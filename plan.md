@@ -6,7 +6,7 @@
 ## Now
 
 ### Phase 1: Project Setup
-[ ] PLAN-001: Initialize Astro project with React and Tailwind
+[x] PLAN-001: Initialize Astro project with React and Tailwind
 [ ] PLAN-002: Set up Supabase project and configure environment variables
 [ ] PLAN-003: Create database schema (metaphors and votes tables)
 [ ] PLAN-004: Create basic layout and homepage structure
