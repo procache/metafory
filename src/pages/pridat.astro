@@ -1,4 +1,6 @@
 ---
+export const prerender = true
+
 import BaseLayout from '../layouts/BaseLayout.astro'
 ---
 
@@ -128,11 +130,17 @@ import BaseLayout from '../layouts/BaseLayout.astro'
 </BaseLayout>
 
 <script>
-  const form = document.getElementById('metaphor-form') as HTMLFormElement
-  const statusDiv = document.getElementById('form-status') as HTMLDivElement
-  const submitButton = form.querySelector('button[type="submit"]') as HTMLButtonElement
+  document.addEventListener('DOMContentLoaded', () => {
+    const form = document.getElementById('metaphor-form') as HTMLFormElement
+    const statusDiv = document.getElementById('form-status') as HTMLDivElement
+    const submitButton = form.querySelector('button[type="submit"]') as HTMLButtonElement
 
-  form.addEventListener('submit', async (e) => {
+    if (!form || !statusDiv || !submitButton) {
+      console.error('Form elements not found')
+      return
+    }
+
+    form.addEventListener('submit', async (e) => {
     e.preventDefault()
 
     // Disable submit button
@@ -178,5 +186,6 @@ import BaseLayout from '../layouts/BaseLayout.astro'
       submitButton.disabled = false
       submitButton.textContent = 'Odeslat metaforu'
     }
+    })
   })
 </script>

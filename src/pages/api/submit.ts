@@ -1,10 +1,13 @@
 import type { APIRoute } from 'astro'
-import { supabase } from '../../lib/supabase'
+import { getServerSupabase } from '../../lib/supabase'
 import { generateSlug, ensureUniqueSlug } from '../../lib/utils'
 import { sendNewMetaphorNotification } from '../../lib/email'
 
 export const POST: APIRoute = async ({ request }) => {
   try {
+    // Use service role for admin operations (bypasses RLS)
+    const supabase = getServerSupabase()
+
     const body = await request.json()
     const { nazev, definice, priklad, autor_jmeno, autor_email } = body
 

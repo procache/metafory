@@ -1,5 +1,6 @@
 import { useState, useMemo } from 'react'
 import type { MetaphorWithVotes } from '../lib/types'
+import VoteButtons from './VoteButtons'
 
 interface SearchBarProps {
   metaphors: MetaphorWithVotes[]
@@ -67,25 +68,22 @@ export default function SearchBar({ metaphors }: SearchBarProps) {
           </div>
         ) : (
           filteredMetaphors.map((metaphor) => (
-            <a
+            <div
               key={metaphor.id}
-              href={`/metafora/${metaphor.slug}`}
-              className="block py-4 sm:py-6 border-b border-gray-200 hover:bg-gray-50 transition-colors -mx-4 sm:-mx-6 px-4 sm:px-6"
+              className="py-4 sm:py-6 border-b border-gray-200 -mx-4 sm:-mx-6 px-4 sm:px-6"
             >
-              <h2 className="text-lg sm:text-xl font-bold mb-2 text-gray-900">{metaphor.nazev}</h2>
-              <p className="text-sm sm:text-base text-gray-700 mb-2 leading-relaxed">{metaphor.definice}</p>
-              <p className="text-xs sm:text-sm text-gray-600 italic mb-3 sm:mb-4">„{metaphor.priklad}"</p>
-              <div className="flex items-center gap-4 sm:gap-6 text-xs sm:text-sm text-gray-500">
-                <span className="flex items-center gap-1">
-                  <span>👍</span>
-                  <span>{metaphor.like_count}</span>
-                </span>
-                <span className="flex items-center gap-1">
-                  <span>👎</span>
-                  <span>{metaphor.dislike_count}</span>
-                </span>
-              </div>
-            </a>
+              <a href={`/metafora/${metaphor.slug}`} className="block hover:opacity-80 transition-opacity">
+                <h2 className="text-lg sm:text-xl font-bold mb-2 text-gray-900">{metaphor.nazev}</h2>
+                <p className="text-sm sm:text-base text-gray-700 mb-2 leading-relaxed">{metaphor.definice}</p>
+                <p className="text-xs sm:text-sm text-gray-600 italic mb-3 sm:mb-4">„{metaphor.priklad}"</p>
+              </a>
+              <VoteButtons
+                metaphorId={metaphor.id}
+                initialLikes={metaphor.like_count}
+                initialDislikes={metaphor.dislike_count}
+                initialScore={metaphor.score}
+              />
+            </div>
           ))
         )}
       </div>
