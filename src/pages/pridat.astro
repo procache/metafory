@@ -1,0 +1,179 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro'
+---
+
+<BaseLayout
+  title="Přidat metaforu | Metafory.cz"
+  description="Přidejte vlastní metaforu do naší databáze českých metafor"
+>
+  <div class="max-w-2xl mx-auto">
+    <!-- Back button -->
+    <div class="mb-6">
+      <a
+        href="/"
+        class="text-gray-600 hover:text-gray-900 transition-colors inline-flex items-center gap-2"
+      >
+        ← Zpět na seznam
+      </a>
+    </div>
+
+    <div class="border border-gray-200 rounded-lg p-8">
+      <h1 class="text-3xl font-bold mb-4">Přidat novou metaforu</h1>
+      <p class="text-gray-600 mb-8">
+        Sdílejte svou oblíbenou českou metaforu. Po odeslání bude metafora čekat na schválení administrátorem.
+      </p>
+
+      <form id="metaphor-form" class="space-y-6">
+        <!-- Název metafory -->
+        <div>
+          <label for="nazev" class="block text-sm font-semibold text-gray-700 mb-2">
+            Název metafory <span class="text-red-500">*</span>
+          </label>
+          <input
+            type="text"
+            id="nazev"
+            name="nazev"
+            required
+            maxlength="200"
+            placeholder="např. Mít máslo na hlavě"
+            class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+          />
+        </div>
+
+        <!-- Definice -->
+        <div>
+          <label for="definice" class="block text-sm font-semibold text-gray-700 mb-2">
+            Definice <span class="text-red-500">*</span>
+          </label>
+          <textarea
+            id="definice"
+            name="definice"
+            required
+            rows="3"
+            maxlength="500"
+            placeholder="Co metafora znamená..."
+            class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+          ></textarea>
+          <p class="text-xs text-gray-500 mt-1">Max 500 znaků</p>
+        </div>
+
+        <!-- Příklad použití -->
+        <div>
+          <label for="priklad" class="block text-sm font-semibold text-gray-700 mb-2">
+            Příklad použití <span class="text-red-500">*</span>
+          </label>
+          <textarea
+            id="priklad"
+            name="priklad"
+            required
+            rows="2"
+            maxlength="300"
+            placeholder="Ukázková věta s použitím metafory..."
+            class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+          ></textarea>
+          <p class="text-xs text-gray-500 mt-1">Max 300 znaků</p>
+        </div>
+
+        <!-- Jméno autora (nepovinné) -->
+        <div>
+          <label for="autor_jmeno" class="block text-sm font-semibold text-gray-700 mb-2">
+            Vaše jméno (nepovinné)
+          </label>
+          <input
+            type="text"
+            id="autor_jmeno"
+            name="autor_jmeno"
+            maxlength="100"
+            placeholder="např. Jan Novák"
+            class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+          />
+        </div>
+
+        <!-- Email autora (nepovinné) -->
+        <div>
+          <label for="autor_email" class="block text-sm font-semibold text-gray-700 mb-2">
+            Váš email (nepovinný)
+          </label>
+          <input
+            type="email"
+            id="autor_email"
+            name="autor_email"
+            maxlength="100"
+            placeholder="email@priklad.cz"
+            class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+          />
+          <p class="text-xs text-gray-500 mt-1">
+            Použijeme pouze pro případné dotazy k vaší metafoře
+          </p>
+        </div>
+
+        <!-- Submit button -->
+        <div class="pt-4">
+          <button
+            type="submit"
+            class="w-full bg-blue-600 text-white font-semibold py-3 px-6 rounded-lg hover:bg-blue-700 transition-colors disabled:bg-gray-400 disabled:cursor-not-allowed"
+          >
+            Odeslat metaforu
+          </button>
+        </div>
+
+        <!-- Status messages -->
+        <div id="form-status" class="hidden"></div>
+      </form>
+    </div>
+  </div>
+</BaseLayout>
+
+<script>
+  const form = document.getElementById('metaphor-form') as HTMLFormElement
+  const statusDiv = document.getElementById('form-status') as HTMLDivElement
+  const submitButton = form.querySelector('button[type="submit"]') as HTMLButtonElement
+
+  form.addEventListener('submit', async (e) => {
+    e.preventDefault()
+
+    // Disable submit button
+    submitButton.disabled = true
+    submitButton.textContent = 'Odesílám...'
+
+    // Get form data
+    const formData = new FormData(form)
+    const data = {
+      nazev: formData.get('nazev') as string,
+      definice: formData.get('definice') as string,
+      priklad: formData.get('priklad') as string,
+      autor_jmeno: formData.get('autor_jmeno') as string || null,
+      autor_email: formData.get('autor_email') as string || null
+    }
+
+    try {
+      const response = await fetch('/api/submit', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(data)
+      })
+
+      const result = await response.json()
+
+      if (response.ok) {
+        // Success
+        statusDiv.className = 'p-4 bg-green-50 border border-green-200 rounded-lg text-green-800'
+        statusDiv.textContent = 'Děkujeme! Vaše metafora byla odeslána a čeká na schválení.'
+        statusDiv.classList.remove('hidden')
+        form.reset()
+      } else {
+        // Error
+        statusDiv.className = 'p-4 bg-red-50 border border-red-200 rounded-lg text-red-800'
+        statusDiv.textContent = result.error || 'Chyba při odesílání. Zkuste to prosím znovu.'
+        statusDiv.classList.remove('hidden')
+      }
+    } catch (err) {
+      statusDiv.className = 'p-4 bg-red-50 border border-red-200 rounded-lg text-red-800'
+      statusDiv.textContent = 'Chyba připojení. Zkontrolujte prosím internetové připojení.'
+      statusDiv.classList.remove('hidden')
+    } finally {
+      submitButton.disabled = false
+      submitButton.textContent = 'Odeslat metaforu'
+    }
+  })
+</script>
