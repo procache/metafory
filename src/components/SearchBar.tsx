@@ -34,19 +34,19 @@ export default function SearchBar({ metaphors }: SearchBarProps) {
   }, [searchQuery, metaphors])
 
   return (
-    <div className="mb-8">
-      <div className="relative">
+    <div>
+      <div className="relative mb-8">
         <input
           type="text"
           placeholder="Hledat metafory..."
           value={searchQuery}
           onChange={(e) => setSearchQuery(e.target.value)}
-          className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+          className="w-full px-4 py-3 border border-gray-300 rounded focus:outline-none focus:ring-1 focus:ring-gray-900 focus:border-gray-900 transition-colors"
         />
         {searchQuery && (
           <button
             onClick={() => setSearchQuery('')}
-            className="absolute right-3 top-1/2 -translate-y-1/2 text-gray-400 hover:text-gray-600"
+            className="absolute right-3 top-1/2 -translate-y-1/2 text-gray-400 hover:text-gray-900 transition-colors text-lg"
             aria-label="Vymazat hledání"
           >
             ✕
@@ -55,14 +55,14 @@ export default function SearchBar({ metaphors }: SearchBarProps) {
       </div>
 
       {searchQuery && (
-        <div className="mt-3 text-sm text-gray-600">
-          Nalezeno {filteredMetaphors.length} z {metaphors.length} metafor
+        <div className="mb-6 text-sm text-gray-600">
+          Nalezeno {filteredMetaphors.length} z {metaphors.length}
         </div>
       )}
 
-      <div className="mt-6 space-y-4">
+      <div className="space-y-6">
         {filteredMetaphors.length === 0 ? (
-          <div className="text-center py-8 text-gray-500">
+          <div className="text-center py-12 text-gray-500">
             Žádné metafory nenalezeny. Zkuste jiné hledání.
           </div>
         ) : (
@@ -70,15 +70,20 @@ export default function SearchBar({ metaphors }: SearchBarProps) {
             <a
               key={metaphor.id}
               href={`/metafora/${metaphor.slug}`}
-              className="block p-4 border border-gray-200 rounded-lg hover:shadow-md transition-shadow"
+              className="block py-6 border-b border-gray-200 hover:bg-gray-50 transition-colors -mx-6 px-6"
             >
-              <h3 className="text-xl font-semibold mb-2">{metaphor.nazev}</h3>
-              <p className="text-gray-700 mb-2">{metaphor.definice}</p>
-              <p className="text-sm text-gray-600 italic mb-3">{metaphor.priklad}</p>
-              <div className="flex items-center gap-4 text-sm text-gray-500">
-                <span>👍 {metaphor.like_count}</span>
-                <span>👎 {metaphor.dislike_count}</span>
-                <span>Score: {metaphor.score}</span>
+              <h2 className="text-xl font-bold mb-2 text-gray-900">{metaphor.nazev}</h2>
+              <p className="text-gray-700 mb-2 leading-relaxed">{metaphor.definice}</p>
+              <p className="text-sm text-gray-600 italic mb-4">„{metaphor.priklad}"</p>
+              <div className="flex items-center gap-6 text-sm text-gray-500">
+                <span className="flex items-center gap-1">
+                  <span>👍</span>
+                  <span>{metaphor.like_count}</span>
+                </span>
+                <span className="flex items-center gap-1">
+                  <span>👎</span>
+                  <span>{metaphor.dislike_count}</span>
+                </span>
               </div>
             </a>
           ))

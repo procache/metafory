@@ -30,30 +30,30 @@ const {
   <meta property="og:description" content={description}>
   <meta property="og:type" content="website">
 </head>
-<body class="min-h-screen bg-white text-gray-900">
-  <div class="max-w-4xl mx-auto px-4 py-8">
-    <header class="mb-12">
-      <nav class="flex items-center justify-between">
-        <a href="/" class="text-2xl font-bold text-gray-900 hover:text-gray-700 transition-colors">
+<body class="min-h-screen bg-gray-50 text-gray-900 antialiased">
+  <div class="max-w-3xl mx-auto px-6 py-12">
+    <header class="mb-16">
+      <nav class="flex items-center justify-between border-b border-gray-200 pb-6">
+        <a href="/" class="text-xl font-bold text-gray-900 hover:text-gray-600 transition-colors">
           Metafory.cz
         </a>
-        <div class="flex gap-6 text-sm">
+        <div class="flex gap-8 text-sm font-medium">
           <a href="/" class="text-gray-600 hover:text-gray-900 transition-colors">
             Metafory
           </a>
-          <a href="/pridat" class="text-gray-600 hover:text-gray-900 transition-colors">
+          <a href="/pridat" class="px-4 py-2 bg-gray-900 text-white rounded hover:bg-gray-700 transition-colors">
             Přidat metaforu
           </a>
         </div>
       </nav>
     </header>
 
-    <main>
+    <main class="mb-20">
       <slot />
     </main>
 
-    <footer class="mt-16 pt-8 border-t border-gray-200 text-center text-sm text-gray-500">
-      <p>&copy; {new Date().getFullYear()} Metafory.cz</p>
+    <footer class="pt-8 border-t border-gray-200 text-center text-sm text-gray-500">
+      <p>&copy; {new Date().getFullYear()} Metafory.cz — Databáze českých metafor</p>
     </footer>
   </div>
 </body>

@@ -31,25 +31,25 @@ const { metaphor } = Astro.props
   title={`${metaphor.nazev} | Metafory.cz`}
   description={metaphor.definice}
 >
-  <div class="max-w-3xl mx-auto">
+  <div>
     <!-- Back button -->
-    <div class="mb-6">
+    <div class="mb-8">
       <a
         href="/"
-        class="text-gray-600 hover:text-gray-900 transition-colors inline-flex items-center gap-2"
+        class="text-gray-600 hover:text-gray-900 transition-colors inline-flex items-center gap-2 text-sm"
       >
         ← Zpět na seznam
       </a>
     </div>
 
     <!-- Metaphor content -->
-    <article class="border border-gray-200 rounded-lg p-8">
-      <h1 class="text-4xl font-bold mb-6">{metaphor.nazev}</h1>
+    <article>
+      <h1 class="text-3xl font-bold mb-8 pb-6 border-b border-gray-200">{metaphor.nazev}</h1>
 
-      <div class="space-y-6">
+      <div class="space-y-8">
         <!-- Definition -->
         <div>
-          <h2 class="text-sm font-semibold text-gray-500 uppercase tracking-wide mb-2">
+          <h2 class="text-xs font-semibold text-gray-500 uppercase tracking-wider mb-3">
             Definice
           </h2>
           <p class="text-lg text-gray-800 leading-relaxed">
@@ -59,17 +59,17 @@ const { metaphor } = Astro.props
 
         <!-- Example -->
         <div>
-          <h2 class="text-sm font-semibold text-gray-500 uppercase tracking-wide mb-2">
+          <h2 class="text-xs font-semibold text-gray-500 uppercase tracking-wider mb-3">
             Příklad použití
           </h2>
-          <p class="text-lg text-gray-700 italic leading-relaxed">
-            {metaphor.priklad}
+          <p class="text-base text-gray-700 italic leading-relaxed">
+            „{metaphor.priklad}"
           </p>
         </div>
 
         <!-- Voting buttons -->
         <div class="pt-6 border-t border-gray-200">
-          <h2 class="text-sm font-semibold text-gray-500 uppercase tracking-wide mb-3">
+          <h2 class="text-xs font-semibold text-gray-500 uppercase tracking-wider mb-4">
             Hodnocení
           </h2>
           <VoteButtons
@@ -85,7 +85,7 @@ const { metaphor } = Astro.props
         {metaphor.autor_jmeno && (
           <div class="pt-6 border-t border-gray-200 text-sm text-gray-600">
             <p>
-              Přidal(a): <span class="font-medium">{metaphor.autor_jmeno}</span>
+              Přidal(a): <span class="font-medium text-gray-900">{metaphor.autor_jmeno}</span>
             </p>
           </div>
         )}
