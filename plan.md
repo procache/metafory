@@ -6,9 +6,6 @@
 ## Now
 
 ### Phase 4: Polish & Deploy
-[ ] PLAN-013: Design minimalist UI (inspired by cestina20.cz)
-[ ] PLAN-014: Add SEO meta tags to all pages
-[ ] PLAN-015: Test responsive design (mobile/desktop)
 [ ] PLAN-016: Deploy to Netlify and configure custom domain
 
 ## Next
@@ -32,4 +29,9 @@
 [x] PLAN-009: Set up email notifications for new submissions (`a477cc2`, 2025-11-03)
 [x] PLAN-010: Implement client-side fulltext search (`1c4b828`, 2025-11-03)
 [x] PLAN-011: Configure Supabase RLS policies for security (done in PLAN-003)
-[x] PLAN-012: Add slug generation utility (done in PLAN-008) 
+[x] PLAN-012: Add slug generation utility (done in PLAN-008)
+
+### Phase 4: Polish & Deploy (Partial)
+[x] PLAN-013: Design minimalist UI inspired by cestina20.cz (`5f8fc61`, 2025-11-03)
+[x] PLAN-014: Add comprehensive SEO meta tags and structured data (`f527822`, 2025-11-03)
+[x] PLAN-015: Improve responsive design for mobile and tablet (`694e962`, 2025-11-03) 
