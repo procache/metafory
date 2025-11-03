@@ -1,0 +1,60 @@
+---
+import '../styles/global.css'
+
+interface Props {
+  title?: string
+  description?: string
+}
+
+const {
+  title = 'Metafory.cz - České metafory a rčení',
+  description = 'Online databáze českých metafor s možností vyhledávání, přidávání a hodnocení.'
+} = Astro.props
+---
+
+<!DOCTYPE html>
+<html lang="cs">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>{title}</title>
+  <meta name="description" content={description}>
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg">
+
+  <!-- Basic SEO -->
+  <meta name="author" content="Metafory.cz">
+  <meta name="robots" content="index, follow">
+
+  <!-- Open Graph (future enhancement) -->
+  <meta property="og:title" content={title}>
+  <meta property="og:description" content={description}>
+  <meta property="og:type" content="website">
+</head>
+<body class="min-h-screen bg-white text-gray-900">
+  <div class="max-w-4xl mx-auto px-4 py-8">
+    <header class="mb-12">
+      <nav class="flex items-center justify-between">
+        <a href="/" class="text-2xl font-bold text-gray-900 hover:text-gray-700 transition-colors">
+          Metafory.cz
+        </a>
+        <div class="flex gap-6 text-sm">
+          <a href="/" class="text-gray-600 hover:text-gray-900 transition-colors">
+            Metafory
+          </a>
+          <a href="/pridat" class="text-gray-600 hover:text-gray-900 transition-colors">
+            Přidat metaforu
+          </a>
+        </div>
+      </nav>
+    </header>
+
+    <main>
+      <slot />
+    </main>
+
+    <footer class="mt-16 pt-8 border-t border-gray-200 text-center text-sm text-gray-500">
+      <p>&copy; {new Date().getFullYear()} Metafory.cz</p>
+    </footer>
+  </div>
+</body>
+</html>
