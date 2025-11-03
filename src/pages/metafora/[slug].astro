@@ -25,12 +25,37 @@ interface Props {
 }
 
 const { metaphor } = Astro.props
+
+// JSON-LD structured data for better SEO
+const jsonLd = {
+  "@context": "https://schema.org",
+  "@type": "DefinedTerm",
+  "name": metaphor.nazev,
+  "description": metaphor.definice,
+  "inDefinedTermSet": "https://metafory.cz",
+  "termCode": metaphor.slug,
+  "inLanguage": "cs",
+  "text": metaphor.priklad,
+  "interactionStatistic": [
+    {
+      "@type": "InteractionCounter",
+      "interactionType": "https://schema.org/LikeAction",
+      "userInteractionCount": metaphor.like_count
+    },
+    {
+      "@type": "InteractionCounter",
+      "interactionType": "https://schema.org/DislikeAction",
+      "userInteractionCount": metaphor.dislike_count
+    }
+  ]
+}
 ---
 
 <BaseLayout
   title={`${metaphor.nazev} | Metafory.cz`}
   description={metaphor.definice}
 >
+  <script type="application/ld+json" set:html={JSON.stringify(jsonLd)} />
   <div>
     <!-- Back button -->
     <div class="mb-8">
