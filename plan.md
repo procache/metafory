@@ -9,7 +9,7 @@
 [x] PLAN-001: Initialize Astro project with React and Tailwind
 [x] PLAN-002: Set up Supabase project and configure environment variables
 [x] PLAN-003: Create database schema (metaphors and votes tables)
-[ ] PLAN-004: Create basic layout and homepage structure
+[x] PLAN-004: Create basic layout and homepage structure
 
 ### Phase 2: Core Features
 [ ] PLAN-005: Build MetaphorCard component (display metaphor with votes)
