@@ -29,12 +29,58 @@
 
 ---
 
-## Indexes
+## Views
 
-*(Will be added as performance needs arise)*
+### metaphors_with_votes ✅
+- **Purpose:** Pre-computed vote counts for efficient querying
+- **Columns:** All metaphor fields + `like_count`, `dislike_count`, `score`
+- **Usage:** Used by homepage to list metaphors sorted by popularity
+- **Created:** Migration `001_initial_schema.sql`
+
+---
+
+## Indexes ✅
+
+- `idx_metaphors_status` - Filter by status (pending/published/rejected)
+- `idx_metaphors_created_at` - Sort by creation date
+- `idx_metaphors_slug` - Fast lookup by slug for detail pages
+- `idx_votes_metaphor_id` - Join votes with metaphors
+
+**Created:** Migration `001_initial_schema.sql`
+
+---
+
+## Row Level Security (RLS) ✅
+
+**metaphors table:**
+- Anyone can view published metaphors
+- Anyone can insert pending metaphors
+- Only service_role can update/delete
+
+**votes table:**
+- Anyone can view votes
+- Anyone can insert votes (anti-spam via unique constraint)
+- No updates or deletes allowed
+
+**Created:** Migration `001_initial_schema.sql`
 
 ---
 
 ## Migrations
 
-*(Will track schema changes)*
+### 001_initial_schema.sql ✅
+- **Status:** Applied on 2025-11-03
+- **Changes:**
+  - Created `metaphors` table
+  - Created `votes` table with anti-spam constraint
+  - Created `metaphors_with_votes` view
+  - Added indexes for performance
+  - Configured RLS policies
+- **Commit:** `bd107b2`
+
+### 002_seed_data.sql ✅
+- **Status:** Applied on 2025-11-03
+- **Changes:**
+  - Inserted 3 sample metaphors (published status)
+  - Added test votes for demo
+- **Commit:** `bd107b2`

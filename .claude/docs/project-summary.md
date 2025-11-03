@@ -6,8 +6,8 @@
 
 ## Current Status
 
-**Phase:** Initial Setup
-**Last Updated:** 2025-11-02
+**Phase:** Phase 1 Complete ✅ → Starting Phase 2 (Core Features)
+**Last Updated:** 2025-11-03
 
 ---
 
@@ -48,11 +48,24 @@
 
 ---
 
+## Completed Milestones
+
+**Phase 1 (✅ Complete):**
+- PLAN-001: Astro + React + Tailwind initialized
+- PLAN-002: Supabase configured with credentials
+- PLAN-003: Database schema created (metaphors, votes tables)
+- PLAN-004: BaseLayout and homepage with metaphor listing
+
+**Key commits:**
+- `1b30e0c` - Astro project initialization
+- `6319365` - Supabase client and types
+- `bd107b2` - Database migrations
+- `6fa37ac` - Layout and homepage
+
 ## Next Milestones
 
 See [plan.md](../../plan.md) for detailed task breakdown.
 
-**Phase 1:** Project setup (Astro + Supabase + schema)
-**Phase 2:** Core features (list, detail, voting, submission)
+**Phase 2 (In Progress):** Core features (MetaphorCard, detail page, voting, submission)
 **Phase 3:** Admin & search
 **Phase 4:** Polish & deploy
