@@ -14,16 +14,16 @@
 ### Phase 2: Core Features
 [x] PLAN-005: Build MetaphorCard component (display metaphor with votes)
 [x] PLAN-006: Implement metaphor detail page (/metafora/[slug])
-[ ] PLAN-007: Create VoteButtons component with anti-spam logic
-[ ] PLAN-008: Build metaphor submission form (/pridat)
+[x] PLAN-007: Create VoteButtons component with anti-spam logic
+[x] PLAN-008: Build metaphor submission form (/pridat)
 
 ## Next
 
 ### Phase 3: Admin & Search
 [ ] PLAN-009: Set up email notifications for new submissions
 [ ] PLAN-010: Implement client-side fulltext search
-[ ] PLAN-011: Configure Supabase RLS policies for security
-[ ] PLAN-012: Add slug generation utility
+[x] PLAN-011: Configure Supabase RLS policies for security (done in PLAN-003)
+[x] PLAN-012: Add slug generation utility (done in PLAN-008)
 
 ### Phase 4: Polish & Deploy
 [ ] PLAN-013: Design minimalist UI (inspired by cestina20.cz)

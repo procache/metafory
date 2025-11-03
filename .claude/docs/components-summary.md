@@ -57,23 +57,39 @@
 - **Features:**
   - Dynamic route with getStaticPaths
   - Full metaphor details (title, definition, example)
-  - Vote statistics display
+  - Integrated VoteButtons component
   - Back navigation button
   - SEO-optimized (custom title/description per metaphor)
   - Optional author info
 - **Generated pages:** 3 static pages at build time
-- **Commit:** `80c2e78`
+- **Commits:** `80c2e78`, `84dac14` (added VoteButtons)
+
+### VoteButtons.tsx (React Island) ✅
+- **Path:** `src/components/VoteButtons.tsx`
+- **Purpose:** Interactive voting component
+- **Features:**
+  - Like/dislike buttons with real-time updates
+  - Anti-spam: localStorage + API (IP + cookie_id)
+  - Disabled state after voting
+  - User feedback messages
+  - Optimistic UI updates
+- **Props:** `metaphorId`, `initialLikes`, `initialDislikes`, `initialScore`
+- **Client directive:** `client:load`
+- **Commit:** `84dac14`
+
+### Submission Form (pridat.astro) ✅
+- **Path:** `src/pages/pridat.astro`
+- **Purpose:** Form for submitting new metaphors
+- **Features:**
+  - Required fields: název, definice, příklad
+  - Optional fields: autor_jmeno, autor_email
+  - Client-side validation (max lengths)
+  - Success/error feedback
+  - Auto-reset on success
+- **Submission:** POST to `/api/submit`
+- **Commit:** `48bee22`
 
 ## Pending Components
-
-### VoteButtons.tsx (React Island)
-- Interactive like/dislike buttons
-- Anti-spam logic (cookie + IP tracking)
-- See PLAN-007
-
-### MetaphorForm.astro
-- Form for submitting new metaphors
-- See PLAN-008
 
 ### SearchBar.tsx (React Island)
 - Client-side fulltext search

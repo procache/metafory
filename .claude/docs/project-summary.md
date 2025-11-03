@@ -6,7 +6,7 @@
 
 ## Current Status
 
-**Phase:** Phase 1 Complete ✅ → Starting Phase 2 (Core Features)
+**Phase:** Phase 2 Complete ✅ → Starting Phase 3 (Admin & Search)
 **Last Updated:** 2025-11-03
 
 ---
@@ -62,20 +62,21 @@
 - `bd107b2` - Database migrations
 - `6fa37ac` - Layout and homepage
 
-**Phase 2 (Partially Complete - 2/4 tasks done):**
+**Phase 2 (✅ Complete - 4/4 tasks done):**
 - PLAN-005: ✅ MetaphorCard component extracted
 - PLAN-006: ✅ Detail pages with dynamic routes
-- PLAN-007: ⏳ VoteButtons (pending)
-- PLAN-008: ⏳ Submission form (pending)
+- PLAN-007: ✅ VoteButtons with anti-spam
+- PLAN-008: ✅ Submission form
 
-**Recent commits:**
+**Key commits:**
 - `2a05b77` - MetaphorCard reusable component
 - `80c2e78` - Dynamic detail pages (/metafora/[slug])
+- `84dac14` - VoteButtons React island + API
+- `48bee22` - Submission form + slug generation
 
 ## Next Milestones
 
 See [plan.md](../../plan.md) for detailed task breakdown.
 
-**Phase 2 (In Progress):** Core features (MetaphorCard, detail page, voting, submission)
-**Phase 3:** Admin & search
+**Phase 3 (Next):** Admin & search (email notifications, fulltext search, RLS review, slug utils)
 **Phase 4:** Polish & deploy
