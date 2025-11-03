@@ -1,5 +1,6 @@
 ---
 import BaseLayout from '../../layouts/BaseLayout.astro'
+import VoteButtons from '../../components/VoteButtons'
 import { supabase } from '../../lib/supabase'
 import type { MetaphorWithVotes } from '../../lib/types'
 
@@ -66,27 +67,18 @@ const { metaphor } = Astro.props
           </p>
         </div>
 
-        <!-- Vote stats (voting buttons will be added in PLAN-007) -->
+        <!-- Voting buttons -->
         <div class="pt-6 border-t border-gray-200">
           <h2 class="text-sm font-semibold text-gray-500 uppercase tracking-wide mb-3">
             Hodnocení
           </h2>
-          <div class="flex items-center gap-6 text-lg">
-            <div class="flex items-center gap-2">
-              <span>👍</span>
-              <span class="font-medium">{metaphor.like_count}</span>
-            </div>
-            <div class="flex items-center gap-2">
-              <span>👎</span>
-              <span class="font-medium">{metaphor.dislike_count}</span>
-            </div>
-            <div class="ml-auto text-gray-600">
-              Skóre: <span class="font-semibold">{metaphor.score}</span>
-            </div>
-          </div>
-          <p class="text-sm text-gray-500 mt-4">
-            Hlasování bude přidáno v další fázi
-          </p>
+          <VoteButtons
+            client:load
+            metaphorId={metaphor.id}
+            initialLikes={metaphor.like_count}
+            initialDislikes={metaphor.dislike_count}
+            initialScore={metaphor.score}
+          />
         </div>
 
         <!-- Author info if available -->
