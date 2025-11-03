@@ -1,5 +1,6 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro'
+import MetaphorCard from '../components/MetaphorCard.astro'
 import { supabase } from '../lib/supabase'
 import type { MetaphorWithVotes } from '../lib/types'
 
@@ -28,30 +29,7 @@ if (error) {
     {metaphors && metaphors.length > 0 ? (
       <div class="space-y-6">
         {metaphors.map((metaphor) => (
-          <article class="border border-gray-200 rounded-lg p-6 hover:border-gray-300 transition-colors">
-            <a href={`/metafora/${metaphor.slug}`} class="group">
-              <h2 class="text-2xl font-semibold mb-3 group-hover:text-gray-600 transition-colors">
-                {metaphor.nazev}
-              </h2>
-              <p class="text-gray-700 mb-2">
-                {metaphor.definice}
-              </p>
-              <p class="text-gray-500 italic text-sm mb-4">
-                Příklad: {metaphor.priklad}
-              </p>
-              <div class="flex items-center gap-4 text-sm text-gray-500">
-                <span class="flex items-center gap-1">
-                  👍 {metaphor.like_count}
-                </span>
-                <span class="flex items-center gap-1">
-                  👎 {metaphor.dislike_count}
-                </span>
-                <span class="ml-auto">
-                  Skóre: {metaphor.score}
-                </span>
-              </div>
-            </a>
-          </article>
+          <MetaphorCard metaphor={metaphor} />
         ))}
       </div>
     ) : (
