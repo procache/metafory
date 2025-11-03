@@ -12,8 +12,8 @@
 [x] PLAN-004: Create basic layout and homepage structure
 
 ### Phase 2: Core Features
-[ ] PLAN-005: Build MetaphorCard component (display metaphor with votes)
-[ ] PLAN-006: Implement metaphor detail page (/metafora/[slug])
+[x] PLAN-005: Build MetaphorCard component (display metaphor with votes)
+[x] PLAN-006: Implement metaphor detail page (/metafora/[slug])
 [ ] PLAN-007: Create VoteButtons component with anti-spam logic
 [ ] PLAN-008: Build metaphor submission form (/pridat)
 

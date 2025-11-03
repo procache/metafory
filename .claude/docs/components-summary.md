@@ -35,17 +35,36 @@
 - **Purpose:** List published metaphors sorted by score
 - **Features:**
   - Fetches from `metaphors_with_votes` Supabase view
-  - Displays metaphor cards with title, definition, example
-  - Shows like/dislike counts and score
+  - Uses MetaphorCard component for each metaphor
   - Links to detail pages via slug
 - **Data:** Server-side fetched at build time
-- **Commit:** `6fa37ac`
+- **Commits:** `6fa37ac`, `2a05b77` (refactored to use MetaphorCard)
+
+### MetaphorCard.astro ✅
+- **Path:** `src/components/MetaphorCard.astro`
+- **Purpose:** Reusable metaphor card component
+- **Features:**
+  - Displays metaphor title, definition, example
+  - Shows like/dislike counts and score
+  - Hover effect for better UX
+  - Links to detail page
+- **Props:** `metaphor: MetaphorWithVotes`
+- **Commit:** `2a05b77`
+
+### Detail Page ([slug].astro) ✅
+- **Path:** `src/pages/metafora/[slug].astro`
+- **Purpose:** Individual metaphor detail page
+- **Features:**
+  - Dynamic route with getStaticPaths
+  - Full metaphor details (title, definition, example)
+  - Vote statistics display
+  - Back navigation button
+  - SEO-optimized (custom title/description per metaphor)
+  - Optional author info
+- **Generated pages:** 3 static pages at build time
+- **Commit:** `80c2e78`
 
 ## Pending Components
-
-### MetaphorCard.astro
-- Extract metaphor card from homepage into reusable component
-- See PLAN-005
 
 ### VoteButtons.tsx (React Island)
 - Interactive like/dislike buttons

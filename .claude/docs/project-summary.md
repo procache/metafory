@@ -62,6 +62,16 @@
 - `bd107b2` - Database migrations
 - `6fa37ac` - Layout and homepage
 
+**Phase 2 (Partially Complete - 2/4 tasks done):**
+- PLAN-005: ✅ MetaphorCard component extracted
+- PLAN-006: ✅ Detail pages with dynamic routes
+- PLAN-007: ⏳ VoteButtons (pending)
+- PLAN-008: ⏳ Submission form (pending)
+
+**Recent commits:**
+- `2a05b77` - MetaphorCard reusable component
+- `80c2e78` - Dynamic detail pages (/metafora/[slug])
+
 ## Next Milestones
 
 See [plan.md](../../plan.md) for detailed task breakdown.
