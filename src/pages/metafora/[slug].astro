@@ -1,0 +1,103 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro'
+import { supabase } from '../../lib/supabase'
+import type { MetaphorWithVotes } from '../../lib/types'
+
+export async function getStaticPaths() {
+  // Fetch all published metaphors to generate static pages
+  const { data: metaphors } = await supabase
+    .from('metaphors_with_votes')
+    .select('*')
+    .eq('status', 'published')
+    .returns<MetaphorWithVotes[]>()
+
+  if (!metaphors) return []
+
+  return metaphors.map((metaphor) => ({
+    params: { slug: metaphor.slug },
+    props: { metaphor }
+  }))
+}
+
+interface Props {
+  metaphor: MetaphorWithVotes
+}
+
+const { metaphor } = Astro.props
+---
+
+<BaseLayout
+  title={`${metaphor.nazev} | Metafory.cz`}
+  description={metaphor.definice}
+>
+  <div class="max-w-3xl mx-auto">
+    <!-- Back button -->
+    <div class="mb-6">
+      <a
+        href="/"
+        class="text-gray-600 hover:text-gray-900 transition-colors inline-flex items-center gap-2"
+      >
+        ← Zpět na seznam
+      </a>
+    </div>
+
+    <!-- Metaphor content -->
+    <article class="border border-gray-200 rounded-lg p-8">
+      <h1 class="text-4xl font-bold mb-6">{metaphor.nazev}</h1>
+
+      <div class="space-y-6">
+        <!-- Definition -->
+        <div>
+          <h2 class="text-sm font-semibold text-gray-500 uppercase tracking-wide mb-2">
+            Definice
+          </h2>
+          <p class="text-lg text-gray-800 leading-relaxed">
+            {metaphor.definice}
+          </p>
+        </div>
+
+        <!-- Example -->
+        <div>
+          <h2 class="text-sm font-semibold text-gray-500 uppercase tracking-wide mb-2">
+            Příklad použití
+          </h2>
+          <p class="text-lg text-gray-700 italic leading-relaxed">
+            {metaphor.priklad}
+          </p>
+        </div>
+
+        <!-- Vote stats (voting buttons will be added in PLAN-007) -->
+        <div class="pt-6 border-t border-gray-200">
+          <h2 class="text-sm font-semibold text-gray-500 uppercase tracking-wide mb-3">
+            Hodnocení
+          </h2>
+          <div class="flex items-center gap-6 text-lg">
+            <div class="flex items-center gap-2">
+              <span>👍</span>
+              <span class="font-medium">{metaphor.like_count}</span>
+            </div>
+            <div class="flex items-center gap-2">
+              <span>👎</span>
+              <span class="font-medium">{metaphor.dislike_count}</span>
+            </div>
+            <div class="ml-auto text-gray-600">
+              Skóre: <span class="font-semibold">{metaphor.score}</span>
+            </div>
+          </div>
+          <p class="text-sm text-gray-500 mt-4">
+            Hlasování bude přidáno v další fázi
+          </p>
+        </div>
+
+        <!-- Author info if available -->
+        {metaphor.autor_jmeno && (
+          <div class="pt-6 border-t border-gray-200 text-sm text-gray-600">
+            <p>
+              Přidal(a): <span class="font-medium">{metaphor.autor_jmeno}</span>
+            </p>
+          </div>
+        )}
+      </div>
+    </article>
+  </div>
+</BaseLayout>
