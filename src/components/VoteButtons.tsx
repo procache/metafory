@@ -86,12 +86,12 @@ export default function VoteButtons({
 
   return (
     <div className="space-y-3">
-      <div className="flex items-center gap-3">
+      <div className="flex items-center gap-2 sm:gap-3">
         <button
           onClick={() => handleVote('like')}
           disabled={hasVoted || isVoting}
           className={`
-            flex items-center gap-2 px-5 py-2 rounded font-medium transition-colors
+            flex items-center gap-1 sm:gap-2 px-4 sm:px-5 py-2 rounded font-medium transition-colors text-sm sm:text-base
             ${hasVoted || isVoting
               ? 'bg-gray-100 text-gray-400 cursor-not-allowed'
               : 'bg-gray-100 text-gray-700 hover:bg-gray-900 hover:text-white'
@@ -99,7 +99,7 @@ export default function VoteButtons({
           `}
           aria-label="Líbí se mi"
         >
-          <span className="text-xl">👍</span>
+          <span className="text-lg sm:text-xl">👍</span>
           <span>{likes}</span>
         </button>
 
@@ -107,7 +107,7 @@ export default function VoteButtons({
           onClick={() => handleVote('dislike')}
           disabled={hasVoted || isVoting}
           className={`
-            flex items-center gap-2 px-5 py-2 rounded font-medium transition-colors
+            flex items-center gap-1 sm:gap-2 px-4 sm:px-5 py-2 rounded font-medium transition-colors text-sm sm:text-base
             ${hasVoted || isVoting
               ? 'bg-gray-100 text-gray-400 cursor-not-allowed'
               : 'bg-gray-100 text-gray-700 hover:bg-gray-900 hover:text-white'
@@ -115,21 +115,21 @@ export default function VoteButtons({
           `}
           aria-label="Nelíbí se mi"
         >
-          <span className="text-xl">👎</span>
+          <span className="text-lg sm:text-xl">👎</span>
           <span>{dislikes}</span>
         </button>
       </div>
 
       {error && (
-        <p className="text-sm text-gray-600">{error}</p>
+        <p className="text-xs sm:text-sm text-gray-600">{error}</p>
       )}
 
       {hasVoted && !error && (
-        <p className="text-sm text-gray-600">Děkujeme za váš hlas</p>
+        <p className="text-xs sm:text-sm text-gray-600">Děkujeme za váš hlas</p>
       )}
 
       {isVoting && (
-        <p className="text-sm text-gray-500">Odesílám...</p>
+        <p className="text-xs sm:text-sm text-gray-500">Odesílám...</p>
       )}
     </div>
   )
