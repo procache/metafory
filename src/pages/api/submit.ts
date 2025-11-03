@@ -1,6 +1,7 @@
 import type { APIRoute } from 'astro'
 import { supabase } from '../../lib/supabase'
 import { generateSlug, ensureUniqueSlug } from '../../lib/utils'
+import { sendNewMetaphorNotification } from '../../lib/email'
 
 export const POST: APIRoute = async ({ request }) => {
   try {
@@ -61,9 +62,15 @@ export const POST: APIRoute = async ({ request }) => {
       )
     }
 
-    // TODO: Send email notification to admin (PLAN-009)
-    // For now, just log
-    console.log('New metaphor submitted:', data)
+    // Send email notification to admin
+    await sendNewMetaphorNotification({
+      nazev: data.nazev,
+      definice: data.definice,
+      priklad: data.priklad,
+      autor_jmeno: data.autor_jmeno,
+      autor_email: data.autor_email,
+      slug: data.slug
+    })
 
     return new Response(
       JSON.stringify({
