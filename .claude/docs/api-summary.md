@@ -1,73 +1,36 @@
 # API Summary
 
-> **Purpose:** Track API endpoints and changes
+> Short bullets of API endpoints/changes. Links to canonical sources.
 
----
+## API Endpoints
 
-## Planned Endpoints
+### POST /api/submit
+- **Purpose:** Submit new metaphor for admin approval
+- **Input:** nazev, definice, priklad, autor_jmeno (optional), autor_email (optional)
+- **Logic:**
+  - Validates input fields
+  - Generates unique slug from nazev
+  - Inserts with status 'pending'
+  - Sends email notification to admin (PLAN-009)
+- **Output:** Success message with generated slug
+- **Source:** [src/pages/api/submit.ts](../../src/pages/api/submit.ts)
 
-- **POST /api/submit** - Submit new metaphor (sends email to admin)
-- **POST /api/vote** - Record like/dislike vote with anti-spam
+### POST /api/vote
+- **Purpose:** Record like/dislike vote on metaphor
+- **Anti-spam:** Unique constraint on (metaphor_id, ip_address, cookie_id)
+- **Input:** metaphor_id, vote_type (like|dislike), cookie_id
+- **Logic:**
+  - Extracts IP from x-forwarded-for or x-real-ip headers
+  - Inserts vote or returns 409 if duplicate
+  - Returns updated vote counts
+- **Output:** { like_count, dislike_count, score }
+- **Source:** [src/pages/api/vote.ts](../../src/pages/api/vote.ts)
 
----
+## Email Service (PLAN-009)
 
-## Implemented Endpoints
-
-### POST /api/vote ✅
-- **Path:** `src/pages/api/vote.ts`
-- **Purpose:** Record user vote (like/dislike) on metaphor
-- **Request body:**
-  ```json
-  {
-    "metaphor_id": "uuid",
-    "vote_type": "like" | "dislike",
-    "cookie_id": "uuid"
-  }
-  ```
-- **Anti-spam:**
-  - IP address from headers (x-forwarded-for)
-  - cookie_id from client
-  - Unique constraint in DB prevents duplicates
-- **Response:** Updated vote counts (like_count, dislike_count, score)
-- **Error handling:** 409 if already voted, 400 for invalid input
-- **Commit:** `84dac14`
-
-### POST /api/submit ✅
-- **Path:** `src/pages/api/submit.ts`
-- **Purpose:** Submit new metaphor for approval
-- **Request body:**
-  ```json
-  {
-    "nazev": "string (required, max 200)",
-    "definice": "string (required, max 500)",
-    "priklad": "string (required, max 300)",
-    "autor_jmeno": "string (optional, max 100)",
-    "autor_email": "string (optional, max 100)"
-  }
-  ```
-- **Features:**
-  - Auto-generates URL-friendly slug from `nazev`
-  - Ensures slug uniqueness (appends counter if needed)
-  - Sets status to 'pending' for admin approval
-  - Validates all input lengths
-- **Response:** Success message with metaphor data
-- **Error handling:** 400 for validation errors, 500 for DB errors
-- **Commit:** `48bee22`
-
-## Utilities
-
-### generateSlug(text: string) ✅
-- **Path:** `src/lib/utils.ts`
-- **Purpose:** Convert Czech text to URL-friendly slug
-- **Features:**
-  - Removes diacritics (á → a)
-  - Converts to lowercase
-  - Replaces non-alphanumeric with hyphens
-  - Max 100 characters
-- **Commit:** `48bee22`
-
-### ensureUniqueSlug(baseSlug, checkExists) ✅
-- **Path:** `src/lib/utils.ts`
-- **Purpose:** Ensure slug uniqueness by appending counter
-- **Example:** `maslo-na-hlave` → `maslo-na-hlave-1` if exists
-- **Commit:** `48bee22`
+- **sendNewMetaphorNotification()** — Sends email to admin when new metaphor submitted
+  - Uses Resend API
+  - HTML + plain text format
+  - Includes metaphor details and Supabase dashboard link
+  - Gracefully skips if RESEND_API_KEY not configured
+  - Source: [src/lib/email.ts](../../src/lib/email.ts)

@@ -86,7 +86,7 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 **Name:** Metafory.cz
 **Goal:** Online databáze českých metafor s možností vyhledávání, přidávání a hodnocení
 **Type:** Web App
-**Status:** Development (MVP)
+**Status:** Development (MVP - Phase 3 Complete: Core features done, now polishing UI/deployment)
 
 ## Project Architecture
 
