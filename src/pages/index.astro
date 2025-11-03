@@ -1,6 +1,6 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro'
-import MetaphorCard from '../components/MetaphorCard.astro'
+import SearchBar from '../components/SearchBar'
 import { supabase } from '../lib/supabase'
 import type { MetaphorWithVotes } from '../lib/types'
 
@@ -27,11 +27,7 @@ if (error) {
     </div>
 
     {metaphors && metaphors.length > 0 ? (
-      <div class="space-y-6">
-        {metaphors.map((metaphor) => (
-          <MetaphorCard metaphor={metaphor} />
-        ))}
-      </div>
+      <SearchBar client:load metaphors={metaphors} />
     ) : (
       <div class="text-center py-12 text-gray-500">
         <p>Zatím nejsou žádné metafory.</p>
