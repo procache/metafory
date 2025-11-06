@@ -6,6 +6,9 @@ import SearchBar from '../components/SearchBar'
 import { supabase } from '../lib/supabase'
 import type { MetaphorWithVotes } from '../lib/types'
 
+// Get search query from URL if present
+const searchQuery = Astro.url.searchParams.get('q') || ''
+
 // Fetch published metaphors sorted by score (likes - dislikes)
 const { data: metaphors, error } = await supabase
   .from('metaphors_with_votes')
@@ -50,7 +53,7 @@ const jsonLd = {
     </div>
 
     {metaphors && metaphors.length > 0 ? (
-      <SearchBar client:load metaphors={metaphors} />
+      <SearchBar client:load metaphors={metaphors} initialQuery={searchQuery} />
     ) : (
       <div class="text-center py-20 rounded-xl" style="background-color: var(--color-bg-card); border: 1.5px solid var(--color-border);">
         <p class="mb-5 text-lg" style="color: var(--color-text-secondary);">Zatím nejsou žádné metafory.</p>
