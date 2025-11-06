@@ -1,32 +1,26 @@
 ---
-export const prerender = true
+export const prerender = false
 
 import BaseLayout from '../../layouts/BaseLayout.astro'
 import VoteButtons from '../../components/VoteButtons'
 import { supabase } from '../../lib/supabase'
 import type { MetaphorWithVotes } from '../../lib/types'
 
-export async function getStaticPaths() {
-  // Fetch all published metaphors to generate static pages
-  const { data: metaphors } = await supabase
-    .from('metaphors_with_votes')
-    .select('*')
-    .eq('status', 'published')
-    .returns<MetaphorWithVotes[]>()
+// Get slug from URL params
+const { slug } = Astro.params
 
-  if (!metaphors) return []
+// Fetch metaphor dynamically based on slug
+const { data: metaphor, error } = await supabase
+  .from('metaphors_with_votes')
+  .select('*')
+  .eq('slug', slug)
+  .eq('status', 'published')
+  .single<MetaphorWithVotes>()
 
-  return metaphors.map((metaphor) => ({
-    params: { slug: metaphor.slug },
-    props: { metaphor }
-  }))
+// Return 404 if metaphor not found
+if (error || !metaphor) {
+  return Astro.redirect('/404')
 }
-
-interface Props {
-  metaphor: MetaphorWithVotes
-}
-
-const { metaphor } = Astro.props
 
 // JSON-LD structured data for better SEO
 const jsonLd = {
