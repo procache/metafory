@@ -65,17 +65,22 @@ const siteUrl = 'https://metafory.cz'
         >
           Metafory.cz
         </a>
-        <div class="flex gap-5 sm:gap-8 items-center text-sm font-medium">
-          <a
-            href="/"
-            class="hidden sm:inline hover:opacity-70 transition-opacity"
-            style="color: var(--color-text-secondary);"
-          >
-            Metafory
-          </a>
+        <div class="flex gap-3 sm:gap-5 items-center">
+          <form action="/" method="get" class="hidden sm:block">
+            <input
+              type="text"
+              name="q"
+              placeholder="Hledat..."
+              class="px-4 py-2.5 rounded-lg text-sm font-medium transition-all w-48 lg:w-64"
+              style="border: 1.5px solid var(--color-border); background-color: var(--color-bg-card); color: var(--color-text-primary);"
+              onfocus="this.style.borderColor='var(--color-accent-primary)'"
+              onblur="this.style.borderColor='var(--color-border)'"
+              value={Astro.url.searchParams.get('q') || ''}
+            />
+          </form>
           <a
             href="/pridat"
-            class="px-6 py-3 rounded-lg font-semibold hover:transform hover:scale-105 transition-all shadow-md"
+            class="px-4 sm:px-6 py-2.5 sm:py-3 rounded-lg text-sm font-semibold hover:transform hover:scale-105 transition-all shadow-md whitespace-nowrap"
             style="background-color: var(--color-positive); color: white;"
             onmouseover="this.style.backgroundColor='var(--color-positive-hover)'"
             onmouseout="this.style.backgroundColor='var(--color-positive)'"

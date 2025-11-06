@@ -4,12 +4,13 @@ import VoteButtons from './VoteButtons'
 
 interface SearchBarProps {
   metaphors: MetaphorWithVotes[]
+  initialQuery?: string
 }
 
 type TabType = 'all' | 'favorites'
 
-export default function SearchBar({ metaphors }: SearchBarProps) {
-  const [searchQuery, setSearchQuery] = useState('')
+export default function SearchBar({ metaphors, initialQuery = '' }: SearchBarProps) {
+  const [searchQuery, setSearchQuery] = useState(initialQuery)
   const [activeTab, setActiveTab] = useState<TabType>('all')
 
   // Normalize text for Czech language search (remove diacritics)
