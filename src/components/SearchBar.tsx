@@ -5,13 +5,11 @@ import VoteButtons from './VoteButtons'
 interface SearchBarProps {
   metaphors: MetaphorWithVotes[]
   initialQuery?: string
+  activeView?: string
 }
 
-type TabType = 'all' | 'favorites'
-
-export default function SearchBar({ metaphors, initialQuery = '' }: SearchBarProps) {
-  const [searchQuery, setSearchQuery] = useState(initialQuery)
-  const [activeTab, setActiveTab] = useState<TabType>('all')
+export default function SearchBar({ metaphors, initialQuery = '', activeView = 'all' }: SearchBarProps) {
+  const [searchQuery] = useState(initialQuery)
 
   // Normalize text for Czech language search (remove diacritics)
   const normalizeText = (text: string): string => {
@@ -45,68 +43,9 @@ export default function SearchBar({ metaphors, initialQuery = '' }: SearchBarPro
 
   return (
     <div>
-      {/* Tab Navigation */}
-      <div className="flex gap-2 mb-10" style={{ borderBottom: '1.5px solid var(--color-border)' }}>
-        <button
-          onClick={() => setActiveTab('all')}
-          className={`px-5 py-3 font-semibold transition-all border-b-3 -mb-px ${
-            activeTab === 'all'
-              ? 'border-b-2'
-              : 'border-transparent hover:opacity-70'
-          }`}
-          style={activeTab === 'all'
-            ? { borderColor: 'var(--color-accent-primary)', color: 'var(--color-text-primary)' }
-            : { color: 'var(--color-text-tertiary)' }
-          }
-        >
-          Všechny
-        </button>
-        <button
-          onClick={() => setActiveTab('favorites')}
-          className={`px-5 py-3 font-semibold transition-all border-b-3 -mb-px ${
-            activeTab === 'favorites'
-              ? 'border-b-2'
-              : 'border-transparent hover:opacity-70'
-          }`}
-          style={activeTab === 'favorites'
-            ? { borderColor: 'var(--color-accent-primary)', color: 'var(--color-text-primary)' }
-            : { color: 'var(--color-text-tertiary)' }
-          }
-        >
-          Nejoblíbenější
-        </button>
-      </div>
-
-      {/* All Metaphors Tab */}
-      {activeTab === 'all' && (
+      {/* All Metaphors View */}
+      {activeView === 'all' && (
         <>
-          <div className="relative mb-10">
-            <input
-              type="text"
-              placeholder="Hledat metafory..."
-              value={searchQuery}
-              onChange={(e) => setSearchQuery(e.target.value)}
-              className="w-full px-5 py-3.5 rounded-lg font-medium transition-all"
-              style={{
-                border: '1.5px solid var(--color-border)',
-                backgroundColor: 'var(--color-bg-card)',
-                color: 'var(--color-text-primary)'
-              }}
-              onFocus={(e) => e.target.style.borderColor = 'var(--color-accent-primary)'}
-              onBlur={(e) => e.target.style.borderColor = 'var(--color-border)'}
-            />
-            {searchQuery && (
-              <button
-                onClick={() => setSearchQuery('')}
-                className="absolute right-4 top-1/2 -translate-y-1/2 hover:opacity-70 transition-opacity text-lg font-bold"
-                style={{ color: 'var(--color-text-tertiary)' }}
-                aria-label="Vymazat hledání"
-              >
-                ✕
-              </button>
-            )}
-          </div>
-
           {searchQuery && (
             <div className="mb-6 text-sm font-medium" style={{ color: 'var(--color-text-secondary)' }}>
               Nalezeno {filteredMetaphors.length} z {metaphors.length}
@@ -165,8 +104,8 @@ export default function SearchBar({ metaphors, initialQuery = '' }: SearchBarPro
         </>
       )}
 
-      {/* Favorites Tab */}
-      {activeTab === 'favorites' && (
+      {/* Favorites View */}
+      {activeView === 'favorites' && (
         <div className="space-y-5">
           {topFavorites.map((metaphor, index) => (
             <div
