@@ -54,36 +54,39 @@ const jsonLd = {
   <script type="application/ld+json" set:html={JSON.stringify(jsonLd)} />
   <div>
     <!-- Back button -->
-    <div class="mb-8">
+    <div class="mb-10">
       <a
         href="/"
-        class="text-gray-600 hover:text-gray-900 transition-colors inline-flex items-center gap-2 text-sm"
+        class="hover:opacity-70 transition-opacity inline-flex items-center gap-2 text-sm font-medium"
+        style="color: var(--color-text-secondary);"
       >
         ← Zpět na seznam
       </a>
     </div>
 
     <!-- Metaphor content -->
-    <article>
-      <h1 class="text-3xl font-bold mb-8 pb-6 border-b border-gray-200">{metaphor.nazev}</h1>
+    <article class="rounded-xl p-8 sm:p-10" style="background-color: var(--color-bg-card); border: 1.5px solid var(--color-border);">
+      <h1 class="text-3xl sm:text-4xl font-bold mb-10 pb-8 tracking-tight leading-tight" style="border-bottom: 1.5px solid var(--color-border); color: var(--color-text-primary);">
+        {metaphor.nazev}
+      </h1>
 
-      <div class="space-y-8">
+      <div class="space-y-10">
         <!-- Definition -->
         <div>
-          <h2 class="text-xs font-semibold text-gray-500 uppercase tracking-wider mb-3">
+          <h2 class="text-xs font-bold uppercase tracking-wider mb-4" style="color: var(--color-accent-primary);">
             Definice
           </h2>
-          <p class="text-lg text-gray-800 leading-relaxed">
+          <p class="text-lg sm:text-xl leading-relaxed" style="color: var(--color-text-secondary);">
             {metaphor.definice}
           </p>
         </div>
 
         <!-- Example -->
         <div>
-          <h2 class="text-xs font-semibold text-gray-500 uppercase tracking-wider mb-3">
+          <h2 class="text-xs font-bold uppercase tracking-wider mb-4" style="color: var(--color-accent-primary);">
             Příklad použití
           </h2>
-          <p class="text-base text-gray-700 italic leading-relaxed">
+          <p class="text-base sm:text-lg italic leading-relaxed" style="color: var(--color-text-secondary);">
             „{metaphor.priklad}"
           </p>
         </div>
@@ -91,18 +94,18 @@ const jsonLd = {
         <!-- Source -->
         {metaphor.zdroj && (
           <div>
-            <h2 class="text-xs font-semibold text-gray-500 uppercase tracking-wider mb-3">
+            <h2 class="text-xs font-bold uppercase tracking-wider mb-4" style="color: var(--color-accent-primary);">
               Zdroj
             </h2>
-            <p class="text-sm text-gray-600">
+            <p class="text-sm sm:text-base" style="color: var(--color-text-tertiary);">
               {metaphor.zdroj}
             </p>
           </div>
         )}
 
         <!-- Voting buttons -->
-        <div class="pt-6 border-t border-gray-200">
-          <h2 class="text-xs font-semibold text-gray-500 uppercase tracking-wider mb-4">
+        <div class="pt-8" style="border-top: 1.5px solid var(--color-border);">
+          <h2 class="text-xs font-bold uppercase tracking-wider mb-5" style="color: var(--color-accent-primary);">
             Hodnocení
           </h2>
           <VoteButtons
@@ -116,9 +119,9 @@ const jsonLd = {
 
         <!-- Author info if available -->
         {metaphor.autor_jmeno && (
-          <div class="pt-6 border-t border-gray-200 text-sm text-gray-600">
+          <div class="pt-8 text-sm sm:text-base" style="border-top: 1.5px solid var(--color-border); color: var(--color-text-secondary);">
             <p>
-              Přidal(a): <span class="font-medium text-gray-900">{metaphor.autor_jmeno}</span>
+              Přidal(a): <span class="font-semibold" style="color: var(--color-text-primary);">{metaphor.autor_jmeno}</span>
             </p>
           </div>
         )}
