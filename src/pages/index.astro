@@ -40,9 +40,11 @@ const jsonLd = {
 >
   <script type="application/ld+json" set:html={JSON.stringify(jsonLd)} />
   <div>
-    <div class="mb-12">
-      <h1 class="text-3xl font-bold mb-3 text-gray-900">České metafory</h1>
-      <p class="text-base text-gray-600 leading-relaxed">
+    <div class="mb-14 sm:mb-16">
+      <h1 class="font-bold mb-4 tracking-tight" style="color: var(--color-text-primary);">
+        České metafory
+      </h1>
+      <p class="text-lg sm:text-xl leading-relaxed max-w-2xl" style="color: var(--color-text-secondary);">
         Objevte bohatství české řeči. Procházejte, vyhledávejte a přidávejte vlastní metafory.
       </p>
     </div>
@@ -50,9 +52,15 @@ const jsonLd = {
     {metaphors && metaphors.length > 0 ? (
       <SearchBar client:load metaphors={metaphors} />
     ) : (
-      <div class="text-center py-16 text-gray-500">
-        <p class="mb-3">Zatím nejsou žádné metafory.</p>
-        <a href="/pridat" class="inline-block px-4 py-2 bg-gray-900 text-white rounded hover:bg-gray-700 transition-colors">
+      <div class="text-center py-20 rounded-xl" style="background-color: var(--color-bg-card); border: 1.5px solid var(--color-border);">
+        <p class="mb-5 text-lg" style="color: var(--color-text-secondary);">Zatím nejsou žádné metafory.</p>
+        <a
+          href="/pridat"
+          class="inline-block px-6 py-3 rounded-lg font-medium hover:transform hover:scale-105 transition-all shadow-sm"
+          style="background-color: var(--color-accent-primary); color: white;"
+          onmouseover="this.style.backgroundColor='var(--color-accent-hover)'"
+          onmouseout="this.style.backgroundColor='var(--color-accent-primary)'"
+        >
           Přidejte první metaforu
         </a>
       </div>

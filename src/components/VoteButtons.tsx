@@ -86,17 +86,22 @@ export default function VoteButtons({
 
   return (
     <div className="space-y-3">
-      <div className="flex items-center gap-2 sm:gap-3">
+      <div className="flex items-center gap-3">
         <button
           onClick={() => handleVote('like')}
           disabled={hasVoted || isVoting}
           className={`
-            flex items-center gap-1 sm:gap-2 px-4 sm:px-5 py-2 rounded font-medium transition-colors text-sm sm:text-base
+            flex items-center gap-2 px-5 py-2.5 rounded-lg font-semibold transition-all text-sm sm:text-base
             ${hasVoted || isVoting
-              ? 'bg-gray-100 text-gray-400 cursor-not-allowed'
-              : 'bg-gray-100 text-gray-700 hover:bg-gray-900 hover:text-white'
+              ? 'opacity-40 cursor-not-allowed'
+              : 'hover:scale-105 hover:shadow-md'
             }
           `}
+          style={{
+            backgroundColor: hasVoted || isVoting ? 'var(--color-border)' : 'var(--color-bg-card)',
+            color: hasVoted || isVoting ? 'var(--color-text-tertiary)' : 'var(--color-positive)',
+            border: '1.5px solid var(--color-border)'
+          }}
           aria-label="Líbí se mi"
         >
           <span className="text-lg sm:text-xl">👍</span>
@@ -107,29 +112,38 @@ export default function VoteButtons({
           onClick={() => handleVote('dislike')}
           disabled={hasVoted || isVoting}
           className={`
-            flex items-center gap-1 sm:gap-2 px-4 sm:px-5 py-2 rounded font-medium transition-colors text-sm sm:text-base
+            flex items-center gap-2 px-5 py-2.5 rounded-lg font-semibold transition-all text-sm sm:text-base
             ${hasVoted || isVoting
-              ? 'bg-gray-100 text-gray-400 cursor-not-allowed'
-              : 'bg-gray-100 text-gray-700 hover:bg-gray-900 hover:text-white'
+              ? 'opacity-40 cursor-not-allowed'
+              : 'hover:scale-105 hover:shadow-md'
             }
           `}
+          style={{
+            backgroundColor: hasVoted || isVoting ? 'var(--color-border)' : 'var(--color-bg-card)',
+            color: hasVoted || isVoting ? 'var(--color-text-tertiary)' : 'var(--color-negative)',
+            border: '1.5px solid var(--color-border)'
+          }}
           aria-label="Nelíbí se mi"
         >
           <span className="text-lg sm:text-xl">👎</span>
           <span>{dislikes}</span>
         </button>
+
+        <span className="ml-2 font-bold text-sm sm:text-base" style={{ color: 'var(--color-accent-primary)' }}>
+          Skóre: {score}
+        </span>
       </div>
 
       {error && (
-        <p className="text-xs sm:text-sm text-gray-600">{error}</p>
+        <p className="text-sm font-medium" style={{ color: 'var(--color-negative)' }}>{error}</p>
       )}
 
       {hasVoted && !error && (
-        <p className="text-xs sm:text-sm text-gray-600">Děkujeme za váš hlas</p>
+        <p className="text-sm font-medium" style={{ color: 'var(--color-positive)' }}>Děkujeme za váš hlas</p>
       )}
 
       {isVoting && (
-        <p className="text-xs sm:text-sm text-gray-500">Odesílám...</p>
+        <p className="text-sm font-medium" style={{ color: 'var(--color-text-tertiary)' }}>Odesílám...</p>
       )}
     </div>
   )
