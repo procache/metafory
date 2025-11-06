@@ -1,4 +1,4 @@
-# Netlify configuration for Astro static site
+# Netlify configuration for Astro SSR site
 [build]
   command = "npm run build"
   publish = "dist"
@@ -6,11 +6,8 @@
 [build.environment]
   NODE_VERSION = "20"
 
-# Redirects for SPA-like behavior (optional)
-[[redirects]]
-  from = "/api/*"
-  to = "/.netlify/functions/:splat"
-  status = 200
+# Note: API routes are automatically handled by @astrojs/netlify adapter
+# No manual redirects needed
 
 # Headers for security and caching
 [[headers]]

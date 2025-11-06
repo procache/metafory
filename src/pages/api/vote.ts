@@ -1,6 +1,9 @@
 import type { APIRoute } from 'astro'
 import { supabase } from '../../lib/supabase'
 
+// Ensure this route is never prerendered (needed for Netlify)
+export const prerender = false
+
 export const POST: APIRoute = async ({ request }) => {
   try {
     const body = await request.json()

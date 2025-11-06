@@ -3,6 +3,9 @@ import { getServerSupabase } from '../../lib/supabase'
 import { generateSlug, ensureUniqueSlug } from '../../lib/utils'
 import { sendNewMetaphorNotification } from '../../lib/email'
 
+// Ensure this route is never prerendered (needed for Netlify)
+export const prerender = false
+
 export const POST: APIRoute = async ({ request }) => {
   try {
     // Use service role for admin operations (bypasses RLS)
