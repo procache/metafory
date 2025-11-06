@@ -67,6 +67,13 @@ const siteUrl = 'https://metafory.cz'
             Metafory.cz
           </a>
           <div class="flex gap-3 sm:gap-5 items-center">
+            <a
+              href="/co-je-metafora"
+              class="hidden sm:inline-block px-4 py-2.5 text-sm font-medium hover:opacity-70 transition-opacity"
+              style="color: var(--color-text-secondary);"
+            >
+              Co je metafora?
+            </a>
             <form action="/" method="get" class="hidden sm:block relative">
               <input
                 type="text"
@@ -125,6 +132,20 @@ const siteUrl = 'https://metafory.cz'
               }
             >
               Nejoblíbenější
+            </a>
+            <a
+              href="/?view=recent"
+              class={`px-5 py-2.5 font-semibold text-sm transition-all border-b-3 ${
+                Astro.url.searchParams.get('view') === 'recent'
+                  ? 'border-b-2'
+                  : 'border-transparent hover:opacity-70'
+              }`}
+              style={Astro.url.searchParams.get('view') === 'recent'
+                ? { borderColor: 'var(--color-accent-primary)', color: 'var(--color-text-primary)' }
+                : { color: 'var(--color-text-tertiary)' }
+              }
+            >
+              Nově přidané
             </a>
           </div>
         )}

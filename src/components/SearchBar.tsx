@@ -24,6 +24,15 @@ export default function SearchBar({ metaphors, initialQuery = '', activeView = '
     return metaphors.slice(0, 5)
   }, [metaphors])
 
+  // Get recently added metaphors (sorted by approved_at or created_at)
+  const recentMetaphors = useMemo(() => {
+    return [...metaphors].sort((a, b) => {
+      const dateA = new Date(a.approved_at || a.created_at).getTime()
+      const dateB = new Date(b.approved_at || b.created_at).getTime()
+      return dateB - dateA
+    })
+  }, [metaphors])
+
   // Filter metaphors based on search query
   const filteredMetaphors = useMemo(() => {
     if (!searchQuery.trim()) {
@@ -146,6 +155,46 @@ export default function SearchBar({ metaphors, initialQuery = '', activeView = '
                   </div>
                 </a>
               </div>
+            </div>
+          ))}
+        </div>
+      )}
+
+      {/* Recent View */}
+      {activeView === 'recent' && (
+        <div className="space-y-5">
+          {recentMetaphors.map((metaphor) => (
+            <div
+              key={metaphor.id}
+              className="py-6 sm:py-7"
+              style={{ borderBottom: '1px solid var(--color-border)' }}
+            >
+              <a href={`/metafora/${metaphor.slug}`} className="block hover:opacity-70 transition-opacity">
+                <h2
+                  className="text-xl sm:text-2xl font-semibold mb-3 leading-tight"
+                  style={{ color: 'var(--color-text-primary)' }}
+                >
+                  {metaphor.nazev}
+                </h2>
+                <p
+                  className="text-base sm:text-lg mb-2.5 leading-relaxed"
+                  style={{ color: 'var(--color-text-secondary)' }}
+                >
+                  {metaphor.definice}
+                </p>
+                <p
+                  className="text-sm sm:text-base italic mb-4 leading-relaxed"
+                  style={{ color: 'var(--color-text-tertiary)' }}
+                >
+                  „{metaphor.priklad}"
+                </p>
+              </a>
+              <VoteButtons
+                metaphorId={metaphor.id}
+                initialLikes={metaphor.like_count}
+                initialDislikes={metaphor.dislike_count}
+                initialScore={metaphor.score}
+              />
             </div>
           ))}
         </div>
