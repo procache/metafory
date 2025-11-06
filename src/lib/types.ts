@@ -6,6 +6,7 @@ export interface Metaphor {
   nazev: string
   definice: string
   priklad: string
+  zdroj: string | null
   autor_jmeno: string | null
   autor_email: string | null
   status: 'pending' | 'published' | 'rejected'

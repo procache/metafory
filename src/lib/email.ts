@@ -13,6 +13,7 @@ interface NewMetaphorEmailParams {
   nazev: string
   definice: string
   priklad: string
+  zdroj?: string | null
   autor_jmeno?: string | null
   autor_email?: string | null
   slug: string
@@ -26,7 +27,11 @@ export async function sendNewMetaphorNotification(params: NewMetaphorEmailParams
   }
 
   try {
-    const { nazev, definice, priklad, autor_jmeno, autor_email, slug } = params
+    const { nazev, definice, priklad, zdroj, autor_jmeno, autor_email, slug } = params
+
+    const sourceInfo = zdroj
+      ? `<p><strong>Zdroj:</strong> ${zdroj}</p>`
+      : ''
 
     const authorInfo = autor_jmeno || autor_email
       ? `<p><strong>Autor:</strong> ${autor_jmeno || 'Neposkytnut'} ${autor_email ? `(${autor_email})` : ''}</p>`
@@ -40,6 +45,8 @@ export async function sendNewMetaphorNotification(params: NewMetaphorEmailParams
       <p><strong>Definice:</strong><br>${definice}</p>
 
       <p><strong>Příklad:</strong><br>${priklad}</p>
+
+      ${sourceInfo}
 
       ${authorInfo}
 
@@ -62,6 +69,7 @@ Definice: ${definice}
 
 Příklad: ${priklad}
 
+${zdroj ? `Zdroj: ${zdroj}` : ''}
 ${autor_jmeno ? `Autor: ${autor_jmeno}` : ''}
 ${autor_email ? `Email: ${autor_email}` : ''}
 

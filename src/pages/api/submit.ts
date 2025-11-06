@@ -12,7 +12,7 @@ export const POST: APIRoute = async ({ request }) => {
     const supabase = getServerSupabase()
 
     const body = await request.json()
-    const { nazev, definice, priklad, autor_jmeno, autor_email } = body
+    const { nazev, definice, priklad, zdroj, autor_jmeno, autor_email } = body
 
     // Validate required fields
     if (!nazev || !definice || !priklad) {
@@ -53,6 +53,7 @@ export const POST: APIRoute = async ({ request }) => {
         nazev: nazev.trim(),
         definice: definice.trim(),
         priklad: priklad.trim(),
+        zdroj: zdroj ? zdroj.trim() : null,
         autor_jmeno: autor_jmeno ? autor_jmeno.trim() : null,
         autor_email: autor_email ? autor_email.trim() : null,
         status: 'pending'
@@ -73,6 +74,7 @@ export const POST: APIRoute = async ({ request }) => {
       nazev: data.nazev,
       definice: data.definice,
       priklad: data.priklad,
+      zdroj: data.zdroj,
       autor_jmeno: data.autor_jmeno,
       autor_email: data.autor_email,
       slug: data.slug
