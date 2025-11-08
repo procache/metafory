@@ -44,15 +44,6 @@ const jsonLd = {
 >
   <script type="application/ld+json" set:html={JSON.stringify(jsonLd)} />
   <div>
-    <div class="mb-14 sm:mb-16">
-      <h1 class="font-bold mb-4 tracking-tight" style="color: var(--color-text-primary);">
-        České metafory
-      </h1>
-      <p class="text-lg sm:text-xl leading-relaxed max-w-2xl" style="color: var(--color-text-secondary);">
-        Objevte bohatství české řeči. Procházejte, vyhledávejte a přidávejte vlastní metafory.
-      </p>
-    </div>
-
     {metaphors && metaphors.length > 0 ? (
       <SearchBar client:load metaphors={metaphors} initialQuery={searchQuery} activeView={viewType} />
     ) : (
