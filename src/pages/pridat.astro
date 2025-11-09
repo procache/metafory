@@ -25,7 +25,15 @@ import BaseLayout from '../layouts/BaseLayout.astro'
         Přidat novou metaforu
       </h1>
       <p class="text-lg leading-relaxed" style="color: var(--color-text-secondary);">
-        Sdílejte svou oblíbenou českou metaforu. Po odeslání bude čekat na schválení administrátorem.
+        Sdílejte svou oblíbenou českou metaforu.
+      </p>
+    </div>
+
+    <!-- Approval notice -->
+    <div class="mb-6 p-4 rounded-lg flex items-start gap-3" style="background-color: var(--color-bg-card); border: 1.5px solid var(--color-border);">
+      <span style="color: var(--color-accent-primary); font-size: 1.25rem; flex-shrink: 0;">ℹ️</span>
+      <p class="text-sm leading-relaxed" style="color: var(--color-text-secondary);">
+        Nově přidané metafory procházejí schválením před zveřejněním. Obvykle to trvá 1–2 dny.
       </p>
     </div>
 
@@ -215,7 +223,11 @@ import BaseLayout from '../layouts/BaseLayout.astro'
         statusDiv.style.backgroundColor = 'var(--color-positive)'
         statusDiv.style.color = 'white'
         statusDiv.style.border = '1.5px solid var(--color-positive)'
-        statusDiv.textContent = 'Děkujeme! Vaše metafora byla odeslána a čeká na schválení.'
+        statusDiv.innerHTML = `
+          <div class="font-bold mb-2">✅ Metafora úspěšně odeslána!</div>
+          <div class="text-sm opacity-95">Zkontrolujeme ji a zveřejníme do 1–2 dnů.</div>
+          ${data.autor_email ? '<div class="text-sm opacity-90 mt-2">Po schválení vám pošleme email s potvrzením.</div>' : ''}
+        `
         statusDiv.classList.remove('hidden')
         form.reset()
       } else {
