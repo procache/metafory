@@ -1,0 +1,134 @@
+---
+interface Props {
+  currentPage: number
+  totalPages: number
+  baseUrl: string
+}
+
+const { currentPage, totalPages, baseUrl } = Astro.props
+
+// Calculate page range to show (max 7 page numbers)
+const getPageNumbers = () => {
+  const delta = 2 // Pages to show on each side of current page
+  const range: (number | string)[] = []
+  const rangeWithDots: (number | string)[] = []
+
+  // Always show first page
+  range.push(1)
+
+  // Calculate middle range
+  for (let i = currentPage - delta; i <= currentPage + delta; i++) {
+    if (i > 1 && i < totalPages) {
+      range.push(i)
+    }
+  }
+
+  // Always show last page
+  if (totalPages > 1) {
+    range.push(totalPages)
+  }
+
+  // Add dots where needed
+  let prev: number | undefined
+  for (const i of range) {
+    if (prev) {
+      if (i !== prev + 1) {
+        rangeWithDots.push('...')
+      }
+    }
+    rangeWithDots.push(i)
+    prev = i as number
+  }
+
+  return rangeWithDots
+}
+
+const pageNumbers = getPageNumbers()
+
+// Build URL with page parameter
+const buildPageUrl = (page: number) => {
+  const separator = baseUrl.includes('?') ? '&' : '?'
+  return `${baseUrl}${separator}page=${page}`
+}
+---
+
+<nav class="mt-10 flex justify-center" aria-label="Pagination">
+  <div class="flex items-center gap-2">
+    <!-- Previous button -->
+    {currentPage > 1 ? (
+      <a
+        href={buildPageUrl(currentPage - 1)}
+        class="px-4 py-2 rounded-lg font-medium transition-all hover:scale-105"
+        style="background-color: var(--color-bg-card); border: 1.5px solid var(--color-border); color: var(--color-text-primary);"
+        onmouseover="this.style.borderColor='var(--color-border-hover)'"
+        onmouseout="this.style.borderColor='var(--color-border)'"
+        aria-label="Předchozí stránka"
+      >
+        ← Předchozí
+      </a>
+    ) : (
+      <span
+        class="px-4 py-2 rounded-lg font-medium cursor-not-allowed opacity-50"
+        style="background-color: var(--color-bg-card); border: 1.5px solid var(--color-border); color: var(--color-text-secondary);"
+        aria-disabled="true"
+      >
+        ← Předchozí
+      </span>
+    )}
+
+    <!-- Page numbers -->
+    <div class="hidden sm:flex items-center gap-2">
+      {pageNumbers.map((pageNum) => (
+        pageNum === '...' ? (
+          <span class="px-2" style="color: var(--color-text-tertiary);">…</span>
+        ) : pageNum === currentPage ? (
+          <span
+            class="px-4 py-2 rounded-lg font-bold"
+            style="background-color: var(--color-accent-primary); color: white;"
+            aria-current="page"
+          >
+            {pageNum}
+          </span>
+        ) : (
+          <a
+            href={buildPageUrl(pageNum as number)}
+            class="px-4 py-2 rounded-lg font-medium transition-all hover:scale-105"
+            style="background-color: var(--color-bg-card); border: 1.5px solid var(--color-border); color: var(--color-text-primary);"
+            onmouseover="this.style.borderColor='var(--color-border-hover)'"
+            onmouseout="this.style.borderColor='var(--color-border)'"
+            aria-label={`Stránka ${pageNum}`}
+          >
+            {pageNum}
+          </a>
+        )
+      ))}
+    </div>
+
+    <!-- Mobile: show current page info -->
+    <div class="sm:hidden px-4 py-2" style="color: var(--color-text-secondary);">
+      {currentPage} / {totalPages}
+    </div>
+
+    <!-- Next button -->
+    {currentPage < totalPages ? (
+      <a
+        href={buildPageUrl(currentPage + 1)}
+        class="px-4 py-2 rounded-lg font-medium transition-all hover:scale-105"
+        style="background-color: var(--color-bg-card); border: 1.5px solid var(--color-border); color: var(--color-text-primary);"
+        onmouseover="this.style.borderColor='var(--color-border-hover)'"
+        onmouseout="this.style.borderColor='var(--color-border)'"
+        aria-label="Další stránka"
+      >
+        Další →
+      </a>
+    ) : (
+      <span
+        class="px-4 py-2 rounded-lg font-medium cursor-not-allowed opacity-50"
+        style="background-color: var(--color-bg-card); border: 1.5px solid var(--color-border); color: var(--color-text-secondary);"
+        aria-disabled="true"
+      >
+        Další →
+      </span>
+    )}
+  </div>
+</nav>
