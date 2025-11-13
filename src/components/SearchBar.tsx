@@ -61,7 +61,7 @@ export default function SearchBar({ metaphors, initialQuery = '', activeView = '
             </div>
           )}
 
-          <div className="space-y-5">
+          <div className="space-y-6">
             {filteredMetaphors.length === 0 ? (
               <div
                 className="text-center py-16 rounded-xl"
@@ -77,8 +77,18 @@ export default function SearchBar({ metaphors, initialQuery = '', activeView = '
               filteredMetaphors.map((metaphor) => (
                 <div
                   key={metaphor.id}
-                  className="py-6 sm:py-7"
-                  style={{ borderBottom: '1px solid var(--color-border)' }}
+                  className="rounded-xl p-6 sm:p-8 hover:shadow-lg transition-all duration-300"
+                  style={{
+                    backgroundColor: 'var(--color-bg-card)',
+                    border: '2px solid var(--color-border)',
+                    boxShadow: '0 1px 3px rgba(0, 0, 0, 0.05)'
+                  }}
+                  onMouseOver={(e) => {
+                    e.currentTarget.style.borderColor = 'var(--color-border-hover)'
+                  }}
+                  onMouseOut={(e) => {
+                    e.currentTarget.style.borderColor = 'var(--color-border)'
+                  }}
                 >
                   <a href={`/metafora/${metaphor.slug}`} className="block hover:opacity-70 transition-opacity">
                     <h2
@@ -115,12 +125,22 @@ export default function SearchBar({ metaphors, initialQuery = '', activeView = '
 
       {/* Favorites View */}
       {activeView === 'favorites' && (
-        <div className="space-y-5">
+        <div className="space-y-6">
           {topFavorites.map((metaphor, index) => (
             <div
               key={metaphor.id}
-              className="flex gap-4 sm:gap-5 py-6"
-              style={{ borderBottom: '1px solid var(--color-border)' }}
+              className="flex gap-4 sm:gap-5 p-6 sm:p-8 rounded-xl hover:shadow-lg transition-all duration-300"
+              style={{
+                backgroundColor: 'var(--color-bg-card)',
+                border: '2px solid var(--color-border)',
+                boxShadow: '0 1px 3px rgba(0, 0, 0, 0.05)'
+              }}
+              onMouseOver={(e) => {
+                e.currentTarget.style.borderColor = 'var(--color-border-hover)'
+              }}
+              onMouseOut={(e) => {
+                e.currentTarget.style.borderColor = 'var(--color-border)'
+              }}
             >
               <div
                 className="flex-shrink-0 w-10 h-10 flex items-center justify-center rounded-full font-bold text-base"
@@ -162,12 +182,22 @@ export default function SearchBar({ metaphors, initialQuery = '', activeView = '
 
       {/* Recent View */}
       {activeView === 'recent' && (
-        <div className="space-y-5">
+        <div className="space-y-6">
           {recentMetaphors.map((metaphor) => (
             <div
               key={metaphor.id}
-              className="py-6 sm:py-7"
-              style={{ borderBottom: '1px solid var(--color-border)' }}
+              className="rounded-xl p-6 sm:p-8 hover:shadow-lg transition-all duration-300"
+              style={{
+                backgroundColor: 'var(--color-bg-card)',
+                border: '2px solid var(--color-border)',
+                boxShadow: '0 1px 3px rgba(0, 0, 0, 0.05)'
+              }}
+              onMouseOver={(e) => {
+                e.currentTarget.style.borderColor = 'var(--color-border-hover)'
+              }}
+              onMouseOut={(e) => {
+                e.currentTarget.style.borderColor = 'var(--color-border)'
+              }}
             >
               <a href={`/metafora/${metaphor.slug}`} className="block hover:opacity-70 transition-opacity">
                 <h2
