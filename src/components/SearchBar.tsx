@@ -1,3 +1,4 @@
+import { useState } from 'react'
 import type { MetaphorWithVotes } from '../lib/types'
 import VoteButtons from './VoteButtons'
 
@@ -8,15 +9,28 @@ interface SearchBarProps {
   showPagination?: boolean
 }
 
+// Fisher-Yates shuffle algorithm
+function shuffleArray<T>(array: T[]): T[] {
+  const shuffled = [...array]
+  for (let i = shuffled.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1))
+    ;[shuffled[i], shuffled[j]] = [shuffled[j], shuffled[i]]
+  }
+  return shuffled
+}
+
 export default function SearchBar({
   metaphors,
   initialQuery = '',
   activeView = 'all',
   showPagination = true
 }: SearchBarProps) {
-  // Metaphors are already filtered/paginated from the server
-  // No need for client-side filtering anymore
-  const displayMetaphors = metaphors
+  // Shuffle metaphors once when component mounts for 'all' view without search
+  // This ensures returning visitors see different content each visit
+  const [shuffledMetaphors] = useState(() => shuffleArray(metaphors))
+
+  // Use shuffled order for 'all' view without search query, otherwise use original order
+  const displayMetaphors = (activeView === 'all' && !initialQuery) ? shuffledMetaphors : metaphors
 
   return (
     <div>
