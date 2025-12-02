@@ -24,6 +24,7 @@ Thumbs.db
 # Editor files
 .vscode/
 .idea/
+.obsidian/
 *.swp
 *.swo
 *~
@@ -36,3 +37,6 @@ coverage/
 
 # Claude local settings
 .claude/settings.local.json
+
+# Temporary exports and working files
+exports/
