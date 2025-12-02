@@ -7,7 +7,7 @@ import netlify from '@astrojs/netlify';
 
 // https://astro.build/config
 export default defineConfig({
-  output: 'server', // Enable server-side rendering for API routes
+  output: 'server', // Server mode with selective prerendering for hybrid behavior
   adapter: netlify(),
 
   integrations: [react()],

@@ -1,92 +1,18 @@
 ---
-export const prerender = false
+export const prerender = true
 
 import BaseLayout from '../layouts/BaseLayout.astro'
 import SearchBar from '../components/SearchBar'
-import Pagination from '../components/Pagination.astro'
 import { supabase } from '../lib/supabase'
 import type { MetaphorWithVotes } from '../lib/types'
 
-// Pagination settings
-const METAPHORS_PER_PAGE = 30
-
-// Get URL parameters
-const searchQuery = Astro.url.searchParams.get('q') || ''
-const viewType = Astro.url.searchParams.get('view') || 'all'
-const currentPage = parseInt(Astro.url.searchParams.get('page') || '1', 10)
-
-// Validate page number
-const page = Math.max(1, currentPage)
-
-// Calculate offset for pagination
-const offset = (page - 1) * METAPHORS_PER_PAGE
-
-// Get total count of published metaphors
-const { count: totalCount, error: countError } = await supabase
+// Fetch ALL published metaphors at build time
+const { data: metaphors, error } = await supabase
   .from('metaphors_with_votes')
-  .select('*', { count: 'exact', head: true })
+  .select('*')
   .eq('status', 'published')
-
-if (countError) {
-  console.error('Error fetching metaphor count:', countError)
-}
-
-const totalPages = Math.ceil((totalCount || 0) / METAPHORS_PER_PAGE)
-
-// Fetch metaphors based on view type
-let metaphors: MetaphorWithVotes[] | null = null
-let error = null
-
-if (viewType === 'all' && !searchQuery) {
-  // Regular pagination for "all" view
-  const result = await supabase
-    .from('metaphors_with_votes')
-    .select('*')
-    .eq('status', 'published')
-    .order('score', { ascending: false })
-    .range(offset, offset + METAPHORS_PER_PAGE - 1)
-    .returns<MetaphorWithVotes[]>()
-
-  metaphors = result.data
-  error = result.error
-} else if (viewType === 'favorites') {
-  // Top 5 favorites (no pagination needed)
-  const result = await supabase
-    .from('metaphors_with_votes')
-    .select('*')
-    .eq('status', 'published')
-    .order('score', { ascending: false })
-    .limit(5)
-    .returns<MetaphorWithVotes[]>()
-
-  metaphors = result.data
-  error = result.error
-} else if (viewType === 'recent') {
-  // Recent metaphors with pagination
-  const result = await supabase
-    .from('metaphors_with_votes')
-    .select('*')
-    .eq('status', 'published')
-    .order('approved_at', { ascending: false, nullsFirst: false })
-    .order('created_at', { ascending: false })
-    .range(offset, offset + METAPHORS_PER_PAGE - 1)
-    .returns<MetaphorWithVotes[]>()
-
-  metaphors = result.data
-  error = result.error
-} else if (searchQuery) {
-  // Search query - fetch all matching results (client-side filtering for now)
-  const result = await supabase
-    .from('metaphors_with_votes')
-    .select('*')
-    .eq('status', 'published')
-    .or(`nazev.ilike.%${searchQuery}%,definice.ilike.%${searchQuery}%,priklad.ilike.%${searchQuery}%`)
-    .order('score', { ascending: false })
-    .returns<MetaphorWithVotes[]>()
-
-  metaphors = result.data
-  error = result.error
-}
+  .order('score', { ascending: false })
+  .returns<MetaphorWithVotes[]>()
 
 if (error) {
   console.error('Error fetching metaphors:', error)
@@ -115,40 +41,24 @@ const jsonLd = {
   <script type="application/ld+json" set:html={JSON.stringify(jsonLd)} />
   <div>
     {metaphors && metaphors.length > 0 ? (
-      <>
-        <SearchBar
-          client:load
-          metaphors={metaphors}
-          initialQuery={searchQuery}
-          activeView={viewType}
-          showPagination={viewType !== 'favorites'}
-        />
-
-        {/* Show pagination only for 'all' and 'recent' views, not for search or favorites */}
-        {!searchQuery && viewType !== 'favorites' && totalPages > 1 && (
-          <Pagination
-            currentPage={page}
-            totalPages={totalPages}
-            baseUrl={`/?view=${viewType}`}
-          />
-        )}
-      </>
+      <SearchBar
+        client:load
+        metaphors={metaphors}
+      />
     ) : (
       <div class="text-center py-20 rounded-xl" style="background-color: var(--color-bg-card); border: 1.5px solid var(--color-border);">
         <p class="mb-5 text-lg" style="color: var(--color-text-secondary);">
-          {searchQuery ? 'Žádné metafory nenalezeny. Zkuste jiné hledání.' : 'Zatím nejsou žádné metafory.'}
+          Zatím nejsou žádné metafory.
         </p>
-        {!searchQuery && (
-          <a
-            href="/pridat"
-            class="inline-block px-6 py-3 rounded-lg font-medium hover:transform hover:scale-105 transition-all shadow-sm"
-            style="background-color: var(--color-accent-primary); color: white;"
-            onmouseover="this.style.backgroundColor='var(--color-accent-hover)'"
-            onmouseout="this.style.backgroundColor='var(--color-accent-primary)'"
-          >
-            Přidejte první metaforu
-          </a>
-        )}
+        <a
+          href="/pridat"
+          class="inline-block px-6 py-3 rounded-lg font-medium hover:transform hover:scale-105 transition-all shadow-sm"
+          style="background-color: var(--color-accent-primary); color: white;"
+          onmouseover="this.style.backgroundColor='var(--color-accent-hover)'"
+          onmouseout="this.style.backgroundColor='var(--color-accent-primary)'"
+        >
+          Přidejte první metaforu
+        </a>
       </div>
     )}
   </div>
