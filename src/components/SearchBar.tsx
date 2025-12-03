@@ -131,6 +131,94 @@ export default function SearchBar({ metaphors }: SearchBarProps) {
     <div>
       {/* Search and Filter Bar */}
       <div className="mb-8 space-y-4">
+        {/* Introduction */}
+        <div
+          className="p-5 sm:p-6 rounded-xl"
+          style={{
+            backgroundColor: '#e8f5e9',
+            border: '1.5px solid #c8e6c9'
+          }}
+        >
+          <p
+            className="text-sm sm:text-base leading-relaxed mb-2"
+            style={{ color: '#2e7d32' }}
+          >
+            Metafora je obrazné vyjádření, kdy jednu věc popisujeme pomocí jiné věci, se kterou má něco společného.
+            Jednoduše řečeno: místo abychom řekli, jak něco skutečně je, řekneme, že to je něco jiného – a najednou tomu lépe rozumíme.
+          </p>
+          <a
+            href="/co-je-metafora"
+            className="text-sm font-medium hover:opacity-70 transition-opacity inline-flex items-center gap-1"
+            style={{ color: '#2e7d32' }}
+          >
+            Více o metaforách →
+          </a>
+        </div>
+
+        {/* View Filters and Add Button */}
+        <div className="flex justify-between items-center gap-4 flex-wrap">
+          <div className="flex gap-2 flex-wrap">
+            <button
+              onClick={() => handleViewChange('all')}
+              className={`px-4 py-2 rounded-lg font-medium transition-all ${
+                viewType === 'all' ? 'font-semibold' : ''
+              }`}
+              style={{
+                backgroundColor: viewType === 'all' ? 'var(--color-accent-primary)' : 'var(--color-bg-card)',
+                color: viewType === 'all' ? 'white' : 'var(--color-text-secondary)',
+                border: '2px solid',
+                borderColor: viewType === 'all' ? 'var(--color-accent-primary)' : 'var(--color-border)'
+              }}
+            >
+              Všechny
+            </button>
+            <button
+              onClick={() => handleViewChange('favorites')}
+              className={`px-4 py-2 rounded-lg font-medium transition-all ${
+                viewType === 'favorites' ? 'font-semibold' : ''
+              }`}
+              style={{
+                backgroundColor: viewType === 'favorites' ? 'var(--color-accent-primary)' : 'var(--color-bg-card)',
+                color: viewType === 'favorites' ? 'white' : 'var(--color-text-secondary)',
+                border: '2px solid',
+                borderColor: viewType === 'favorites' ? 'var(--color-accent-primary)' : 'var(--color-border)'
+              }}
+            >
+              Top 5
+            </button>
+            <button
+              onClick={() => handleViewChange('recent')}
+              className={`px-4 py-2 rounded-lg font-medium transition-all ${
+                viewType === 'recent' ? 'font-semibold' : ''
+              }`}
+              style={{
+                backgroundColor: viewType === 'recent' ? 'var(--color-accent-primary)' : 'var(--color-bg-card)',
+                color: viewType === 'recent' ? 'white' : 'var(--color-text-secondary)',
+                border: '2px solid',
+                borderColor: viewType === 'recent' ? 'var(--color-accent-primary)' : 'var(--color-border)'
+              }}
+            >
+              Nejnovější
+            </button>
+          </div>
+          <a
+            href="/pridat"
+            className="px-4 sm:px-6 py-2 sm:py-2.5 rounded-lg text-sm font-semibold hover:transform hover:scale-105 transition-all shadow-md whitespace-nowrap"
+            style={{
+              backgroundColor: 'var(--color-positive)',
+              color: 'white'
+            }}
+            onMouseOver={(e) => {
+              e.currentTarget.style.backgroundColor = 'var(--color-positive-hover)'
+            }}
+            onMouseOut={(e) => {
+              e.currentTarget.style.backgroundColor = 'var(--color-positive)'
+            }}
+          >
+            Přidat metaforu
+          </a>
+        </div>
+
         {/* Search Input */}
         <div>
           <input
@@ -145,52 +233,6 @@ export default function SearchBar({ metaphors }: SearchBarProps) {
               color: 'var(--color-text-primary)'
             }}
           />
-        </div>
-
-        {/* View Filters */}
-        <div className="flex gap-2 flex-wrap">
-          <button
-            onClick={() => handleViewChange('all')}
-            className={`px-4 py-2 rounded-lg font-medium transition-all ${
-              viewType === 'all' ? 'font-semibold' : ''
-            }`}
-            style={{
-              backgroundColor: viewType === 'all' ? 'var(--color-accent-primary)' : 'var(--color-bg-card)',
-              color: viewType === 'all' ? 'white' : 'var(--color-text-secondary)',
-              border: '2px solid',
-              borderColor: viewType === 'all' ? 'var(--color-accent-primary)' : 'var(--color-border)'
-            }}
-          >
-            Všechny
-          </button>
-          <button
-            onClick={() => handleViewChange('favorites')}
-            className={`px-4 py-2 rounded-lg font-medium transition-all ${
-              viewType === 'favorites' ? 'font-semibold' : ''
-            }`}
-            style={{
-              backgroundColor: viewType === 'favorites' ? 'var(--color-accent-primary)' : 'var(--color-bg-card)',
-              color: viewType === 'favorites' ? 'white' : 'var(--color-text-secondary)',
-              border: '2px solid',
-              borderColor: viewType === 'favorites' ? 'var(--color-accent-primary)' : 'var(--color-border)'
-            }}
-          >
-            Top 5
-          </button>
-          <button
-            onClick={() => handleViewChange('recent')}
-            className={`px-4 py-2 rounded-lg font-medium transition-all ${
-              viewType === 'recent' ? 'font-semibold' : ''
-            }`}
-            style={{
-              backgroundColor: viewType === 'recent' ? 'var(--color-accent-primary)' : 'var(--color-bg-card)',
-              color: viewType === 'recent' ? 'white' : 'var(--color-text-secondary)',
-              border: '2px solid',
-              borderColor: viewType === 'recent' ? 'var(--color-accent-primary)' : 'var(--color-border)'
-            }}
-          >
-            Nejnovější
-          </button>
         </div>
 
         {/* Results Count */}

@@ -58,7 +58,7 @@ const siteUrl = 'https://metafory.cz'
   <div class="max-w-4xl mx-auto px-5 sm:px-8 py-10 sm:py-16">
     <header class="mb-16 sm:mb-20">
       <nav class="pb-6 sm:pb-8" style="border-bottom: 1.5px solid var(--color-border);">
-        <div class="flex items-center justify-between mb-4">
+        <div class="mb-4">
           <a
             href="/"
             class="hover:opacity-80 transition-opacity inline-block"
@@ -69,35 +69,6 @@ const siteUrl = 'https://metafory.cz'
               class="h-14 sm:h-18 lg:h-22 w-auto"
             />
           </a>
-          <div class="flex gap-3 sm:gap-5 items-center">
-            <form action="/" method="get" class="hidden sm:block relative">
-              <input
-                type="text"
-                name="q"
-                placeholder="Hledat..."
-                class="px-4 py-2.5 pr-10 rounded-lg text-sm font-medium transition-all w-48 lg:w-64"
-                style="border: 1.5px solid var(--color-border); background-color: var(--color-bg-card); color: var(--color-text-primary);"
-                onfocus="this.style.borderColor='var(--color-accent-primary)'"
-                onblur="this.style.borderColor='var(--color-border)'"
-                value={Astro.url.searchParams.get('q') || ''}
-              />
-              <button type="submit" class="absolute right-3 top-1/2 -translate-y-1/2 hover:opacity-70 transition-opacity" aria-label="Vyhledat">
-                <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="var(--color-positive)" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
-                  <circle cx="11" cy="11" r="8"></circle>
-                  <path d="m21 21-4.35-4.35"></path>
-                </svg>
-              </button>
-            </form>
-            <a
-              href="/pridat"
-              class="px-4 sm:px-6 py-2.5 sm:py-3 rounded-lg text-sm font-semibold hover:transform hover:scale-105 transition-all shadow-md whitespace-nowrap"
-              style="background-color: var(--color-positive); color: white;"
-              onmouseover="this.style.backgroundColor='var(--color-positive-hover)'"
-              onmouseout="this.style.backgroundColor='var(--color-positive)'"
-            >
-              Přidat metaforu
-            </a>
-          </div>
         </div>
       </nav>
     </header>
