@@ -99,66 +99,6 @@ const siteUrl = 'https://metafory.cz'
             </a>
           </div>
         </div>
-        {(Astro.url.pathname === '/' || Astro.url.pathname === '/co-je-metafora') && (
-          <div class="flex gap-2">
-            <a
-              href="/?view=all"
-              class={`px-5 py-2.5 font-semibold text-sm transition-all border-b-3 ${
-                Astro.url.pathname === '/' && (Astro.url.searchParams.get('view') || 'all') === 'all'
-                  ? 'border-b-2'
-                  : 'border-transparent hover:opacity-70'
-              }`}
-              style={Astro.url.pathname === '/' && (Astro.url.searchParams.get('view') || 'all') === 'all'
-                ? { borderColor: 'var(--color-accent-primary)', color: 'var(--color-text-primary)' }
-                : { color: 'var(--color-text-tertiary)' }
-              }
-            >
-              Všechny
-            </a>
-            <a
-              href="/?view=favorites"
-              class={`px-5 py-2.5 font-semibold text-sm transition-all border-b-3 ${
-                Astro.url.pathname === '/' && Astro.url.searchParams.get('view') === 'favorites'
-                  ? 'border-b-2'
-                  : 'border-transparent hover:opacity-70'
-              }`}
-              style={Astro.url.pathname === '/' && Astro.url.searchParams.get('view') === 'favorites'
-                ? { borderColor: 'var(--color-accent-primary)', color: 'var(--color-text-primary)' }
-                : { color: 'var(--color-text-tertiary)' }
-              }
-            >
-              Nejoblíbenější
-            </a>
-            <a
-              href="/?view=recent"
-              class={`px-5 py-2.5 font-semibold text-sm transition-all border-b-3 ${
-                Astro.url.pathname === '/' && Astro.url.searchParams.get('view') === 'recent'
-                  ? 'border-b-2'
-                  : 'border-transparent hover:opacity-70'
-              }`}
-              style={Astro.url.pathname === '/' && Astro.url.searchParams.get('view') === 'recent'
-                ? { borderColor: 'var(--color-accent-primary)', color: 'var(--color-text-primary)' }
-                : { color: 'var(--color-text-tertiary)' }
-              }
-            >
-              Nově přidané
-            </a>
-            <a
-              href="/co-je-metafora"
-              class={`px-5 py-2.5 font-semibold text-sm transition-all border-b-3 ${
-                Astro.url.pathname === '/co-je-metafora'
-                  ? 'border-b-2'
-                  : 'border-transparent hover:opacity-70'
-              }`}
-              style={Astro.url.pathname === '/co-je-metafora'
-                ? { borderColor: 'var(--color-accent-primary)', color: 'var(--color-text-primary)' }
-                : { color: 'var(--color-text-tertiary)' }
-              }
-            >
-              Co je metafora?
-            </a>
-          </div>
-        )}
       </nav>
     </header>
 
@@ -167,6 +107,15 @@ const siteUrl = 'https://metafory.cz'
     </main>
 
     <footer class="pt-8 sm:pt-10 text-center text-sm" style="border-top: 1.5px solid var(--color-border); color: var(--color-text-tertiary);">
+      <div class="mb-4">
+        <a
+          href="/co-je-metafora"
+          class="hover:opacity-70 transition-opacity font-medium"
+          style="color: var(--color-accent-primary);"
+        >
+          Co je metafora?
+        </a>
+      </div>
       <p>&copy; {new Date().getFullYear()} Metafory.cz — Databáze českých metafor</p>
     </footer>
   </div>
