@@ -25,9 +25,12 @@
   - Real-time vote count updates
   - Source: [src/components/VoteButtons.tsx](../../src/components/VoteButtons.tsx)
 
-- **SearchBar.tsx** — Client-side fulltext search (PLAN-010)
-  - Czech diacritics normalization (á→a, č→c)
-  - Filters across nazev, definice, priklad fields
-  - Shows result count and clear button
+- **SearchBar.tsx** — Full client-side search, filters, and pagination (PLAN-019)
+  - Real-time search filtering (nazev, definice, priklad fields)
+  - View filters: All (randomized), Top 5 favorites, Recent
+  - Client-side pagination (30 per page)
+  - URL state management (?q=search&view=recent&page=2)
+  - Browser history support (back/forward buttons)
+  - Fisher-Yates shuffle for randomized default view
   - Renders filtered metaphor cards inline
   - Source: [src/components/SearchBar.tsx](../../src/components/SearchBar.tsx)
