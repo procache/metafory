@@ -55,23 +55,38 @@ const siteUrl = 'https://metafory.cz'
   <meta name="format-detection" content="telephone=no">
 </head>
 <body class="min-h-screen antialiased" style="background-color: var(--color-bg-base); color: var(--color-text-primary);">
-  <div class="max-w-4xl mx-auto px-5 sm:px-8 py-10 sm:py-16">
-    <header class="mb-16 sm:mb-20">
-      <nav class="pb-6 sm:pb-8" style="border-bottom: 1.5px solid var(--color-border);">
-        <div class="mb-4">
-          <a
-            href="/"
-            class="hover:opacity-80 transition-opacity inline-block"
-          >
-            <img
-              src="/metafory-logo.png"
-              alt="Metafory.cz - Radost z češtiny"
-              class="h-14 sm:h-18 lg:h-22 w-auto"
-            />
-          </a>
-        </div>
+  <!-- Sticky Header -->
+  <header class="sticky top-0 z-50 backdrop-blur-md" style="background-color: rgba(250, 247, 242, 0.95); border-bottom: 1.5px solid var(--color-border);">
+    <div class="max-w-4xl mx-auto px-5 sm:px-8">
+      <nav class="flex items-center justify-between py-4">
+        <a
+          href="/"
+          class="hover:opacity-80 transition-opacity"
+        >
+          <img
+            src="/metafory-logo.png"
+            alt="Metafory.cz - Radost z češtiny"
+            class="h-10 sm:h-12 w-auto"
+          />
+        </a>
+        <a
+          href="/pridat"
+          class="inline-flex items-center gap-2 px-4 sm:px-6 py-2.5 sm:py-3 rounded-lg font-semibold text-sm sm:text-base hover:transform hover:scale-105 transition-all shadow-md"
+          style="background-color: #10b981; color: white;"
+          onmouseover="this.style.backgroundColor='#059669'"
+          onmouseout="this.style.backgroundColor='#10b981'"
+        >
+          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" class="w-5 h-5">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M12 4.5v15m7.5-7.5h-15" />
+          </svg>
+          <span class="hidden sm:inline">Přidat metaforu</span>
+          <span class="sm:hidden">Přidat</span>
+        </a>
       </nav>
-    </header>
+    </div>
+  </header>
+
+  <div class="max-w-4xl mx-auto px-5 sm:px-8 py-10 sm:py-16">
 
     <main class="mb-20 sm:mb-24">
       <slot />

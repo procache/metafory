@@ -37,18 +37,11 @@ const jsonLd = {
   "termCode": metaphor.slug,
   "inLanguage": "cs",
   "text": metaphor.priklad,
-  "interactionStatistic": [
-    {
-      "@type": "InteractionCounter",
-      "interactionType": "https://schema.org/LikeAction",
-      "userInteractionCount": metaphor.like_count
-    },
-    {
-      "@type": "InteractionCounter",
-      "interactionType": "https://schema.org/DislikeAction",
-      "userInteractionCount": metaphor.dislike_count
-    }
-  ]
+  "interactionStatistic": {
+    "@type": "InteractionCounter",
+    "interactionType": "https://schema.org/LikeAction",
+    "userInteractionCount": metaphor.like_count
+  }
 }
 ---
 
@@ -99,8 +92,6 @@ const jsonLd = {
           client:load
           metaphorId={metaphor.id}
           initialLikes={metaphor.like_count}
-          initialDislikes={metaphor.dislike_count}
-          initialScore={metaphor.score}
         />
       </div>
 

@@ -66,9 +66,9 @@ export default function SearchBar({ metaphors }: SearchBarProps) {
 
     // Apply view type sorting/filtering
     if (viewType === 'favorites') {
-      // Top 5 favorites (no pagination for favorites)
+      // Top 5 favorites sorted by likes (no pagination for favorites)
       return result
-        .sort((a, b) => b.score - a.score)
+        .sort((a, b) => b.like_count - a.like_count)
         .slice(0, 5)
     } else if (viewType === 'recent') {
       // Sort by approval date, then creation date
@@ -78,13 +78,13 @@ export default function SearchBar({ metaphors }: SearchBarProps) {
         return dateB - dateA
       })
     } else {
-      // 'all' view: use shuffled order if no search, otherwise sort by score
+      // 'all' view: use shuffled order if no search, otherwise sort by likes
       if (!searchQuery.trim()) {
         // Use pre-shuffled order for 'all' view
         return shuffledMetaphors
       } else {
-        // For search results, sort by relevance (score)
-        return result.sort((a, b) => b.score - a.score)
+        // For search results, sort by relevance (like_count)
+        return result.sort((a, b) => b.like_count - a.like_count)
       }
     }
   }, [metaphors, shuffledMetaphors, searchQuery, viewType])
@@ -294,17 +294,14 @@ export default function SearchBar({ metaphors }: SearchBarProps) {
                   >
                     {metaphor.definice}
                   </p>
-                  <div className="flex items-center gap-5 text-sm font-medium" style={{ color: 'var(--color-text-tertiary)' }}>
-                    <span className="flex items-center gap-1.5" style={{ color: 'var(--color-positive)' }}>
-                      👍 {metaphor.like_count}
-                    </span>
-                    <span className="flex items-center gap-1.5" style={{ color: 'var(--color-negative)' }}>
-                      👎 {metaphor.dislike_count}
-                    </span>
-                    <span className="font-semibold" style={{ color: 'var(--color-accent-primary)' }}>
-                      Skóre: {metaphor.score}
-                    </span>
-                  </div>
+                  {metaphor.like_count > 0 && (
+                    <div className="flex items-center gap-1.5 text-sm font-medium" style={{ color: '#ef4444' }}>
+                      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" className="w-4 h-4">
+                        <path d="m11.645 20.91-.007-.003-.022-.012a15.247 15.247 0 0 1-.383-.218 25.18 25.18 0 0 1-4.244-3.17C4.688 15.36 2.25 12.174 2.25 8.25 2.25 5.322 4.714 3 7.688 3A5.5 5.5 0 0 1 12 5.052 5.5 5.5 0 0 1 16.313 3c2.973 0 5.437 2.322 5.437 5.25 0 3.925-2.438 7.111-4.739 9.256a25.175 25.175 0 0 1-4.244 3.17 15.247 15.247 0 0 1-.383.219l-.022.012-.007.004-.003.001a.752.752 0 0 1-.704 0l-.003-.001Z" />
+                      </svg>
+                      <span>{metaphor.like_count}</span>
+                    </div>
+                  )}
                 </a>
               </div>
             </div>
@@ -350,8 +347,6 @@ export default function SearchBar({ metaphors }: SearchBarProps) {
               <VoteButtons
                 metaphorId={metaphor.id}
                 initialLikes={metaphor.like_count}
-                initialDislikes={metaphor.dislike_count}
-                initialScore={metaphor.score}
               />
             </div>
           ))
