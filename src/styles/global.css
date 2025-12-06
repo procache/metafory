@@ -1,19 +1,32 @@
 @import "tailwindcss";
 
-/* Color palette - warm, minimalist design */
+/* Color palette - Jarní čeština (Fresh Spring Czech) */
 :root {
-  --color-bg-base: #FAF8F5;
-  --color-bg-card: #FFFFFF;
-  --color-text-primary: #2D2D2A;
-  --color-text-secondary: #6B6B68;
-  --color-text-tertiary: #9B9B98;
-  --color-accent-primary: #8B7355;
-  --color-accent-hover: #6D5842;
-  --color-border: #E5E1D8;
-  --color-border-hover: #D0C9BC;
-  --color-positive: #7A9D7A;
-  --color-positive-hover: #5F8A5F;
-  --color-negative: #B87C7C;
+  /* Background colors */
+  --color-background-soft: #F7FBF8;  /* Soft white background */
+  --color-white: #FFFFFF;            /* Pure white for cards, header */
+  --color-bg-base: #F7FBF8;          /* Alias for body background */
+  --color-bg-card: #FFFFFF;          /* Alias for card background */
+
+  /* Text colors */
+  --color-text-main: #2C3E50;        /* Main text and headings */
+  --color-text-primary: #2C3E50;     /* Alias for main text */
+  --color-text-secondary: rgba(44, 62, 80, 0.7);  /* Secondary text (70% opacity) */
+  --color-text-tertiary: rgba(44, 62, 80, 0.5);   /* Tertiary text (50% opacity) */
+
+  /* Accent colors */
+  --color-accent-primary: #00A36C;   /* Primary green - CTA, active states, hearts */
+  --color-accent-hover: #00C283;     /* Lighter green for hover states */
+  --color-accent-secondary: #FF6F61; /* Coral - Important elements, featured metaphor frame */
+
+  /* Border colors */
+  --color-border: rgba(0, 163, 108, 0.2);      /* Subtle primary accent border */
+  --color-border-hover: rgba(0, 163, 108, 0.4); /* Hover border */
+
+  /* Positive/Negative (voting) */
+  --color-positive: #FF6F61;         /* Coral for heart icon (active) */
+  --color-positive-hover: #FF8A7F;   /* Lighter coral for hover */
+  --color-negative: rgba(44, 62, 80, 0.3);  /* Muted for inactive states */
 }
 
 /* Custom fonts and typography - minimalist inspired by cestina20.cz */

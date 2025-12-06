@@ -102,7 +102,7 @@ export default function VoteButtons({
             }
           `}
           style={{
-            backgroundColor: hasVoted || isVoting ? '#d0d0d0' : '#ef4444',
+            backgroundColor: hasVoted || isVoting ? '#d0d0d0' : 'var(--color-positive)',
             color: '#fff',
             border: 'none'
           }}
@@ -118,7 +118,7 @@ export default function VoteButtons({
           onClick={handleCopyLink}
           className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg font-medium transition-all text-sm hover:scale-105"
           style={{
-            backgroundColor: copied ? '#10b981' : '#8B7355',
+            backgroundColor: copied ? 'var(--color-accent-hover)' : 'var(--color-accent-primary)',
             color: '#fff',
             border: 'none'
           }}
