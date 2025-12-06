@@ -48,4 +48,23 @@
 - Detail pages: < 50ms prerendered HTML
 - Bundle size: ~106KB HTML with all data (gzips to ~30KB)
 - 72 metaphor pages + homepage + /pridat all prerendered as static HTML
-- API routes remain dynamic for voting and submissions 
+- API routes remain dynamic for voting and submissions
+
+### Phase 6: UX Improvements - Conversion & Engagement (2025-12-06)
+[x] PLAN-024: Sticky header with logo + "Přidat metaforu" CTA (`4d40169`, 2025-12-06)
+[x] PLAN-025: Redesigned "Přidat metaforu" button (done in PLAN-024, `4d40169`, 2025-12-06)
+[x] PLAN-026: Heart icon voting system, count shown only if > 0 (`4d40169`, 2025-12-06)
+[x] PLAN-027: Top 5 sorting by like_count only (`4d40169`, 2025-12-06)
+[x] PLAN-028: Copy-to-clipboard share button (`4d40169`, 2025-12-06)
+[x] PLAN-029: Featured random metaphor card (`39abe61`, 2025-12-06)
+[x] PLAN-030: Manual refresh button "Zkusit jinou metaforu" (`39abe61`, 2025-12-06)
+[x] PLAN-031: "Co je metafora" definition moved to footer (`39abe61`, 2025-12-06)
+[x] PLAN-032: Improved visual hierarchy in metaphor cards (`39abe61`, 2025-12-06)
+[x] PLAN-033: Unified search bar and filters visual block (`39abe61`, 2025-12-06)
+
+**Results achieved:**
+- Sticky header with always-visible CTA increases conversion opportunities
+- Heart-based voting system is more intuitive and engaging
+- Featured random metaphor provides dynamic content on each visit
+- Improved visual hierarchy makes content more scannable
+- Unified search/filter block improves UX clarity
