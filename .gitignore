@@ -40,3 +40,13 @@ coverage/
 
 # Temporary exports and working files
 exports/
+
+# SSH keys (SECURITY - never commit)
+github_ssh
+github_ssh.pub
+*.pem
+*.key
+id_rsa*
+
+# CSV exports and working data files
+*.csv
