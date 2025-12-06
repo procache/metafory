@@ -92,17 +92,24 @@ const siteUrl = 'https://metafory.cz'
       <slot />
     </main>
 
-    <footer class="pt-8 sm:pt-10 text-center text-sm" style="border-top: 1.5px solid var(--color-border); color: var(--color-text-tertiary);">
-      <div class="mb-4">
+    <footer class="pt-10 sm:pt-12 pb-8 text-center" style="border-top: 1.5px solid var(--color-border);">
+      <div class="max-w-2xl mx-auto mb-8 px-4">
+        <h3 class="text-base font-semibold mb-3" style="color: var(--color-accent-primary);">
+          Co je metafora?
+        </h3>
+        <p class="text-sm sm:text-base leading-relaxed mb-3" style="color: var(--color-text-secondary);">
+          Metafora je obrazné vyjádření, kdy jednu věc popisujeme pomocí jiné věci, se kterou má něco společného.
+          Jednoduše řečeno: místo abychom řekli, jak něco skutečně je, řekneme, že to je něco jiného – a najednou tomu lépe rozumíme.
+        </p>
         <a
           href="/co-je-metafora"
-          class="hover:opacity-70 transition-opacity font-medium"
+          class="text-sm font-medium hover:opacity-70 transition-opacity inline-flex items-center gap-1"
           style="color: var(--color-accent-primary);"
         >
-          Co je metafora?
+          Více o metaforách →
         </a>
       </div>
-      <p>&copy; {new Date().getFullYear()} Metafory.cz — Databáze českých metafor</p>
+      <p class="text-sm" style="color: var(--color-text-tertiary);">&copy; {new Date().getFullYear()} Metafory.cz — Databáze českých metafor</p>
     </footer>
   </div>
 </body>

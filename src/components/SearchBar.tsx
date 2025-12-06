@@ -37,6 +37,12 @@ export default function SearchBar({ metaphors }: SearchBarProps) {
   // Shuffle metaphors once when component mounts (for 'all' view without search)
   const [shuffledMetaphors] = useState(() => shuffleArray(metaphors))
 
+  // Featured random metaphor (from top 15-20 by likes)
+  const [featuredMetaphor, setFeaturedMetaphor] = useState<MetaphorWithVotes | null>(() => {
+    const topMetaphors = [...metaphors].sort((a, b) => b.like_count - a.like_count).slice(0, 20)
+    return topMetaphors[Math.floor(Math.random() * Math.min(topMetaphors.length, 20))] || null
+  })
+
   // Update URL when state changes
   useEffect(() => {
     if (typeof window === 'undefined') return
@@ -127,36 +133,91 @@ export default function SearchBar({ metaphors }: SearchBarProps) {
     window.scrollTo({ top: 0, behavior: 'smooth' })
   }
 
+  const refreshFeaturedMetaphor = () => {
+    const topMetaphors = [...metaphors].sort((a, b) => b.like_count - a.like_count).slice(0, 20)
+    const newFeatured = topMetaphors[Math.floor(Math.random() * Math.min(topMetaphors.length, 20))] || null
+    setFeaturedMetaphor(newFeatured)
+  }
+
   return (
     <div>
       {/* Search and Filter Bar */}
       <div className="mb-8 space-y-4">
-        {/* Introduction */}
+        {/* Featured Random Metaphor */}
+        {featuredMetaphor && (
+          <div
+            className="p-6 sm:p-8 rounded-xl"
+            style={{
+              backgroundColor: 'var(--color-bg-card)',
+              border: '2px solid var(--color-accent-primary)',
+              boxShadow: '0 4px 6px rgba(0, 0, 0, 0.1)'
+            }}
+          >
+            <div className="flex justify-between items-start gap-4 mb-4">
+              <h3 className="text-sm font-semibold uppercase tracking-wide" style={{ color: 'var(--color-accent-primary)' }}>
+                ✨ Doporučená metafora
+              </h3>
+              <button
+                onClick={refreshFeaturedMetaphor}
+                className="px-3 py-1.5 rounded-lg font-medium text-sm hover:opacity-80 transition-all"
+                style={{
+                  backgroundColor: 'var(--color-accent-primary)',
+                  color: 'white'
+                }}
+                aria-label="Zkusit jinou metaforu"
+              >
+                <span className="hidden sm:inline">Zkusit jinou metaforu</span>
+                <span className="sm:hidden">🔄</span>
+              </button>
+            </div>
+            <a href={`/metafora/${featuredMetaphor.slug}`} className="block hover:opacity-80 transition-opacity">
+              <h2
+                className="text-2xl sm:text-3xl font-bold mb-3 leading-tight"
+                style={{ color: 'var(--color-text-primary)' }}
+              >
+                {featuredMetaphor.nazev}
+              </h2>
+              <p
+                className="text-base sm:text-lg mb-3 leading-relaxed"
+                style={{ color: 'var(--color-text-secondary)' }}
+              >
+                {featuredMetaphor.definice}
+              </p>
+              <p
+                className="text-sm sm:text-base italic leading-relaxed"
+                style={{ color: 'var(--color-text-tertiary)' }}
+              >
+                „{featuredMetaphor.priklad}"
+              </p>
+            </a>
+          </div>
+        )}
+
+        {/* Unified Search and Filters Block */}
         <div
-          className="p-5 sm:p-6 rounded-xl"
+          className="p-5 sm:p-6 rounded-xl space-y-4"
           style={{
-            backgroundColor: '#e8f5e9',
-            border: '1.5px solid #c8e6c9'
+            backgroundColor: 'var(--color-bg-card)',
+            border: '2px solid var(--color-border)'
           }}
         >
-          <p
-            className="text-sm sm:text-base leading-relaxed mb-2"
-            style={{ color: '#2e7d32' }}
-          >
-            Metafora je obrazné vyjádření, kdy jednu věc popisujeme pomocí jiné věci, se kterou má něco společného.
-            Jednoduše řečeno: místo abychom řekli, jak něco skutečně je, řekneme, že to je něco jiného – a najednou tomu lépe rozumíme.
-          </p>
-          <a
-            href="/co-je-metafora"
-            className="text-sm font-medium hover:opacity-70 transition-opacity inline-flex items-center gap-1"
-            style={{ color: '#2e7d32' }}
-          >
-            Více o metaforách →
-          </a>
-        </div>
+          {/* Search Input */}
+          <div>
+            <input
+              type="text"
+              value={searchQuery}
+              onChange={handleSearchChange}
+              placeholder="Hledat metafory..."
+              className="w-full px-4 py-3 rounded-lg border-2 focus:outline-none focus:ring-2 focus:ring-opacity-50"
+              style={{
+                backgroundColor: 'white',
+                borderColor: 'var(--color-border)',
+                color: 'var(--color-text-primary)'
+              }}
+            />
+          </div>
 
-        {/* View Filters and Add Button */}
-        <div className="flex justify-between items-center gap-4 flex-wrap">
+          {/* View Filters */}
           <div className="flex gap-2 flex-wrap">
             <button
               onClick={() => handleViewChange('all')}
@@ -164,7 +225,7 @@ export default function SearchBar({ metaphors }: SearchBarProps) {
                 viewType === 'all' ? 'font-semibold' : ''
               }`}
               style={{
-                backgroundColor: viewType === 'all' ? 'var(--color-accent-primary)' : 'var(--color-bg-card)',
+                backgroundColor: viewType === 'all' ? 'var(--color-accent-primary)' : 'white',
                 color: viewType === 'all' ? 'white' : 'var(--color-text-secondary)',
                 border: '2px solid',
                 borderColor: viewType === 'all' ? 'var(--color-accent-primary)' : 'var(--color-border)'
@@ -178,7 +239,7 @@ export default function SearchBar({ metaphors }: SearchBarProps) {
                 viewType === 'favorites' ? 'font-semibold' : ''
               }`}
               style={{
-                backgroundColor: viewType === 'favorites' ? 'var(--color-accent-primary)' : 'var(--color-bg-card)',
+                backgroundColor: viewType === 'favorites' ? 'var(--color-accent-primary)' : 'white',
                 color: viewType === 'favorites' ? 'white' : 'var(--color-text-secondary)',
                 border: '2px solid',
                 borderColor: viewType === 'favorites' ? 'var(--color-accent-primary)' : 'var(--color-border)'
@@ -192,7 +253,7 @@ export default function SearchBar({ metaphors }: SearchBarProps) {
                 viewType === 'recent' ? 'font-semibold' : ''
               }`}
               style={{
-                backgroundColor: viewType === 'recent' ? 'var(--color-accent-primary)' : 'var(--color-bg-card)',
+                backgroundColor: viewType === 'recent' ? 'var(--color-accent-primary)' : 'white',
                 color: viewType === 'recent' ? 'white' : 'var(--color-text-secondary)',
                 border: '2px solid',
                 borderColor: viewType === 'recent' ? 'var(--color-accent-primary)' : 'var(--color-border)'
@@ -201,38 +262,6 @@ export default function SearchBar({ metaphors }: SearchBarProps) {
               Nejnovější
             </button>
           </div>
-          <a
-            href="/pridat"
-            className="px-4 sm:px-6 py-2 sm:py-2.5 rounded-lg text-sm font-semibold hover:transform hover:scale-105 transition-all shadow-md whitespace-nowrap"
-            style={{
-              backgroundColor: 'var(--color-positive)',
-              color: 'white'
-            }}
-            onMouseOver={(e) => {
-              e.currentTarget.style.backgroundColor = 'var(--color-positive-hover)'
-            }}
-            onMouseOut={(e) => {
-              e.currentTarget.style.backgroundColor = 'var(--color-positive)'
-            }}
-          >
-            Přidat metaforu
-          </a>
-        </div>
-
-        {/* Search Input */}
-        <div>
-          <input
-            type="text"
-            value={searchQuery}
-            onChange={handleSearchChange}
-            placeholder="Hledat metafory..."
-            className="w-full px-4 py-3 rounded-lg border-2 focus:outline-none focus:ring-2 focus:ring-opacity-50"
-            style={{
-              backgroundColor: 'var(--color-bg-card)',
-              borderColor: 'var(--color-border)',
-              color: 'var(--color-text-primary)'
-            }}
-          />
         </div>
 
         {/* Results Count */}
@@ -283,14 +312,14 @@ export default function SearchBar({ metaphors }: SearchBarProps) {
               <div className="flex-grow">
                 <a href={`/metafora/${metaphor.slug}`} className="block hover:opacity-70 transition-opacity">
                   <h3
-                    className="text-lg sm:text-xl font-semibold mb-2 leading-tight"
-                    style={{ color: 'var(--color-text-primary)' }}
+                    className="text-xl sm:text-2xl font-bold mb-3 leading-tight"
+                    style={{ color: 'var(--color-accent-primary)' }}
                   >
                     {metaphor.nazev}
                   </h3>
                   <p
-                    className="text-sm sm:text-base mb-3 leading-relaxed"
-                    style={{ color: 'var(--color-text-secondary)' }}
+                    className="text-sm sm:text-base mb-3 leading-relaxed font-medium"
+                    style={{ color: 'var(--color-text-primary)' }}
                   >
                     {metaphor.definice}
                   </p>
@@ -326,14 +355,14 @@ export default function SearchBar({ metaphors }: SearchBarProps) {
             >
               <a href={`/metafora/${metaphor.slug}`} className="block hover:opacity-70 transition-opacity">
                 <h2
-                  className="text-xl sm:text-2xl font-semibold mb-3 leading-tight"
-                  style={{ color: 'var(--color-text-primary)' }}
+                  className="text-2xl sm:text-3xl font-bold mb-4 leading-tight"
+                  style={{ color: 'var(--color-accent-primary)' }}
                 >
                   {metaphor.nazev}
                 </h2>
                 <p
-                  className="text-base sm:text-lg mb-2.5 leading-relaxed"
-                  style={{ color: 'var(--color-text-secondary)' }}
+                  className="text-base sm:text-lg mb-3 leading-relaxed font-medium"
+                  style={{ color: 'var(--color-text-primary)' }}
                 >
                   {metaphor.definice}
                 </p>
