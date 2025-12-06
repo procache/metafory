@@ -51,12 +51,12 @@ const siteUrl = 'https://metafory.cz'
   <meta name="twitter:image" content={new URL(ogImage, siteUrl).href}>
 
   <!-- Additional Meta Tags -->
-  <meta name="theme-color" content="#00A36C">
+  <meta name="theme-color" content="#4682B4">
   <meta name="format-detection" content="telephone=no">
 </head>
 <body class="min-h-screen antialiased" style="background-color: var(--color-bg-base); color: var(--color-text-primary);">
   <!-- Sticky Header -->
-  <header class="sticky top-0 z-50 backdrop-blur-md" style="background-color: rgba(247, 251, 248, 0.95); border-bottom: 1.5px solid var(--color-border);">
+  <header class="sticky top-0 z-50 backdrop-blur-md" style="background-color: rgba(247, 247, 247, 0.95); border-bottom: 1.5px solid var(--color-border);">
     <div class="max-w-4xl mx-auto px-5 sm:px-8">
       <nav class="flex items-center justify-between py-4">
         <a
@@ -64,7 +64,7 @@ const siteUrl = 'https://metafory.cz'
           class="hover:opacity-80 transition-opacity"
         >
           <img
-            src="/metafory-logo.png"
+            src="/metafory-logo.svg"
             alt="Metafory.cz - Radost z češtiny"
             class="h-10 sm:h-12 w-auto"
           />
@@ -94,7 +94,7 @@ const siteUrl = 'https://metafory.cz'
 
     <footer class="pt-10 sm:pt-12 pb-8 text-center" style="border-top: 1.5px solid var(--color-border);">
       <div class="max-w-2xl mx-auto mb-8 px-4">
-        <h3 class="text-base font-semibold mb-3" style="color: var(--color-accent-primary);">
+        <h3 class="text-base font-semibold mb-3" style="color: var(--color-accent-primary-light);">
           Co je metafora?
         </h3>
         <p class="text-sm sm:text-base leading-relaxed mb-3" style="color: var(--color-text-secondary);">
@@ -104,7 +104,7 @@ const siteUrl = 'https://metafory.cz'
         <a
           href="/co-je-metafora"
           class="text-sm font-medium hover:opacity-70 transition-opacity inline-flex items-center gap-1"
-          style="color: var(--color-accent-primary);"
+          style="color: var(--color-accent-primary-light);"
         >
           Více o metaforách →
         </a>

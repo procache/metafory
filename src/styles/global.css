@@ -1,32 +1,33 @@
 @import "tailwindcss";
 
-/* Color palette - Jarní čeština (Fresh Spring Czech) */
+/* Color palette - Mořská Hladina (Sea Surface - Cool Blue Tones) */
 :root {
   /* Background colors */
-  --color-background-soft: #F7FBF8;  /* Soft white background */
+  --color-background-soft: #F7F7F7;  /* Very light cool gray background */
   --color-white: #FFFFFF;            /* Pure white for cards, header */
-  --color-bg-base: #F7FBF8;          /* Alias for body background */
+  --color-bg-base: #F7F7F7;          /* Alias for body background */
   --color-bg-card: #FFFFFF;          /* Alias for card background */
 
   /* Text colors */
-  --color-text-main: #2C3E50;        /* Main text and headings */
-  --color-text-primary: #2C3E50;     /* Alias for main text */
-  --color-text-secondary: rgba(44, 62, 80, 0.7);  /* Secondary text (70% opacity) */
-  --color-text-tertiary: rgba(44, 62, 80, 0.5);   /* Tertiary text (50% opacity) */
+  --color-text-main: #334756;        /* Main text and headings - Dark blue-gray */
+  --color-text-primary: #334756;     /* Alias for main text */
+  --color-text-secondary: #61798C;   /* Secondary text - Medium blue-gray */
+  --color-text-tertiary: #8899AA;    /* Tertiary text - Light blue-gray */
 
   /* Accent colors */
-  --color-accent-primary: #00A36C;   /* Primary green - CTA, active states, hearts */
-  --color-accent-hover: #00C283;     /* Lighter green for hover states */
-  --color-accent-secondary: #FF6F61; /* Coral - Important elements, featured metaphor frame */
+  --color-accent-primary: #4682B4;   /* Steel blue - CTA buttons (WCAG AA compliant) */
+  --color-accent-primary-light: #5B9BD5;  /* Lighter steel blue - titles, highlights */
+  --color-accent-hover: #3A6A92;     /* Darker steel blue for hover states */
+  --color-accent-secondary: #ADD8E6; /* Light blue - borders, featured metaphor frame */
 
   /* Border colors */
-  --color-border: rgba(0, 163, 108, 0.2);      /* Subtle primary accent border */
-  --color-border-hover: rgba(0, 163, 108, 0.4); /* Hover border */
+  --color-border: rgba(173, 216, 230, 0.4);      /* Light blue border */
+  --color-border-hover: rgba(173, 216, 230, 0.7); /* Hover border */
 
   /* Positive/Negative (voting) */
-  --color-positive: #FF6F61;         /* Coral for heart icon (active) */
-  --color-positive-hover: #FF8A7F;   /* Lighter coral for hover */
-  --color-negative: rgba(44, 62, 80, 0.3);  /* Muted for inactive states */
+  --color-positive: #4682B4;         /* Steel blue for heart icon (active) */
+  --color-positive-hover: #5B9BD5;   /* Lighter steel blue for hover */
+  --color-negative: rgba(51, 71, 86, 0.3);  /* Muted blue-gray for inactive states */
 }
 
 /* Custom fonts and typography - minimalist inspired by cestina20.cz */

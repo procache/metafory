@@ -313,7 +313,7 @@ export default function SearchBar({ metaphors }: SearchBarProps) {
                 <a href={`/metafora/${metaphor.slug}`} className="block hover:opacity-70 transition-opacity">
                   <h3
                     className="text-xl sm:text-2xl font-bold mb-3 leading-tight"
-                    style={{ color: 'var(--color-accent-primary)' }}
+                    style={{ color: 'var(--color-accent-primary-light)' }}
                   >
                     {metaphor.nazev}
                   </h3>
@@ -356,7 +356,7 @@ export default function SearchBar({ metaphors }: SearchBarProps) {
               <a href={`/metafora/${metaphor.slug}`} className="block hover:opacity-70 transition-opacity">
                 <h2
                   className="text-2xl sm:text-3xl font-bold mb-4 leading-tight"
-                  style={{ color: 'var(--color-accent-primary)' }}
+                  style={{ color: 'var(--color-accent-primary-light)' }}
                 >
                   {metaphor.nazev}
                 </h2>
