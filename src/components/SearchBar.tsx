@@ -150,7 +150,7 @@ export default function SearchBar({ metaphors }: SearchBarProps) {
             style={{
               backgroundColor: 'var(--color-bg-card)',
               border: '2px solid var(--color-accent-secondary)',
-              boxShadow: '0 4px 6px rgba(0, 0, 0, 0.1)'
+              boxShadow: 'var(--shadow-sm)'
             }}
           >
             <div className="flex justify-between items-start gap-4 mb-4">
@@ -198,7 +198,7 @@ export default function SearchBar({ metaphors }: SearchBarProps) {
           className="p-5 sm:p-6 rounded-xl space-y-4"
           style={{
             backgroundColor: 'var(--color-bg-card)',
-            border: '2px solid var(--color-border)'
+            boxShadow: 'var(--shadow-sm)'
           }}
         >
           {/* Search Input */}
@@ -208,11 +208,12 @@ export default function SearchBar({ metaphors }: SearchBarProps) {
               value={searchQuery}
               onChange={handleSearchChange}
               placeholder="Hledat metafory..."
-              className="w-full px-4 py-3 rounded-lg border-2 focus:outline-none focus:ring-2 focus:ring-opacity-50"
+              className="w-full px-4 py-3 rounded-lg focus:outline-none focus:ring-2 focus:ring-opacity-50"
               style={{
                 backgroundColor: 'white',
-                borderColor: 'var(--color-border)',
-                color: 'var(--color-text-primary)'
+                border: '1px solid rgba(0, 0, 0, 0.1)',
+                color: 'var(--color-text-primary)',
+                boxShadow: '0 1px 3px rgba(0, 0, 0, 0.05)'
               }}
             />
           </div>
@@ -228,7 +229,8 @@ export default function SearchBar({ metaphors }: SearchBarProps) {
                 backgroundColor: viewType === 'all' ? 'var(--color-accent-primary)' : 'white',
                 color: viewType === 'all' ? 'white' : 'var(--color-text-secondary)',
                 border: '2px solid',
-                borderColor: viewType === 'all' ? 'var(--color-accent-primary)' : 'var(--color-border)'
+                borderColor: viewType === 'all' ? 'var(--color-accent-primary)' : 'rgba(0, 0, 0, 0.1)',
+                boxShadow: viewType === 'all' ? 'none' : '0 1px 3px rgba(0, 0, 0, 0.05)'
               }}
             >
               Všechny
@@ -242,7 +244,8 @@ export default function SearchBar({ metaphors }: SearchBarProps) {
                 backgroundColor: viewType === 'favorites' ? 'var(--color-accent-primary)' : 'white',
                 color: viewType === 'favorites' ? 'white' : 'var(--color-text-secondary)',
                 border: '2px solid',
-                borderColor: viewType === 'favorites' ? 'var(--color-accent-primary)' : 'var(--color-border)'
+                borderColor: viewType === 'favorites' ? 'var(--color-accent-primary)' : 'rgba(0, 0, 0, 0.1)',
+                boxShadow: viewType === 'favorites' ? 'none' : '0 1px 3px rgba(0, 0, 0, 0.05)'
               }}
             >
               Top 5
@@ -256,7 +259,8 @@ export default function SearchBar({ metaphors }: SearchBarProps) {
                 backgroundColor: viewType === 'recent' ? 'var(--color-accent-primary)' : 'white',
                 color: viewType === 'recent' ? 'white' : 'var(--color-text-secondary)',
                 border: '2px solid',
-                borderColor: viewType === 'recent' ? 'var(--color-accent-primary)' : 'var(--color-border)'
+                borderColor: viewType === 'recent' ? 'var(--color-accent-primary)' : 'rgba(0, 0, 0, 0.1)',
+                boxShadow: viewType === 'recent' ? 'none' : '0 1px 3px rgba(0, 0, 0, 0.05)'
               }}
             >
               Nejnovější
@@ -279,7 +283,7 @@ export default function SearchBar({ metaphors }: SearchBarProps) {
             className="text-center py-16 rounded-xl"
             style={{
               backgroundColor: 'var(--color-bg-card)',
-              border: '1.5px solid var(--color-border)',
+              boxShadow: 'var(--shadow-sm)',
               color: 'var(--color-text-secondary)'
             }}
           >
@@ -290,17 +294,16 @@ export default function SearchBar({ metaphors }: SearchBarProps) {
           paginatedMetaphors.map((metaphor, index) => (
             <div
               key={metaphor.id}
-              className="flex gap-4 sm:gap-5 p-6 sm:p-8 rounded-xl hover:shadow-lg transition-all duration-300"
+              className="flex gap-4 sm:gap-5 p-6 sm:p-8 rounded-xl transition-all duration-300"
               style={{
                 backgroundColor: 'var(--color-bg-card)',
-                border: '2px solid var(--color-border)',
-                boxShadow: '0 1px 3px rgba(0, 0, 0, 0.05)'
+                boxShadow: 'var(--shadow-sm)'
               }}
               onMouseOver={(e) => {
-                e.currentTarget.style.borderColor = 'var(--color-border-hover)'
+                e.currentTarget.style.boxShadow = 'var(--shadow-md)'
               }}
               onMouseOut={(e) => {
-                e.currentTarget.style.borderColor = 'var(--color-border)'
+                e.currentTarget.style.boxShadow = 'var(--shadow-sm)'
               }}
             >
               <div
@@ -340,17 +343,16 @@ export default function SearchBar({ metaphors }: SearchBarProps) {
           paginatedMetaphors.map((metaphor) => (
             <div
               key={metaphor.id}
-              className="rounded-xl p-6 sm:p-8 hover:shadow-lg transition-all duration-300"
+              className="rounded-xl p-6 sm:p-8 transition-all duration-300"
               style={{
                 backgroundColor: 'var(--color-bg-card)',
-                border: '2px solid var(--color-border)',
-                boxShadow: '0 1px 3px rgba(0, 0, 0, 0.05)'
+                boxShadow: 'var(--shadow-sm)'
               }}
               onMouseOver={(e) => {
-                e.currentTarget.style.borderColor = 'var(--color-border-hover)'
+                e.currentTarget.style.boxShadow = 'var(--shadow-md)'
               }}
               onMouseOut={(e) => {
-                e.currentTarget.style.borderColor = 'var(--color-border)'
+                e.currentTarget.style.boxShadow = 'var(--shadow-sm)'
               }}
             >
               <a href={`/metafora/${metaphor.slug}`} className="block hover:opacity-70 transition-opacity">
@@ -391,7 +393,8 @@ export default function SearchBar({ metaphors }: SearchBarProps) {
             className="px-4 py-2 rounded-lg font-medium transition-all disabled:opacity-50 disabled:cursor-not-allowed"
             style={{
               backgroundColor: 'var(--color-bg-card)',
-              border: '2px solid var(--color-border)',
+              border: '1px solid rgba(0, 0, 0, 0.1)',
+              boxShadow: 'var(--shadow-sm)',
               color: 'var(--color-text-primary)'
             }}
           >
@@ -421,8 +424,9 @@ export default function SearchBar({ metaphors }: SearchBarProps) {
                   style={{
                     backgroundColor: currentPage === pageNum ? 'var(--color-accent-primary)' : 'var(--color-bg-card)',
                     color: currentPage === pageNum ? 'white' : 'var(--color-text-primary)',
-                    border: '2px solid',
-                    borderColor: currentPage === pageNum ? 'var(--color-accent-primary)' : 'var(--color-border)'
+                    border: '1px solid',
+                    borderColor: currentPage === pageNum ? 'var(--color-accent-primary)' : 'rgba(0, 0, 0, 0.1)',
+                    boxShadow: currentPage === pageNum ? 'none' : 'var(--shadow-sm)'
                   }}
                 >
                   {pageNum}
@@ -437,7 +441,8 @@ export default function SearchBar({ metaphors }: SearchBarProps) {
             className="px-4 py-2 rounded-lg font-medium transition-all disabled:opacity-50 disabled:cursor-not-allowed"
             style={{
               backgroundColor: 'var(--color-bg-card)',
-              border: '2px solid var(--color-border)',
+              border: '1px solid rgba(0, 0, 0, 0.1)',
+              boxShadow: 'var(--shadow-sm)',
               color: 'var(--color-text-primary)'
             }}
           >

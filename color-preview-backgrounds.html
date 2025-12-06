@@ -1,0 +1,573 @@
+<!DOCTYPE html>
+<html lang="cs">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Porovnání pozadí a karet - Metafory.cz</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Inter', 'Roboto', 'Helvetica Neue', Arial, sans-serif;
+      line-height: 1.6;
+      padding: 20px;
+      background: #e5e5e5;
+    }
+
+    .container {
+      max-width: 1600px;
+      margin: 0 auto;
+    }
+
+    h1 {
+      text-align: center;
+      margin-bottom: 10px;
+      color: #1a1a1a;
+      font-size: 2rem;
+    }
+
+    .subtitle {
+      text-align: center;
+      margin-bottom: 30px;
+      color: #666;
+      font-size: 1rem;
+    }
+
+    .section-title {
+      text-align: center;
+      margin: 40px 0 20px;
+      color: #1a1a1a;
+      font-size: 1.5rem;
+      font-weight: bold;
+    }
+
+    .variants-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(450px, 1fr));
+      gap: 20px;
+      margin-bottom: 40px;
+    }
+
+    .variant {
+      border-radius: 12px;
+      overflow: hidden;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+    }
+
+    .variant-header {
+      padding: 12px 15px;
+      font-weight: bold;
+      font-size: 0.95rem;
+      text-align: center;
+      color: white;
+      background: #333;
+    }
+
+    .variant-content {
+      padding: 20px;
+      min-height: 500px;
+    }
+
+    /* Header simulation */
+    .header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 12px 15px;
+      margin-bottom: 15px;
+      border-radius: 8px;
+      border-bottom: 2px solid;
+    }
+
+    .logo {
+      font-weight: bold;
+      font-size: 1rem;
+    }
+
+    .cta-button {
+      padding: 8px 16px;
+      border-radius: 8px;
+      border: none;
+      font-weight: 600;
+      cursor: pointer;
+      color: white;
+      font-size: 0.85rem;
+    }
+
+    /* Featured metaphor */
+    .featured {
+      padding: 15px;
+      border-radius: 10px;
+      margin-bottom: 15px;
+      border: 2px solid;
+    }
+
+    .featured-label {
+      font-size: 0.7rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      margin-bottom: 6px;
+    }
+
+    .featured-title {
+      font-size: 1.2rem;
+      font-weight: bold;
+      margin-bottom: 8px;
+    }
+
+    .featured-text {
+      font-size: 0.85rem;
+      line-height: 1.5;
+    }
+
+    /* Metaphor cards */
+    .card {
+      padding: 15px;
+      border-radius: 10px;
+      margin-bottom: 12px;
+      border: 2px solid;
+    }
+
+    .card-title {
+      font-size: 1.1rem;
+      font-weight: bold;
+      margin-bottom: 8px;
+    }
+
+    .card-definition {
+      font-size: 0.85rem;
+      margin-bottom: 6px;
+    }
+
+    .card-example {
+      font-size: 0.8rem;
+      font-style: italic;
+    }
+
+    .vote-btn {
+      padding: 6px 12px;
+      border-radius: 6px;
+      border: none;
+      color: white;
+      font-weight: 500;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      font-size: 0.75rem;
+      margin-top: 8px;
+    }
+
+    /* Tags */
+    .tag {
+      display: inline-block;
+      padding: 4px 8px;
+      border-radius: 12px;
+      font-size: 0.7rem;
+      font-weight: 600;
+      margin-top: 10px;
+    }
+
+    .pros-cons {
+      margin-top: 15px;
+      padding: 10px;
+      background: rgba(255,255,255,0.5);
+      border-radius: 6px;
+      font-size: 0.75rem;
+    }
+
+    .pros { color: #2d6a4f; }
+    .cons { color: #c1121f; }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>🎨 Pozadí vs. Karty - Kombinace barev</h1>
+    <p class="subtitle">Porovnání různých přístupů k pozadí a kartám metafor</p>
+
+    <!-- ========== MODRÉ VARIANTY ========== -->
+    <div class="section-title" style="color: #1976D2;">💙 MODRÉ VARIANTY</div>
+
+    <div class="variants-grid">
+
+      <!-- MODRÁ 1: Světle modré pozadí + bílé karty -->
+      <div class="variant">
+        <div class="variant-header">Modrá 1: Světle modré pozadí + Bílé karty (DOPORUČENO)</div>
+        <div class="variant-content" style="background: linear-gradient(135deg, #E3F2FD 0%, #F0F8FF 100%);">
+
+          <div class="header" style="background-color: rgba(255, 255, 255, 0.9); border-bottom-color: #90CAF9;">
+            <div class="logo" style="color: #1976D2;">Metafory.cz</div>
+            <button class="cta-button" style="background-color: #1976D2;">+ Přidat</button>
+          </div>
+
+          <div class="featured" style="background-color: white; border-color: #42A5F5;">
+            <div class="featured-label" style="color: #1976D2;">✨ Doporučená</div>
+            <div class="featured-title" style="color: #1E293B;">Mít máslo na hlavě</div>
+            <div class="featured-text" style="color: #475569;">Mít za sebou něco špatného.</div>
+          </div>
+
+          <div class="card" style="background-color: white; border-color: rgba(25, 118, 210, 0.2);">
+            <div class="card-title" style="color: #1976D2;">Hodit flintu do žita</div>
+            <div class="card-definition" style="color: #1E293B;">Vzdát snahu, přestat se snažit.</div>
+            <div class="card-example" style="color: #64748B;">„Hodil flintu do žita."</div>
+            <button class="vote-btn" style="background-color: #1976D2;">❤️ 24</button>
+          </div>
+
+          <div class="card" style="background-color: white; border-color: rgba(25, 118, 210, 0.2);">
+            <div class="card-title" style="color: #1976D2;">Být jako na trní</div>
+            <div class="card-definition" style="color: #1E293B;">Být nervózní, neklidný.</div>
+            <div class="card-example" style="color: #64748B;">„Čekal jako na trní."</div>
+            <button class="vote-btn" style="background-color: #1976D2;">❤️ 18</button>
+          </div>
+
+          <div class="pros-cons">
+            <div class="pros">✅ Nejvýraznější kontrast</div>
+            <div class="pros">✅ Moderní a svěží</div>
+            <div class="pros">✅ Karty vyniknou</div>
+            <div class="cons">⚠️ Může být až příliš modré</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- MODRÁ 2: Bílé pozadí + světle modré karty -->
+      <div class="variant">
+        <div class="variant-header">Modrá 2: Bílé pozadí + Světle modré karty</div>
+        <div class="variant-content" style="background-color: #FFFFFF;">
+
+          <div class="header" style="background-color: rgba(240, 248, 255, 0.5); border-bottom-color: #BBDEFB;">
+            <div class="logo" style="color: #1976D2;">Metafory.cz</div>
+            <button class="cta-button" style="background-color: #1976D2;">+ Přidat</button>
+          </div>
+
+          <div class="featured" style="background-color: #E3F2FD; border-color: #2196F3;">
+            <div class="featured-label" style="color: #1565C0;">✨ Doporučená</div>
+            <div class="featured-title" style="color: #0D47A1;">Mít máslo na hlavě</div>
+            <div class="featured-text" style="color: #1565C0;">Mít za sebou něco špatného.</div>
+          </div>
+
+          <div class="card" style="background-color: #F0F8FF; border-color: #90CAF9;">
+            <div class="card-title" style="color: #1976D2;">Hodit flintu do žita</div>
+            <div class="card-definition" style="color: #1E293B;">Vzdát snahu, přestat se snažit.</div>
+            <div class="card-example" style="color: #475569;">„Hodil flintu do žita."</div>
+            <button class="vote-btn" style="background-color: #1976D2;">❤️ 24</button>
+          </div>
+
+          <div class="card" style="background-color: #F0F8FF; border-color: #90CAF9;">
+            <div class="card-title" style="color: #1976D2;">Být jako na trní</div>
+            <div class="card-definition" style="color: #1E293B;">Být nervózní, neklidný.</div>
+            <div class="card-example" style="color: #475569;">„Čekal jako na trní."</div>
+            <button class="vote-btn" style="background-color: #1976D2;">❤️ 18</button>
+          </div>
+
+          <div class="pros-cons">
+            <div class="pros">✅ Jemné a čisté</div>
+            <div class="pros">✅ Dobře čitelné</div>
+            <div class="cons">⚠️ Méně výrazné</div>
+            <div class="cons">⚠️ Karty mohou splývat</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- MODRÁ 3: Šedé pozadí + bílé karty + modré akcenty -->
+      <div class="variant">
+        <div class="variant-header">Modrá 3: Šedé pozadí + Bílé karty + Modré akcenty</div>
+        <div class="variant-content" style="background-color: #F5F5F7;">
+
+          <div class="header" style="background-color: white; border-bottom-color: #E0E0E0;">
+            <div class="logo" style="color: #1976D2;">Metafory.cz</div>
+            <button class="cta-button" style="background-color: #1976D2;">+ Přidat</button>
+          </div>
+
+          <div class="featured" style="background-color: white; border-color: #2196F3;">
+            <div class="featured-label" style="color: #1976D2;">✨ Doporučená</div>
+            <div class="featured-title" style="color: #212121;">Mít máslo na hlavě</div>
+            <div class="featured-text" style="color: #616161;">Mít za sebou něco špatného.</div>
+          </div>
+
+          <div class="card" style="background-color: white; border-color: #E0E0E0;">
+            <div class="card-title" style="color: #1976D2;">Hodit flintu do žita</div>
+            <div class="card-definition" style="color: #212121;">Vzdát snahu, přestat se snažit.</div>
+            <div class="card-example" style="color: #757575;">„Hodil flintu do žita."</div>
+            <button class="vote-btn" style="background-color: #1976D2;">❤️ 24</button>
+          </div>
+
+          <div class="card" style="background-color: white; border-color: #E0E0E0;">
+            <div class="card-title" style="color: #1976D2;">Být jako na trní</div>
+            <div class="card-definition" style="color: #212121;">Být nervózní, neklidný.</div>
+            <div class="card-example" style="color: #757575;">„Čekal jako na trní."</div>
+            <button class="vote-btn" style="background-color: #1976D2;">❤️ 18</button>
+          </div>
+
+          <div class="pros-cons">
+            <div class="pros">✅ Univerzální a čisté</div>
+            <div class="pros">✅ Modrá vynikne jako akcent</div>
+            <div class="pros">✅ Profesionální</div>
+            <div class="cons">⚠️ Konzervativnější</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- MODRÁ 4: Tmavě modré pozadí s gradientem + bílé karty -->
+      <div class="variant">
+        <div class="variant-header">Modrá 4: Gradientní pozadí + Bílé karty (ODVÁŽNÉ)</div>
+        <div class="variant-content" style="background: linear-gradient(160deg, #E8F4F8 0%, #D4E8F0 50%, #C5E1F5 100%);">
+
+          <div class="header" style="background-color: rgba(255, 255, 255, 0.95); border-bottom-color: transparent; box-shadow: 0 2px 8px rgba(0,0,0,0.05);">
+            <div class="logo" style="color: #0D47A1;">Metafory.cz</div>
+            <button class="cta-button" style="background-color: #1976D2;">+ Přidat</button>
+          </div>
+
+          <div class="featured" style="background-color: rgba(255, 255, 255, 0.95); border-color: #42A5F5; box-shadow: 0 2px 8px rgba(0,0,0,0.08);">
+            <div class="featured-label" style="color: #1976D2;">✨ Doporučená</div>
+            <div class="featured-title" style="color: #0D47A1;">Mít máslo na hlavě</div>
+            <div class="featured-text" style="color: #1565C0;">Mít za sebou něco špatného.</div>
+          </div>
+
+          <div class="card" style="background-color: rgba(255, 255, 255, 0.95); border-color: transparent; box-shadow: 0 2px 8px rgba(0,0,0,0.08);">
+            <div class="card-title" style="color: #1976D2;">Hodit flintu do žita</div>
+            <div class="card-definition" style="color: #0D47A1;">Vzdát snahu, přestat se snažit.</div>
+            <div class="card-example" style="color: #1565C0;">„Hodil flintu do žita."</div>
+            <button class="vote-btn" style="background-color: #1976D2;">❤️ 24</button>
+          </div>
+
+          <div class="card" style="background-color: rgba(255, 255, 255, 0.95); border-color: transparent; box-shadow: 0 2px 8px rgba(0,0,0,0.08);">
+            <div class="card-title" style="color: #1976D2;">Být jako na trní</div>
+            <div class="card-definition" style="color: #0D47A1;">Být nervózní, neklidný.</div>
+            <div class="card-example" style="color: #1565C0;">„Čekal jako na trní."</div>
+            <button class="vote-btn" style="background-color: #1976D2;">❤️ 18</button>
+          </div>
+
+          <div class="pros-cons">
+            <div class="pros">✅ Nejmodernější</div>
+            <div class="pros">✅ Vizuálně zajímavé</div>
+            <div class="pros">✅ Hloubka díky stínům</div>
+            <div class="cons">⚠️ Odvážnější volba</div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- ========== ZELENÉ VARIANTY ========== -->
+    <div class="section-title" style="color: #2D6A4F;">💚 ZELENÉ VARIANTY</div>
+
+    <div class="variants-grid">
+
+      <!-- ZELENÁ 1: Světle zelené pozadí + bílé karty -->
+      <div class="variant">
+        <div class="variant-header">Zelená 1: Světle zelené pozadí + Bílé karty (DOPORUČENO)</div>
+        <div class="variant-content" style="background: linear-gradient(135deg, #E8F5E9 0%, #F1F8E9 100%);">
+
+          <div class="header" style="background-color: rgba(255, 255, 255, 0.9); border-bottom-color: #A5D6A7;">
+            <div class="logo" style="color: #2D6A4F;">Metafory.cz</div>
+            <button class="cta-button" style="background-color: #52B788;">+ Přidat</button>
+          </div>
+
+          <div class="featured" style="background-color: white; border-color: #74C69D;">
+            <div class="featured-label" style="color: #52B788;">✨ Doporučená</div>
+            <div class="featured-title" style="color: #1B4332;">Mít máslo na hlavě</div>
+            <div class="featured-text" style="color: #2D6A4F;">Mít za sebou něco špatného.</div>
+          </div>
+
+          <div class="card" style="background-color: white; border-color: rgba(82, 183, 136, 0.2);">
+            <div class="card-title" style="color: #52B788;">Hodit flintu do žita</div>
+            <div class="card-definition" style="color: #1B4332;">Vzdát snahu, přestat se snažit.</div>
+            <div class="card-example" style="color: #2D6A4F;">„Hodil flintu do žita."</div>
+            <button class="vote-btn" style="background-color: #52B788;">❤️ 24</button>
+          </div>
+
+          <div class="card" style="background-color: white; border-color: rgba(82, 183, 136, 0.2);">
+            <div class="card-title" style="color: #52B788;">Být jako na trní</div>
+            <div class="card-definition" style="color: #1B4332;">Být nervózní, neklidný.</div>
+            <div class="card-example" style="color: #2D6A4F;">„Čekal jako na trní."</div>
+            <button class="vote-btn" style="background-color: #52B788;">❤️ 18</button>
+          </div>
+
+          <div class="pros-cons">
+            <div class="pros">✅ Přírodní a uklidňující</div>
+            <div class="pros">✅ Moderní pastelová</div>
+            <div class="pros">✅ Výborný kontrast</div>
+            <div class="cons">⚠️ Může působit "eco"</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ZELENÁ 2: Bílé pozadí + světle zelené karty -->
+      <div class="variant">
+        <div class="variant-header">Zelená 2: Bílé pozadí + Světle zelené karty</div>
+        <div class="variant-content" style="background-color: #FFFFFF;">
+
+          <div class="header" style="background-color: rgba(232, 245, 233, 0.5); border-bottom-color: #C8E6C9;">
+            <div class="logo" style="color: #2D6A4F;">Metafory.cz</div>
+            <button class="cta-button" style="background-color: #52B788;">+ Přidat</button>
+          </div>
+
+          <div class="featured" style="background-color: #E8F5E9; border-color: #66BB6A;">
+            <div class="featured-label" style="color: #2E7D32;">✨ Doporučená</div>
+            <div class="featured-title" style="color: #1B5E20;">Mít máslo na hlavě</div>
+            <div class="featured-text" style="color: #2E7D32;">Mít za sebou něco špatného.</div>
+          </div>
+
+          <div class="card" style="background-color: #F1F8E9; border-color: #A5D6A7;">
+            <div class="card-title" style="color: #52B788;">Hodit flintu do žita</div>
+            <div class="card-definition" style="color: #1B4332;">Vzdát snahu, přestat se snažit.</div>
+            <div class="card-example" style="color: #2D6A4F;">„Hodil flintu do žita."</div>
+            <button class="vote-btn" style="background-color: #52B788;">❤️ 24</button>
+          </div>
+
+          <div class="card" style="background-color: #F1F8E9; border-color: #A5D6A7;">
+            <div class="card-title" style="color: #52B788;">Být jako na trní</div>
+            <div class="card-definition" style="color: #1B4332;">Být nervózní, neklidný.</div>
+            <div class="card-example" style="color: #2D6A4F;">„Čekal jako na trní."</div>
+            <button class="vote-btn" style="background-color: #52B788;">❤️ 18</button>
+          </div>
+
+          <div class="pros-cons">
+            <div class="pros">✅ Jemné a čisté</div>
+            <div class="pros">✅ Přátelské</div>
+            <div class="cons">⚠️ Méně výrazné</div>
+            <div class="cons">⚠️ Může být až příliš jemné</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ZELENÁ 3: Šedé pozadí + bílé karty + zelené akcenty -->
+      <div class="variant">
+        <div class="variant-header">Zelená 3: Šedé pozadí + Bílé karty + Zelené akcenty</div>
+        <div class="variant-content" style="background-color: #F5F5F7;">
+
+          <div class="header" style="background-color: white; border-bottom-color: #E0E0E0;">
+            <div class="logo" style="color: #2D6A4F;">Metafory.cz</div>
+            <button class="cta-button" style="background-color: #52B788;">+ Přidat</button>
+          </div>
+
+          <div class="featured" style="background-color: white; border-color: #66BB6A;">
+            <div class="featured-label" style="color: #52B788;">✨ Doporučená</div>
+            <div class="featured-title" style="color: #212121;">Mít máslo na hlavě</div>
+            <div class="featured-text" style="color: #616161;">Mít za sebou něco špatného.</div>
+          </div>
+
+          <div class="card" style="background-color: white; border-color: #E0E0E0;">
+            <div class="card-title" style="color: #52B788;">Hodit flintu do žita</div>
+            <div class="card-definition" style="color: #212121;">Vzdát snahu, přestat se snažit.</div>
+            <div class="card-example" style="color: #757575;">„Hodil flintu do žita."</div>
+            <button class="vote-btn" style="background-color: #52B788;">❤️ 24</button>
+          </div>
+
+          <div class="card" style="background-color: white; border-color: #E0E0E0;">
+            <div class="card-title" style="color: #52B788;">Být jako na trní</div>
+            <div class="card-definition" style="color: #212121;">Být nervózní, neklidný.</div>
+            <div class="card-example" style="color: #757575;">„Čekal jako na trní."</div>
+            <button class="vote-btn" style="background-color: #52B788;">❤️ 18</button>
+          </div>
+
+          <div class="pros-cons">
+            <div class="pros">✅ Profesionální</div>
+            <div class="pros">✅ Zelená vynikne</div>
+            <div class="pros">✅ Čisté a moderní</div>
+            <div class="cons">⚠️ Méně hravé</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ZELENÁ 4: Gradientní pozadí + bílé karty -->
+      <div class="variant">
+        <div class="variant-header">Zelená 4: Gradientní pozadí + Bílé karty (ODVÁŽNÉ)</div>
+        <div class="variant-content" style="background: linear-gradient(160deg, #E8F5E9 0%, #DCF0DD 50%, #C8E6C9 100%);">
+
+          <div class="header" style="background-color: rgba(255, 255, 255, 0.95); border-bottom-color: transparent; box-shadow: 0 2px 8px rgba(0,0,0,0.05);">
+            <div class="logo" style="color: #1B5E20;">Metafory.cz</div>
+            <button class="cta-button" style="background-color: #52B788;">+ Přidat</button>
+          </div>
+
+          <div class="featured" style="background-color: rgba(255, 255, 255, 0.95); border-color: #66BB6A; box-shadow: 0 2px 8px rgba(0,0,0,0.08);">
+            <div class="featured-label" style="color: #52B788;">✨ Doporučená</div>
+            <div class="featured-title" style="color: #1B5E20;">Mít máslo na hlavě</div>
+            <div class="featured-text" style="color: #2E7D32;">Mít za sebou něco špatného.</div>
+          </div>
+
+          <div class="card" style="background-color: rgba(255, 255, 255, 0.95); border-color: transparent; box-shadow: 0 2px 8px rgba(0,0,0,0.08);">
+            <div class="card-title" style="color: #52B788;">Hodit flintu do žita</div>
+            <div class="card-definition" style="color: #1B5E20;">Vzdát snahu, přestat se snažit.</div>
+            <div class="card-example" style="color: #2E7D32;">„Hodil flintu do žita."</div>
+            <button class="vote-btn" style="background-color: #52B788;">❤️ 24</button>
+          </div>
+
+          <div class="card" style="background-color: rgba(255, 255, 255, 0.95); border-color: transparent; box-shadow: 0 2px 8px rgba(0,0,0,0.08);">
+            <div class="card-title" style="color: #52B788;">Být jako na trní</div>
+            <div class="card-definition" style="color: #1B5E20;">Být nervózní, neklidný.</div>
+            <div class="card-example" style="color: #2E7D32;">„Čekal jako na trní."</div>
+            <button class="vote-btn" style="background-color: #52B788;">❤️ 18</button>
+          </div>
+
+          <div class="pros-cons">
+            <div class="pros">✅ Velmi moderní</div>
+            <div class="pros">✅ Příjemný gradient</div>
+            <div class="pros">✅ Stíny přidávají hloubku</div>
+            <div class="cons">⚠️ Nejodvážnější varianta</div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- RECOMMENDATIONS -->
+    <div style="background: white; padding: 30px; border-radius: 12px; max-width: 900px; margin: 40px auto;">
+      <h2 style="margin-bottom: 20px; color: #1a1a1a;">🎯 Moje doporučení</h2>
+
+      <div style="margin-bottom: 25px; padding: 20px; background: #E3F2FD; border-left: 4px solid #1976D2; border-radius: 4px;">
+        <h3 style="color: #1976D2; margin-bottom: 10px;">🥇 TOP volba: Modrá 1 nebo Zelená 1</h3>
+        <p style="line-height: 1.8; color: #333;">
+          <strong>Světle barevné pozadí s gradientem + bílé karty</strong><br>
+          ✅ Nejvýraznější kontrast - karty opravdu vyniknou<br>
+          ✅ Moderní a svěží vzhled<br>
+          ✅ Dobrá čitelnost<br>
+          ✅ Rozdíl od současného stavu je znatelný<br>
+          ✅ Není to příliš odvážné
+        </p>
+      </div>
+
+      <div style="margin-bottom: 25px; padding: 20px; background: #F1F8E9; border-left: 4px solid #52B788; border-radius: 4px;">
+        <h3 style="color: #2D6A4F; margin-bottom: 10px;">🥈 Alternativa: Modrá 4 nebo Zelená 4</h3>
+        <p style="line-height: 1.8; color: #333;">
+          <strong>Gradientní pozadí + bílé karty se stíny</strong><br>
+          ✅ Nejmodernější vzhled<br>
+          ✅ Vizuálně nejzajímavější<br>
+          ✅ Stíny přidávají hloubku<br>
+          ⚠️ Trochu odvážnější, ale stále elegantní
+        </p>
+      </div>
+
+      <div style="padding: 20px; background: #FFF3E0; border-left: 4px solid #FF9800; border-radius: 4px;">
+        <h3 style="color: #E65100; margin-bottom: 10px;">⚠️ Nedoporučuji: Varianty 2</h3>
+        <p style="line-height: 1.8; color: #333;">
+          <strong>Bílé pozadí + barevné karty</strong><br>
+          ❌ Barevné karty působí nepřirozeně<br>
+          ❌ Hůře se čte text na barevném pozadí<br>
+          ❌ Méně profesionální vzhled
+        </p>
+      </div>
+
+      <div style="margin-top: 30px; padding: 20px; background: #F5F5F5; border-radius: 8px;">
+        <h3 style="color: #333; margin-bottom: 15px;">💡 Modrá vs. Zelená?</h3>
+        <div style="line-height: 1.8; color: #555;">
+          <strong style="color: #1976D2;">🔵 Modrá:</strong> Univerzální, důvěryhodná, profesionální. Bezpečná volba.<br>
+          <strong style="color: #52B788;">🟢 Zelená:</strong> Přírodní, uklidňující, přátelská. Originálnější volba.<br><br>
+          <em>Pro jazykový web jako Metafory.cz může zelená evokovat "růst jazyka" a "živou kulturu".</em>
+        </div>
+      </div>
+    </div>
+
+    <div style="margin-top: 30px; text-align: center; color: #666; font-size: 0.9rem;">
+      <p>Po výběru řekni: <strong>"Implementuj [barva] [číslo]"</strong></p>
+      <p style="margin-top: 5px;">Např: "Implementuj modrou 1" nebo "Implementuj zelenou 4"</p>
+    </div>
+
+  </div>
+</body>
+</html>

@@ -30,14 +30,14 @@ import BaseLayout from '../layouts/BaseLayout.astro'
     </div>
 
     <!-- Approval notice -->
-    <div class="mb-6 p-4 rounded-lg flex items-start gap-3" style="background-color: var(--color-bg-card); border: 1.5px solid var(--color-border);">
+    <div class="mb-6 p-4 rounded-lg flex items-start gap-3" style="background-color: var(--color-bg-card); box-shadow: var(--shadow-sm);">
       <span style="color: var(--color-accent-primary-light); font-size: 1.25rem; flex-shrink: 0;">ℹ️</span>
       <p class="text-sm leading-relaxed" style="color: var(--color-text-secondary);">
         Nově přidané metafory procházejí schválením před zveřejněním. Obvykle to trvá 1–2 dny.
       </p>
     </div>
 
-    <div class="rounded-xl p-8 sm:p-10" style="background-color: var(--color-bg-card); border: 1.5px solid var(--color-border);">
+    <div class="rounded-xl p-8 sm:p-10" style="background-color: var(--color-bg-card); box-shadow: var(--shadow-sm);">
 
       <form id="metaphor-form" class="space-y-7">
         <!-- Název metafory -->
@@ -53,9 +53,9 @@ import BaseLayout from '../layouts/BaseLayout.astro'
             maxlength="200"
             placeholder="např. Mít máslo na hlavě"
             class="w-full px-4 py-3 rounded-lg font-medium transition-all"
-            style="border: 1.5px solid var(--color-border); background-color: var(--color-bg-base); color: var(--color-text-primary);"
-            onfocus="this.style.borderColor='var(--color-accent-primary)'"
-            onblur="this.style.borderColor='var(--color-border)'"
+            style="border: 1px solid rgba(0, 0, 0, 0.1); background-color: white; color: var(--color-text-primary); box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);"
+            onfocus="this.style.borderColor='var(--color-accent-primary)'; this.style.boxShadow='0 0 0 3px rgba(82, 183, 136, 0.1)'"
+            onblur="this.style.borderColor='rgba(0, 0, 0, 0.1)'; this.style.boxShadow='0 1px 3px rgba(0, 0, 0, 0.05)'"
           />
         </div>
 
@@ -72,9 +72,9 @@ import BaseLayout from '../layouts/BaseLayout.astro'
             maxlength="500"
             placeholder="Co metafora znamená..."
             class="w-full px-4 py-3 rounded-lg font-medium transition-all"
-            style="border: 1.5px solid var(--color-border); background-color: var(--color-bg-base); color: var(--color-text-primary);"
-            onfocus="this.style.borderColor='var(--color-accent-primary)'"
-            onblur="this.style.borderColor='var(--color-border)'"
+            style="border: 1px solid rgba(0, 0, 0, 0.1); background-color: white; color: var(--color-text-primary); box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);"
+            onfocus="this.style.borderColor='var(--color-accent-primary)'; this.style.boxShadow='0 0 0 3px rgba(82, 183, 136, 0.1)'"
+            onblur="this.style.borderColor='rgba(0, 0, 0, 0.1)'; this.style.boxShadow='0 1px 3px rgba(0, 0, 0, 0.05)'"
           ></textarea>
           <p class="text-xs mt-2" style="color: var(--color-text-tertiary);">Max 500 znaků</p>
         </div>
@@ -92,9 +92,9 @@ import BaseLayout from '../layouts/BaseLayout.astro'
             maxlength="300"
             placeholder="Ukázková věta s použitím metafory..."
             class="w-full px-4 py-3 rounded-lg font-medium transition-all"
-            style="border: 1.5px solid var(--color-border); background-color: var(--color-bg-base); color: var(--color-text-primary);"
-            onfocus="this.style.borderColor='var(--color-accent-primary)'"
-            onblur="this.style.borderColor='var(--color-border)'"
+            style="border: 1px solid rgba(0, 0, 0, 0.1); background-color: white; color: var(--color-text-primary); box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);"
+            onfocus="this.style.borderColor='var(--color-accent-primary)'; this.style.boxShadow='0 0 0 3px rgba(82, 183, 136, 0.1)'"
+            onblur="this.style.borderColor='rgba(0, 0, 0, 0.1)'; this.style.boxShadow='0 1px 3px rgba(0, 0, 0, 0.05)'"
           ></textarea>
           <p class="text-xs mt-2" style="color: var(--color-text-tertiary);">Max 300 znaků</p>
         </div>
@@ -111,9 +111,9 @@ import BaseLayout from '../layouts/BaseLayout.astro'
             maxlength="200"
             placeholder="např. Kniha XY, Článek ABC, ..."
             class="w-full px-4 py-3 rounded-lg font-medium transition-all"
-            style="border: 1.5px solid var(--color-border); background-color: var(--color-bg-base); color: var(--color-text-primary);"
-            onfocus="this.style.borderColor='var(--color-accent-primary)'"
-            onblur="this.style.borderColor='var(--color-border)'"
+            style="border: 1px solid rgba(0, 0, 0, 0.1); background-color: white; color: var(--color-text-primary); box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);"
+            onfocus="this.style.borderColor='var(--color-accent-primary)'; this.style.boxShadow='0 0 0 3px rgba(82, 183, 136, 0.1)'"
+            onblur="this.style.borderColor='rgba(0, 0, 0, 0.1)'; this.style.boxShadow='0 1px 3px rgba(0, 0, 0, 0.05)'"
           />
           <p class="text-xs mt-2" style="color: var(--color-text-tertiary);">
             Odkud pochází tato metafora (kniha, článek, atd.)
@@ -132,9 +132,9 @@ import BaseLayout from '../layouts/BaseLayout.astro'
             maxlength="100"
             placeholder="např. Jan Novák"
             class="w-full px-4 py-3 rounded-lg font-medium transition-all"
-            style="border: 1.5px solid var(--color-border); background-color: var(--color-bg-base); color: var(--color-text-primary);"
-            onfocus="this.style.borderColor='var(--color-accent-primary)'"
-            onblur="this.style.borderColor='var(--color-border)'"
+            style="border: 1px solid rgba(0, 0, 0, 0.1); background-color: white; color: var(--color-text-primary); box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);"
+            onfocus="this.style.borderColor='var(--color-accent-primary)'; this.style.boxShadow='0 0 0 3px rgba(82, 183, 136, 0.1)'"
+            onblur="this.style.borderColor='rgba(0, 0, 0, 0.1)'; this.style.boxShadow='0 1px 3px rgba(0, 0, 0, 0.05)'"
           />
         </div>
 
@@ -150,9 +150,9 @@ import BaseLayout from '../layouts/BaseLayout.astro'
             maxlength="100"
             placeholder="email@priklad.cz"
             class="w-full px-4 py-3 rounded-lg font-medium transition-all"
-            style="border: 1.5px solid var(--color-border); background-color: var(--color-bg-base); color: var(--color-text-primary);"
-            onfocus="this.style.borderColor='var(--color-accent-primary)'"
-            onblur="this.style.borderColor='var(--color-border)'"
+            style="border: 1px solid rgba(0, 0, 0, 0.1); background-color: white; color: var(--color-text-primary); box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);"
+            onfocus="this.style.borderColor='var(--color-accent-primary)'; this.style.boxShadow='0 0 0 3px rgba(82, 183, 136, 0.1)'"
+            onblur="this.style.borderColor='rgba(0, 0, 0, 0.1)'; this.style.boxShadow='0 1px 3px rgba(0, 0, 0, 0.05)'"
           />
           <p class="text-xs mt-2" style="color: var(--color-text-tertiary);">
             Použijeme pouze pro případné dotazy k vaší metafoře

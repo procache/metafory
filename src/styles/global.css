@@ -1,33 +1,38 @@
 @import "tailwindcss";
 
-/* Color palette - Mořská Hladina (Sea Surface - Cool Blue Tones) */
+/* Color palette - Zelená 4: Gradientní Lesní (Forest Gradient with Shadows) */
 :root {
   /* Background colors */
-  --color-background-soft: #F7F7F7;  /* Very light cool gray background */
+  --color-background-soft: #E8F5E9;  /* Light green base for gradient */
   --color-white: #FFFFFF;            /* Pure white for cards, header */
-  --color-bg-base: #F7F7F7;          /* Alias for body background */
-  --color-bg-card: #FFFFFF;          /* Alias for card background */
+  --color-bg-base: #E8F5E9;          /* Alias for body background */
+  --color-bg-card: rgba(255, 255, 255, 0.95);  /* Semi-transparent white for cards */
 
   /* Text colors */
-  --color-text-main: #334756;        /* Main text and headings - Dark blue-gray */
-  --color-text-primary: #334756;     /* Alias for main text */
-  --color-text-secondary: #61798C;   /* Secondary text - Medium blue-gray */
-  --color-text-tertiary: #8899AA;    /* Tertiary text - Light blue-gray */
+  --color-text-main: #1B5E20;        /* Main text and headings - Deep Forest Green */
+  --color-text-primary: #1B5E20;     /* Alias for main text */
+  --color-text-secondary: #2E7D32;   /* Secondary text - Medium Forest Green */
+  --color-text-tertiary: #4A7C59;    /* Tertiary text - Light Forest Green */
 
   /* Accent colors */
-  --color-accent-primary: #4682B4;   /* Steel blue - CTA buttons (WCAG AA compliant) */
-  --color-accent-primary-light: #5B9BD5;  /* Lighter steel blue - titles, highlights */
-  --color-accent-hover: #3A6A92;     /* Darker steel blue for hover states */
-  --color-accent-secondary: #ADD8E6; /* Light blue - borders, featured metaphor frame */
+  --color-accent-primary: #52B788;   /* Mint green - CTA buttons */
+  --color-accent-primary-light: #52B788;  /* Same as primary for titles */
+  --color-accent-hover: #3D9970;     /* Darker mint green for hover states */
+  --color-accent-secondary: #66BB6A; /* Light green - featured metaphor accent */
 
-  /* Border colors */
-  --color-border: rgba(173, 216, 230, 0.4);      /* Light blue border */
-  --color-border-hover: rgba(173, 216, 230, 0.7); /* Hover border */
+  /* Border colors (minimal use - we use shadows instead) */
+  --color-border: transparent;       /* Transparent - using shadows */
+  --color-border-hover: transparent; /* Transparent - using shadows */
+
+  /* Shadow values */
+  --shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.08);
+  --shadow-md: 0 4px 12px rgba(0, 0, 0, 0.1);
+  --shadow-lg: 0 8px 24px rgba(0, 0, 0, 0.12);
 
   /* Positive/Negative (voting) */
-  --color-positive: #4682B4;         /* Steel blue for heart icon (active) */
-  --color-positive-hover: #5B9BD5;   /* Lighter steel blue for hover */
-  --color-negative: rgba(51, 71, 86, 0.3);  /* Muted blue-gray for inactive states */
+  --color-positive: #52B788;         /* Mint green for heart icon (active) */
+  --color-positive-hover: #66BB6A;   /* Lighter mint green for hover */
+  --color-negative: rgba(27, 94, 32, 0.3);  /* Muted forest green for inactive states */
 }
 
 /* Custom fonts and typography - minimalist inspired by cestina20.cz */

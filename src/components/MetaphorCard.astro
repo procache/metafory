@@ -9,10 +9,10 @@ const { metaphor } = Astro.props
 ---
 
 <article
-  class="rounded-xl p-7 sm:p-8 hover:shadow-lg hover:-translate-y-0.5 transition-all duration-300"
-  style="background-color: var(--color-bg-card); border: 1.5px solid var(--color-border);"
-  onmouseover="this.style.borderColor='var(--color-border-hover)'"
-  onmouseout="this.style.borderColor='var(--color-border)'"
+  class="rounded-xl p-7 sm:p-8 hover:-translate-y-0.5 transition-all duration-300"
+  style="background-color: var(--color-bg-card); box-shadow: var(--shadow-sm);"
+  onmouseover="this.style.boxShadow='var(--shadow-md)'"
+  onmouseout="this.style.boxShadow='var(--shadow-sm)'"
 >
   <a href={`/metafora/${metaphor.slug}`} class="group block">
     <h2
@@ -32,7 +32,7 @@ const { metaphor } = Astro.props
         Zdroj: {metaphor.zdroj}
       </p>
     )}
-    <div class="flex items-center gap-6 text-sm font-medium pt-4" style="border-top: 1px solid var(--color-border);">
+    <div class="flex items-center gap-6 text-sm font-medium pt-4" style="border-top: 1px solid rgba(0, 0, 0, 0.08);">
       <span class="flex items-center gap-2" style="color: var(--color-positive);">
         <span class="text-base">👍</span>
         <span>{metaphor.like_count}</span>
