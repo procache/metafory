@@ -102,9 +102,19 @@ export default function VoteButtons({
             }
           `}
           style={{
-            backgroundColor: hasVoted || isVoting ? '#d0d0d0' : 'var(--color-positive)',
+            backgroundColor: hasVoted || isVoting ? '#d0d0d0' : 'var(--color-accent-red)',
             color: '#fff',
             border: 'none'
+          }}
+          onMouseOver={(e) => {
+            if (!hasVoted && !isVoting) {
+              e.currentTarget.style.backgroundColor = 'var(--color-accent-red-hover)'
+            }
+          }}
+          onMouseOut={(e) => {
+            if (!hasVoted && !isVoting) {
+              e.currentTarget.style.backgroundColor = 'var(--color-accent-red)'
+            }
           }}
           aria-label="Líbí se mi"
         >
@@ -121,6 +131,16 @@ export default function VoteButtons({
             backgroundColor: copied ? 'var(--color-accent-hover)' : 'var(--color-accent-primary)',
             color: '#fff',
             border: 'none'
+          }}
+          onMouseOver={(e) => {
+            if (!copied) {
+              e.currentTarget.style.backgroundColor = 'var(--color-accent-hover)'
+            }
+          }}
+          onMouseOut={(e) => {
+            if (!copied) {
+              e.currentTarget.style.backgroundColor = 'var(--color-accent-primary)'
+            }
           }}
           aria-label="Kopírovat odkaz"
         >

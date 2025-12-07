@@ -159,10 +159,16 @@ export default function SearchBar({ metaphors }: SearchBarProps) {
               </h3>
               <button
                 onClick={refreshFeaturedMetaphor}
-                className="px-3 py-1.5 rounded-lg font-medium text-sm hover:opacity-80 transition-all"
+                className="px-3 py-1.5 rounded-lg font-medium text-sm transition-all"
                 style={{
                   backgroundColor: 'var(--color-accent-primary)',
                   color: 'white'
+                }}
+                onMouseOver={(e) => {
+                  e.currentTarget.style.backgroundColor = 'var(--color-accent-hover)'
+                }}
+                onMouseOut={(e) => {
+                  e.currentTarget.style.backgroundColor = 'var(--color-accent-primary)'
                 }}
                 aria-label="Zkusit jinou metaforu"
               >

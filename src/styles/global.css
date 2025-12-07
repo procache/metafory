@@ -15,10 +15,12 @@
   --color-text-tertiary: #4A7C59;    /* Tertiary text - Light Forest Green */
 
   /* Accent colors */
-  --color-accent-primary: #52B788;   /* Mint green - CTA buttons */
+  --color-accent-primary: #52B788;   /* Mint green - general accents */
   --color-accent-primary-light: #52B788;  /* Same as primary for titles */
   --color-accent-hover: #3D9970;     /* Darker mint green for hover states */
   --color-accent-secondary: #66BB6A; /* Light green - featured metaphor accent */
+  --color-accent-red: #E53935;       /* Red - CTA buttons and heart icon */
+  --color-accent-red-hover: #C62828; /* Darker red for hover states */
 
   /* Border colors (minimal use - we use shadows instead) */
   --color-border: transparent;       /* Transparent - using shadows */
@@ -30,8 +32,8 @@
   --shadow-lg: 0 8px 24px rgba(0, 0, 0, 0.12);
 
   /* Positive/Negative (voting) */
-  --color-positive: #52B788;         /* Mint green for heart icon (active) */
-  --color-positive-hover: #66BB6A;   /* Lighter mint green for hover */
+  --color-positive: #E53935;         /* Red for heart icon (active) */
+  --color-positive-hover: #C62828;   /* Darker red for hover */
   --color-negative: rgba(27, 94, 32, 0.3);  /* Muted forest green for inactive states */
 }
 
