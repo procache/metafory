@@ -72,6 +72,7 @@
 ### Phase 7: Design Refresh - Color Palette Update (2025-12-07)
 [x] PLAN-034: Change metaphor heading color from green to pastel blue (#64B5F6) (`7919385`, `29c135e`, 2025-12-07)
 [x] PLAN-035: Change background from mint green to sage green (#D8E3DD) (`52ec07c`, `0bdedb0`, 2025-12-07)
+[x] PLAN-036: Update logo to horizontal version with 3x larger size (`b71e59a`, 2025-12-07)
 
 **Results achieved:**
 - Pastel blue headings (#64B5F6) provide better contrast and modern look
@@ -79,3 +80,4 @@
 - Updated gradient: #D8E3DD → #CDD8D2 → #C2D3CC for subtle depth
 - Maintains accessibility while refreshing visual identity
 - Color palette now: Sage green bg + Blue headings + Red CTAs + Green accents
+- New horizontal logo (metafory_cz_horizontal.png) 3x larger: 96px (mobile) / 120px (desktop)
