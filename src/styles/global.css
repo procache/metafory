@@ -21,6 +21,7 @@
   --color-accent-secondary: #66BB6A; /* Light green - featured metaphor accent */
   --color-accent-red: #E53935;       /* Red - CTA buttons and heart icon */
   --color-accent-red-hover: #C62828; /* Darker red for hover states */
+  --color-heading-blue: #64B5F6;     /* Pastel blue for metaphor headings */
 
   /* Border colors (minimal use - we use shadows instead) */
   --color-border: transparent;       /* Transparent - using shadows */
