@@ -1,11 +1,11 @@
 @import "tailwindcss";
 
-/* Color palette - Zelená 4: Gradientní Lesní (Forest Gradient with Shadows) */
+/* Color palette - Šedozelená (Sage Green) */
 :root {
   /* Background colors */
-  --color-background-soft: #E8F5E9;  /* Light green base for gradient */
+  --color-background-soft: #D8E3DD;  /* Sage green background */
   --color-white: #FFFFFF;            /* Pure white for cards, header */
-  --color-bg-base: #E8F5E9;          /* Alias for body background */
+  --color-bg-base: #D8E3DD;          /* Alias for body background */
   --color-bg-card: rgba(255, 255, 255, 0.95);  /* Semi-transparent white for cards */
 
   /* Text colors */
