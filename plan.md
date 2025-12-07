@@ -68,3 +68,14 @@
 - Featured random metaphor provides dynamic content on each visit
 - Improved visual hierarchy makes content more scannable
 - Unified search/filter block improves UX clarity
+
+### Phase 7: Design Refresh - Color Palette Update (2025-12-07)
+[x] PLAN-034: Change metaphor heading color from green to pastel blue (#64B5F6) (`7919385`, `29c135e`, 2025-12-07)
+[x] PLAN-035: Change background from mint green to sage green (#D8E3DD) (`52ec07c`, `0bdedb0`, 2025-12-07)
+
+**Results achieved:**
+- Pastel blue headings (#64B5F6) provide better contrast and modern look
+- Sage green background (#D8E3DD) is more sophisticated than mint
+- Updated gradient: #D8E3DD → #CDD8D2 → #C2D3CC for subtle depth
+- Maintains accessibility while refreshing visual identity
+- Color palette now: Sage green bg + Blue headings + Red CTAs + Green accents
