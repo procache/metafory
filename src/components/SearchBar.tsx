@@ -141,92 +141,122 @@ export default function SearchBar({ metaphors }: SearchBarProps) {
 
   return (
     <div>
-      {/* Compact Search + Filters Bar */}
-      <div className="mb-6">
-        <div
-          className="p-4 sm:p-5 rounded-xl"
-          style={{
-            backgroundColor: 'var(--color-bg-card)',
-            boxShadow: 'var(--shadow-sm)'
-          }}
-        >
-          {/* Desktop: horizontal (search 60%, filters 40%), Mobile: stacked */}
-          <div className="flex flex-col sm:flex-row gap-3 sm:gap-4 items-stretch sm:items-center">
-            {/* Search Input - takes more space on desktop */}
-            <div className="flex-1">
-              <input
-                type="text"
-                value={searchQuery}
-                onChange={handleSearchChange}
-                placeholder="Hledat metafory..."
-                className="w-full px-4 py-3 rounded-lg focus:outline-none focus:ring-2 focus:ring-opacity-50"
-                style={{
-                  backgroundColor: 'white',
-                  border: '1px solid rgba(0, 0, 0, 0.1)',
-                  color: 'var(--color-text-primary)',
-                  boxShadow: '0 1px 3px rgba(0, 0, 0, 0.05)'
-                }}
-              />
-            </div>
-
-            {/* View Filters - compact buttons */}
-            <div className="flex gap-2 flex-shrink-0">
-              <button
-                onClick={() => handleViewChange('all')}
-                className={`px-3 sm:px-4 py-2 rounded-lg font-medium text-sm sm:text-base transition-all ${
-                  viewType === 'all' ? 'font-semibold' : ''
-                }`}
-                style={{
-                  backgroundColor: viewType === 'all' ? 'var(--color-accent-primary)' : 'white',
-                  color: viewType === 'all' ? 'white' : 'var(--color-text-secondary)',
-                  border: '2px solid',
-                  borderColor: viewType === 'all' ? 'var(--color-accent-primary)' : 'rgba(0, 0, 0, 0.1)',
-                  boxShadow: viewType === 'all' ? 'none' : '0 1px 3px rgba(0, 0, 0, 0.05)'
-                }}
+      {/* Search Input Block - attached to header */}
+      <div
+        className="px-5 sm:px-8 py-4"
+        style={{
+          backgroundColor: 'rgba(255, 255, 255, 0.95)',
+          boxShadow: 'var(--shadow-sm)'
+        }}
+      >
+        <div className="max-w-4xl mx-auto">
+          <div className="relative">
+            <input
+              type="text"
+              value={searchQuery}
+              onChange={handleSearchChange}
+              placeholder="Hledat metafory..."
+              className="w-full px-4 py-3 pr-12 rounded-lg focus:outline-none focus:ring-2 focus:ring-opacity-50"
+              style={{
+                backgroundColor: 'white',
+                border: '1px solid rgba(0, 0, 0, 0.1)',
+                color: 'var(--color-text-primary)',
+                boxShadow: '0 1px 3px rgba(0, 0, 0, 0.05)'
+              }}
+            />
+            {/* Search Icon */}
+            <div className="absolute right-4 top-1/2 -translate-y-1/2 pointer-events-none">
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                fill="none"
+                viewBox="0 0 24 24"
+                strokeWidth="2"
+                stroke="currentColor"
+                className="w-5 h-5"
+                style={{ color: 'var(--color-text-tertiary)' }}
               >
-                Všechny
-              </button>
-              <button
-                onClick={() => handleViewChange('favorites')}
-                className={`px-3 sm:px-4 py-2 rounded-lg font-medium text-sm sm:text-base transition-all ${
-                  viewType === 'favorites' ? 'font-semibold' : ''
-                }`}
-                style={{
-                  backgroundColor: viewType === 'favorites' ? 'var(--color-accent-primary)' : 'white',
-                  color: viewType === 'favorites' ? 'white' : 'var(--color-text-secondary)',
-                  border: '2px solid',
-                  borderColor: viewType === 'favorites' ? 'var(--color-accent-primary)' : 'rgba(0, 0, 0, 0.1)',
-                  boxShadow: viewType === 'favorites' ? 'none' : '0 1px 3px rgba(0, 0, 0, 0.05)'
-                }}
-              >
-                Top 5
-              </button>
-              <button
-                onClick={() => handleViewChange('recent')}
-                className={`px-3 sm:px-4 py-2 rounded-lg font-medium text-sm sm:text-base transition-all ${
-                  viewType === 'recent' ? 'font-semibold' : ''
-                }`}
-                style={{
-                  backgroundColor: viewType === 'recent' ? 'var(--color-accent-primary)' : 'white',
-                  color: viewType === 'recent' ? 'white' : 'var(--color-text-secondary)',
-                  border: '2px solid',
-                  borderColor: viewType === 'recent' ? 'var(--color-accent-primary)' : 'rgba(0, 0, 0, 0.1)',
-                  boxShadow: viewType === 'recent' ? 'none' : '0 1px 3px rgba(0, 0, 0, 0.05)'
-                }}
-              >
-                Nejnovější
-              </button>
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  d="m21 21-5.197-5.197m0 0A7.5 7.5 0 1 0 5.196 5.196a7.5 7.5 0 0 0 10.607 10.607Z"
+                />
+              </svg>
             </div>
           </div>
         </div>
+      </div>
 
-        {/* Results Count */}
-        {searchQuery && (
-          <div className="mt-3 text-sm font-medium" style={{ color: 'var(--color-text-secondary)' }}>
+      {/* Category Bar - no gap above */}
+      <div
+        className="px-5 sm:px-8 py-3"
+        style={{
+          backgroundColor: 'rgba(255, 255, 255, 0.95)',
+          boxShadow: 'var(--shadow-sm)',
+          borderTop: '1px solid rgba(0, 0, 0, 0.05)'
+        }}
+      >
+        <div className="max-w-4xl mx-auto">
+          <div className="flex gap-2 flex-wrap">
+            <button
+              onClick={() => handleViewChange('all')}
+              className={`px-3 sm:px-4 py-2 rounded-lg font-medium text-sm sm:text-base transition-all ${
+                viewType === 'all' ? 'font-semibold' : ''
+              }`}
+              style={{
+                backgroundColor: viewType === 'all' ? 'var(--color-accent-primary)' : 'white',
+                color: viewType === 'all' ? 'white' : 'var(--color-text-secondary)',
+                border: '2px solid',
+                borderColor: viewType === 'all' ? 'var(--color-accent-primary)' : 'rgba(0, 0, 0, 0.1)',
+                boxShadow: viewType === 'all' ? 'none' : '0 1px 3px rgba(0, 0, 0, 0.05)'
+              }}
+            >
+              Všechny
+            </button>
+            <button
+              onClick={() => handleViewChange('favorites')}
+              className={`px-3 sm:px-4 py-2 rounded-lg font-medium text-sm sm:text-base transition-all ${
+                viewType === 'favorites' ? 'font-semibold' : ''
+              }`}
+              style={{
+                backgroundColor: viewType === 'favorites' ? 'var(--color-accent-primary)' : 'white',
+                color: viewType === 'favorites' ? 'white' : 'var(--color-text-secondary)',
+                border: '2px solid',
+                borderColor: viewType === 'favorites' ? 'var(--color-accent-primary)' : 'rgba(0, 0, 0, 0.1)',
+                boxShadow: viewType === 'favorites' ? 'none' : '0 1px 3px rgba(0, 0, 0, 0.05)'
+              }}
+            >
+              Top 5
+            </button>
+            <button
+              onClick={() => handleViewChange('recent')}
+              className={`px-3 sm:px-4 py-2 rounded-lg font-medium text-sm sm:text-base transition-all ${
+                viewType === 'recent' ? 'font-semibold' : ''
+              }`}
+              style={{
+                backgroundColor: viewType === 'recent' ? 'var(--color-accent-primary)' : 'white',
+                color: viewType === 'recent' ? 'white' : 'var(--color-text-secondary)',
+                border: '2px solid',
+                borderColor: viewType === 'recent' ? 'var(--color-accent-primary)' : 'rgba(0, 0, 0, 0.1)',
+                boxShadow: viewType === 'recent' ? 'none' : '0 1px 3px rgba(0, 0, 0, 0.05)'
+              }}
+            >
+              Nejnovější
+            </button>
+          </div>
+        </div>
+      </div>
+
+      {/* Results Count */}
+      {searchQuery && (
+        <div className="px-5 sm:px-8 mt-4">
+          <div className="max-w-4xl mx-auto text-sm font-medium" style={{ color: 'var(--color-text-secondary)' }}>
             Nalezeno {filteredMetaphors.length} metafor{filteredMetaphors.length === 1 ? 'a' : filteredMetaphors.length < 5 ? 'y' : ''}
           </div>
-        )}
-      </div>
+        </div>
+      )}
+
+      <div className="px-5 sm:px-8 mt-6">
+        <div className="max-w-4xl mx-auto">
 
       {/* Featured Random Metaphor */}
       {featuredMetaphor && (
@@ -460,6 +490,8 @@ export default function SearchBar({ metaphors }: SearchBarProps) {
           </button>
         </div>
       )}
+        </div>
+      </div>
     </div>
   )
 }
