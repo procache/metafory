@@ -97,14 +97,15 @@ export default function VoteButtons({
           className={`
             flex items-center gap-1.5 px-3 py-1.5 rounded-lg font-medium transition-all text-sm
             ${hasVoted || isVoting
-              ? 'opacity-50 cursor-not-allowed'
+              ? 'cursor-not-allowed'
               : 'hover:scale-105'
             }
           `}
           style={{
-            backgroundColor: hasVoted || isVoting ? '#d0d0d0' : 'var(--color-accent-red)',
+            backgroundColor: 'var(--color-accent-red)',
             color: '#fff',
-            border: 'none'
+            border: 'none',
+            opacity: isVoting ? 0.5 : 1
           }}
           onMouseOver={(e) => {
             if (!hasVoted && !isVoting) {
