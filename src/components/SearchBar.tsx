@@ -37,12 +37,6 @@ export default function SearchBar({ metaphors }: SearchBarProps) {
   // Shuffle metaphors once when component mounts (for 'all' view without search)
   const [shuffledMetaphors] = useState(() => shuffleArray(metaphors))
 
-  // Featured random metaphor (from top 15-20 by likes)
-  const [featuredMetaphor, setFeaturedMetaphor] = useState<MetaphorWithVotes | null>(() => {
-    const topMetaphors = [...metaphors].sort((a, b) => b.like_count - a.like_count).slice(0, 20)
-    return topMetaphors[Math.floor(Math.random() * Math.min(topMetaphors.length, 20))] || null
-  })
-
   // Update URL when state changes
   useEffect(() => {
     if (typeof window === 'undefined') return
@@ -131,12 +125,6 @@ export default function SearchBar({ metaphors }: SearchBarProps) {
     setCurrentPage(page)
     // Scroll to top
     window.scrollTo({ top: 0, behavior: 'smooth' })
-  }
-
-  const refreshFeaturedMetaphor = () => {
-    const topMetaphors = [...metaphors].sort((a, b) => b.like_count - a.like_count).slice(0, 20)
-    const newFeatured = topMetaphors[Math.floor(Math.random() * Math.min(topMetaphors.length, 20))] || null
-    setFeaturedMetaphor(newFeatured)
   }
 
   return (
@@ -257,64 +245,6 @@ export default function SearchBar({ metaphors }: SearchBarProps) {
 
       <div className="px-5 sm:px-8 mt-6">
         <div className="max-w-4xl mx-auto">
-
-      {/* Featured Random Metaphor */}
-      {featuredMetaphor && (
-        <div className="mb-8">
-          <div
-            className="p-6 sm:p-8 rounded-xl"
-            style={{
-              backgroundColor: 'var(--color-bg-card)',
-              border: '2px solid var(--color-accent-secondary)',
-              boxShadow: 'var(--shadow-sm)'
-            }}
-          >
-            <div className="flex justify-between items-start gap-4 mb-4">
-              <h3 className="text-sm font-semibold uppercase tracking-wide" style={{ color: 'var(--color-accent-secondary)' }}>
-                ✨ Doporučená metafora
-              </h3>
-              <button
-                onClick={refreshFeaturedMetaphor}
-                className="px-3 py-1.5 rounded-lg font-medium text-sm transition-all"
-                style={{
-                  backgroundColor: 'var(--color-accent-primary)',
-                  color: 'white'
-                }}
-                onMouseOver={(e) => {
-                  e.currentTarget.style.backgroundColor = 'var(--color-accent-hover)'
-                }}
-                onMouseOut={(e) => {
-                  e.currentTarget.style.backgroundColor = 'var(--color-accent-primary)'
-                }}
-                aria-label="Zkusit jinou metaforu"
-              >
-                <span className="hidden sm:inline">Zkusit jinou metaforu</span>
-                <span className="sm:hidden">🔄</span>
-              </button>
-            </div>
-            <a href={`/metafora/${featuredMetaphor.slug}`} className="block hover:opacity-80 transition-opacity">
-              <h2
-                className="text-2xl sm:text-3xl font-bold mb-3 leading-tight"
-                style={{ color: 'var(--color-heading-blue)' }}
-              >
-                {featuredMetaphor.nazev}
-              </h2>
-              <p
-                className="text-base sm:text-lg mb-3 leading-relaxed"
-                style={{ color: 'var(--color-text-secondary)' }}
-              >
-                {featuredMetaphor.definice}
-              </p>
-              <p
-                className="text-sm sm:text-base italic leading-relaxed"
-                style={{ color: 'var(--color-text-tertiary)' }}
-              >
-                „{featuredMetaphor.priklad}"
-              </p>
-            </a>
-          </div>
-        </div>
-      )}
 
       {/* Metaphor List */}
       <div className="space-y-6">
