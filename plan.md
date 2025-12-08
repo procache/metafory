@@ -6,6 +6,7 @@
 ## Now
 
 ## Next
+- [ ] Optimalizace velikosti obrázků v public/ (2.6MB koreni_cestiny PNG soubory)
 
 ## Done
 <!-- Claude moves completed items here with commit hash + date -->
@@ -81,3 +82,19 @@
 - Maintains accessibility while refreshing visual identity
 - Color palette now: Sage green bg + Blue headings + Red CTAs + Green accents
 - New horizontal logo (metafory_cz_horizontal.png) 3x larger: 96px (mobile) / 120px (desktop)
+
+### Phase 8: Detail Page Redesign & Netlify Deployment Fix (2025-12-08)
+[x] PLAN-037: Redesign metaphor detail page with white card layout (`521e623`, 2025-12-08)
+[x] PLAN-038: Fix Netlify deployment error with static output mode (`0f3dacd`, `0c10afe`, 2025-12-08)
+
+**Results achieved:**
+- Detail page now uses white card background matching homepage design
+- Centered content with max-w-4xl layout for consistency
+- Proper padding (p-6 sm:p-8) and margins (px-5 sm:px-8)
+- Fixed Netlify HTTP 500 deployment error by:
+  - Changed from output='server' to output='static' mode
+  - Removed redundant prerender declarations
+  - Fixed defineConfig import issue
+  - Reduced SSR function size for successful Netlify deployment
+- API routes remain as serverless functions
+- All pages successfully prerendered as static HTML
