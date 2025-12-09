@@ -1,0 +1,465 @@
+<!DOCTYPE html>
+<html lang="cs">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Color Preview - Šedozelená (Sage) varianty</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Inter', 'Roboto', 'Helvetica Neue', Arial, sans-serif;
+      padding: 2rem;
+      background: #f5f5f5;
+    }
+
+    h1 {
+      text-align: center;
+      margin-bottom: 1rem;
+      color: #333;
+      font-size: 2rem;
+    }
+
+    .subtitle {
+      text-align: center;
+      margin-bottom: 3rem;
+      color: #666;
+      font-size: 1rem;
+    }
+
+    .container {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+      gap: 2rem;
+      max-width: 1600px;
+      margin: 0 auto;
+    }
+
+    .variant {
+      border-radius: 12px;
+      overflow: hidden;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    }
+
+    .variant-header {
+      padding: 1rem;
+      text-align: center;
+      font-weight: 600;
+      font-size: 1.1rem;
+      background: white;
+      border-bottom: 2px solid rgba(0, 0, 0, 0.1);
+    }
+
+    .variant-body {
+      padding: 2rem;
+      min-height: 600px;
+    }
+
+    /* Šedozelené varianty - od světlé po tmavší */
+    .variant-1 .variant-body { background-color: #F0F4F3; } /* Původní světlá */
+    .variant-2 .variant-body { background-color: #E8EDE9; } /* Trochu tmavší */
+    .variant-3 .variant-body { background-color: #E0E8E3; } /* Střední */
+    .variant-4 .variant-body { background-color: #D8E3DD; } /* Výraznější */
+    .variant-5 .variant-body { background-color: #D0DED7; } /* Ještě tmavší */
+    .variant-6 .variant-body { background-color: #C8D9D1; } /* Nejtmavší */
+
+    .metaphor-card {
+      background: rgba(255, 255, 255, 0.95);
+      padding: 2rem;
+      border-radius: 12px;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+      margin-bottom: 1.5rem;
+      transition: all 0.3s;
+    }
+
+    .metaphor-card:hover {
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+      transform: translateY(-2px);
+    }
+
+    .metaphor-title {
+      color: #64B5F6;
+      font-size: 1.5rem;
+      font-weight: 600;
+      margin-bottom: 1rem;
+      line-height: 1.3;
+    }
+
+    .metaphor-definition {
+      color: #2E7D32;
+      font-size: 1rem;
+      line-height: 1.6;
+      margin-bottom: 0.75rem;
+    }
+
+    .metaphor-example {
+      color: #4A7C59;
+      font-size: 0.875rem;
+      font-style: italic;
+      line-height: 1.6;
+    }
+
+    .header-demo {
+      background: rgba(255, 255, 255, 0.95);
+      padding: 1rem 1.5rem;
+      border-radius: 12px;
+      margin-bottom: 1.5rem;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .logo {
+      font-size: 1.25rem;
+      font-weight: 700;
+      color: #1B5E20;
+    }
+
+    .cta-button {
+      background: #E53935;
+      color: white;
+      padding: 0.5rem 1rem;
+      border-radius: 8px;
+      font-size: 0.875rem;
+      font-weight: 600;
+    }
+
+    .featured-badge {
+      display: inline-block;
+      background: #66BB6A;
+      color: white;
+      padding: 0.25rem 0.75rem;
+      border-radius: 6px;
+      font-size: 0.75rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      margin-bottom: 0.5rem;
+    }
+
+    .color-info {
+      text-align: center;
+      margin-top: 1rem;
+      padding: 1rem;
+      background: rgba(0, 0, 0, 0.05);
+      border-radius: 8px;
+      font-size: 0.875rem;
+      color: #666;
+    }
+
+    .recommended-badge {
+      background: #FFD700;
+      color: #333;
+      padding: 0.25rem 0.5rem;
+      border-radius: 4px;
+      font-size: 0.75rem;
+      font-weight: 700;
+      margin-left: 0.5rem;
+    }
+
+    .comparison {
+      margin-top: 3rem;
+      padding: 2rem;
+      background: white;
+      border-radius: 12px;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+      max-width: 1600px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    .comparison h2 {
+      margin-bottom: 1.5rem;
+      color: #333;
+    }
+
+    .comparison table {
+      width: 100%;
+      border-collapse: collapse;
+    }
+
+    .comparison th,
+    .comparison td {
+      padding: 1rem;
+      text-align: left;
+      border-bottom: 1px solid #e0e0e0;
+      vertical-align: top;
+    }
+
+    .comparison th {
+      background: #f5f5f5;
+      font-weight: 600;
+    }
+
+    .pros { color: #2E7D32; }
+    .cons { color: #C62828; }
+
+    .color-swatch {
+      display: inline-block;
+      width: 60px;
+      height: 60px;
+      border-radius: 8px;
+      border: 2px solid #ddd;
+      vertical-align: middle;
+      margin-right: 0.5rem;
+      box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    }
+
+    @media (max-width: 768px) {
+      .container { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+  <h1>🌿 Šedozelená (Sage) - Odstíny</h1>
+  <p class="subtitle">Od světlé po výraznější tmavší varianty</p>
+
+  <div class="container">
+    <!-- Varianta 1: Původní světlá -->
+    <div class="variant variant-1">
+      <div class="variant-header">🌿 Světlá (původní)</div>
+      <div class="variant-body">
+        <div class="header-demo">
+          <div class="logo">Metafory.cz</div>
+          <a href="#" class="cta-button">Přidat metaforu</a>
+        </div>
+        <div class="metaphor-card">
+          <span class="featured-badge">✨ Doporučená</span>
+          <h2 class="metaphor-title">Být z toho u vytržení</h2>
+          <p class="metaphor-definition">Být nadšený, velmi potěšený nebo silně zaujatý něčím pozitivním.</p>
+          <p class="metaphor-example">"Když jsem viděl ten nový film, byl jsem z toho úplně u vytržení."</p>
+        </div>
+        <div class="metaphor-card">
+          <h2 class="metaphor-title">Blesk z čistého nebe</h2>
+          <p class="metaphor-definition">Něco zcela nečekaného, co se stalo náhle a překvapivě.</p>
+          <p class="metaphor-example">"Jeho rezignace byla pro nás blesk z čistého nebe."</p>
+        </div>
+        <div class="color-info">
+          <span class="color-swatch" style="background-color: #F0F4F3;"></span><br>
+          <strong>Barva:</strong> #F0F4F3<br>
+          <strong>Intenzita:</strong> Velmi světlá, jemná
+        </div>
+      </div>
+    </div>
+
+    <!-- Varianta 2: Trochu tmavší -->
+    <div class="variant variant-2">
+      <div class="variant-header">🌿 Trochu tmavší</div>
+      <div class="variant-body">
+        <div class="header-demo">
+          <div class="logo">Metafory.cz</div>
+          <a href="#" class="cta-button">Přidat metaforu</a>
+        </div>
+        <div class="metaphor-card">
+          <span class="featured-badge">✨ Doporučená</span>
+          <h2 class="metaphor-title">Být z toho u vytržení</h2>
+          <p class="metaphor-definition">Být nadšený, velmi potěšený nebo silně zaujatý něčím pozitivním.</p>
+          <p class="metaphor-example">"Když jsem viděl ten nový film, byl jsem z toho úplně u vytržení."</p>
+        </div>
+        <div class="metaphor-card">
+          <h2 class="metaphor-title">Blesk z čistého nebe</h2>
+          <p class="metaphor-definition">Něco zcela nečekaného, co se stalo náhle a překvapivě.</p>
+          <p class="metaphor-example">"Jeho rezignace byla pro nás blesk z čistého nebe."</p>
+        </div>
+        <div class="color-info">
+          <span class="color-swatch" style="background-color: #E8EDE9;"></span><br>
+          <strong>Barva:</strong> #E8EDE9<br>
+          <strong>Intenzita:</strong> Světlá s nádechem
+        </div>
+      </div>
+    </div>
+
+    <!-- Varianta 3: Střední -->
+    <div class="variant variant-3">
+      <div class="variant-header">🌿 Střední <span class="recommended-badge">DOPORUČUJI</span></div>
+      <div class="variant-body">
+        <div class="header-demo">
+          <div class="logo">Metafory.cz</div>
+          <a href="#" class="cta-button">Přidat metaforu</a>
+        </div>
+        <div class="metaphor-card">
+          <span class="featured-badge">✨ Doporučená</span>
+          <h2 class="metaphor-title">Být z toho u vytržení</h2>
+          <p class="metaphor-definition">Být nadšený, velmi potěšený nebo silně zaujatý něčím pozitivním.</p>
+          <p class="metaphor-example">"Když jsem viděl ten nový film, byl jsem z toho úplně u vytržení."</p>
+        </div>
+        <div class="metaphor-card">
+          <h2 class="metaphor-title">Blesk z čistého nebe</h2>
+          <p class="metaphor-definition">Něco zcela nečekaného, co se stalo náhle a překvapivě.</p>
+          <p class="metaphor-example">"Jeho rezignace byla pro nás blesk z čistého nebe."</p>
+        </div>
+        <div class="color-info">
+          <span class="color-swatch" style="background-color: #E0E8E3;"></span><br>
+          <strong>Barva:</strong> #E0E8E3<br>
+          <strong>Intenzita:</strong> Vyvážená, výrazná ale ne příliš
+        </div>
+      </div>
+    </div>
+
+    <!-- Varianta 4: Výraznější -->
+    <div class="variant variant-4">
+      <div class="variant-header">🌿 Výraznější <span class="recommended-badge">DOPORUČUJI</span></div>
+      <div class="variant-body">
+        <div class="header-demo">
+          <div class="logo">Metafory.cz</div>
+          <a href="#" class="cta-button">Přidat metaforu</a>
+        </div>
+        <div class="metaphor-card">
+          <span class="featured-badge">✨ Doporučená</span>
+          <h2 class="metaphor-title">Být z toho u vytržení</h2>
+          <p class="metaphor-definition">Být nadšený, velmi potěšený nebo silně zaujatý něčím pozitivním.</p>
+          <p class="metaphor-example">"Když jsem viděl ten nový film, byl jsem z toho úplně u vytržení."</p>
+        </div>
+        <div class="metaphor-card">
+          <h2 class="metaphor-title">Blesk z čistého nebe</h2>
+          <p class="metaphor-definition">Něco zcela nečekaného, co se stalo náhle a překvapivě.</p>
+          <p class="metaphor-example">"Jeho rezignace byla pro nás blesk z čistého nebe."</p>
+        </div>
+        <div class="color-info">
+          <span class="color-swatch" style="background-color: #D8E3DD;"></span><br>
+          <strong>Barva:</strong> #D8E3DD<br>
+          <strong>Intenzita:</strong> Výrazná, viditelný odstín
+        </div>
+      </div>
+    </div>
+
+    <!-- Varianta 5: Ještě tmavší -->
+    <div class="variant variant-5">
+      <div class="variant-header">🌿 Ještě tmavší</div>
+      <div class="variant-body">
+        <div class="header-demo">
+          <div class="logo">Metafory.cz</div>
+          <a href="#" class="cta-button">Přidat metaforu</a>
+        </div>
+        <div class="metaphor-card">
+          <span class="featured-badge">✨ Doporučená</span>
+          <h2 class="metaphor-title">Být z toho u vytržení</h2>
+          <p class="metaphor-definition">Být nadšený, velmi potěšený nebo silně zaujatý něčím pozitivním.</p>
+          <p class="metaphor-example">"Když jsem viděl ten nový film, byl jsem z toho úplně u vytržení."</p>
+        </div>
+        <div class="metaphor-card">
+          <h2 class="metaphor-title">Blesk z čistého nebe</h2>
+          <p class="metaphor-definition">Něco zcela nečekaného, co se stalo náhle a překvapivě.</p>
+          <p class="metaphor-example">"Jeho rezignace byla pro nás blesk z čistého nebe."</p>
+        </div>
+        <div class="color-info">
+          <span class="color-swatch" style="background-color: #D0DED7;"></span><br>
+          <strong>Barva:</strong> #D0DED7<br>
+          <strong>Intenzita:</strong> Tmavší, saturovanější
+        </div>
+      </div>
+    </div>
+
+    <!-- Varianta 6: Nejtmavší -->
+    <div class="variant variant-6">
+      <div class="variant-header">🌿 Nejtmavší</div>
+      <div class="variant-body">
+        <div class="header-demo">
+          <div class="logo">Metafory.cz</div>
+          <a href="#" class="cta-button">Přidat metaforu</a>
+        </div>
+        <div class="metaphor-card">
+          <span class="featured-badge">✨ Doporučená</span>
+          <h2 class="metaphor-title">Být z toho u vytržení</h2>
+          <p class="metaphor-definition">Být nadšený, velmi potěšený nebo silně zaujatý něčím pozitivním.</p>
+          <p class="metaphor-example">"Když jsem viděl ten nový film, byl jsem z toho úplně u vytržení."</p>
+        </div>
+        <div class="metaphor-card">
+          <h2 class="metaphor-title">Blesk z čistého nebe</h2>
+          <p class="metaphor-definition">Něco zcela nečekaného, co se stalo náhle a překvapivě.</p>
+          <p class="metaphor-example">"Jeho rezignace byla pro nás blesk z čistého nebe."</p>
+        </div>
+        <div class="color-info">
+          <span class="color-swatch" style="background-color: #C8D9D1;"></span><br>
+          <strong>Barva:</strong> #C8D9D1<br>
+          <strong>Intenzita:</strong> Velmi tmavá, nejvýraznější
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="comparison">
+    <h2>📊 Srovnání šedozelených odstínů</h2>
+    <table>
+      <thead>
+        <tr>
+          <th>Varianta</th>
+          <th>Vzorek</th>
+          <th>Hex kód</th>
+          <th>Výhody</th>
+          <th>Nevýhody</th>
+          <th>Hodnocení</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><strong>Světlá</strong></td>
+          <td><span class="color-swatch" style="background-color: #F0F4F3;"></span></td>
+          <td>#F0F4F3</td>
+          <td class="pros">✓ Velmi jemná<br>✓ Nenápadná<br>✓ Elegantní</td>
+          <td class="cons">✗ Možná příliš světlá<br>✗ Málo charakteru</td>
+          <td>⭐⭐⭐</td>
+        </tr>
+        <tr>
+          <td><strong>Trochu tmavší</strong></td>
+          <td><span class="color-swatch" style="background-color: #E8EDE9;"></span></td>
+          <td>#E8EDE9</td>
+          <td class="pros">✓ Jemná ale viditelná<br>✓ Sofistikovaná</td>
+          <td class="cons">✗ Stále dost světlá</td>
+          <td>⭐⭐⭐⭐</td>
+        </tr>
+        <tr style="background: #f0fff0;">
+          <td><strong>Střední</strong></td>
+          <td><span class="color-swatch" style="background-color: #E0E8E3;"></span></td>
+          <td>#E0E8E3</td>
+          <td class="pros">✓ Vyvážená<br>✓ Výrazná ale elegantní<br>✓ Perfektní kontrast<br>✓ Univerzální</td>
+          <td class="cons">✗ Žádné výrazné</td>
+          <td>⭐⭐⭐⭐⭐</td>
+        </tr>
+        <tr style="background: #f0fff0;">
+          <td><strong>Výraznější</strong></td>
+          <td><span class="color-swatch" style="background-color: #D8E3DD;"></span></td>
+          <td>#D8E3DD</td>
+          <td class="pros">✓ Velmi výrazná<br>✓ Moderní<br>✓ Charakteristická<br>✓ Dobrý kontrast s bílými kartami</td>
+          <td class="cons">✗ Možná trochu moc pro některé</td>
+          <td>⭐⭐⭐⭐⭐</td>
+        </tr>
+        <tr>
+          <td><strong>Ještě tmavší</strong></td>
+          <td><span class="color-swatch" style="background-color: #D0DED7;"></span></td>
+          <td>#D0DED7</td>
+          <td class="pros">✓ Tmavá<br>✓ Saturovaná<br>✓ Odvážná</td>
+          <td class="cons">✗ Může být příliš tmavá<br>✗ Karta méně vyniká</td>
+          <td>⭐⭐⭐</td>
+        </tr>
+        <tr>
+          <td><strong>Nejtmavší</strong></td>
+          <td><span class="color-swatch" style="background-color: #C8D9D1;"></span></td>
+          <td>#C8D9D1</td>
+          <td class="pros">✓ Velmi výrazná<br>✓ Unikátní</td>
+          <td class="cons">✗ Příliš tmavá<br>✗ Ztráta vzdušnosti<br>✗ Text hůře čitelný</td>
+          <td>⭐⭐</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div style="text-align: center; margin-top: 2rem; padding: 2rem; color: #666;">
+    <h3 style="margin-bottom: 1rem; color: #333;">💡 Moje TOP doporučení</h3>
+    <p style="margin-bottom: 1rem;">
+      <strong style="color: #2E7D32;">1. Střední (#E0E8E3)</strong> - perfektní vyvážení, výrazná ale elegantní
+    </p>
+    <p style="margin-bottom: 1rem;">
+      <strong style="color: #2E7D32;">2. Výraznější (#D8E3DD)</strong> - více charakteru, moderní, dobrý kontrast
+    </p>
+    <p style="margin-top: 2rem; font-size: 0.9rem;">
+      <em>Obě doporučené varianty jsou výraznější než původní, ale ne příliš tmavé.</em>
+    </p>
+    <p style="margin-top: 2rem;"><em>Soubor: C:\Projects\metafory.cz\color-preview-sage.html</em></p>
+  </div>
+</body>
+</html>
