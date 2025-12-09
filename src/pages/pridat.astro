@@ -6,7 +6,7 @@ import BaseLayout from '../layouts/BaseLayout.astro'
   title="Přidat metaforu | Metafory.cz"
   description="Přidejte vlastní metaforu do naší databáze českých metafor"
 >
-  <div>
+  <div class="max-w-4xl mx-auto px-5 sm:px-8">
     <!-- Back button -->
     <div class="mb-10">
       <a
@@ -28,8 +28,8 @@ import BaseLayout from '../layouts/BaseLayout.astro'
     </div>
 
     <!-- Approval notice -->
-    <div class="mb-6 p-4 rounded-lg flex items-start gap-3" style="background-color: var(--color-bg-card); box-shadow: var(--shadow-sm);">
-      <span style="color: var(--color-accent-primary-light); font-size: 1.25rem; flex-shrink: 0;">ℹ️</span>
+    <div class="mb-6 p-4 rounded-lg flex items-center gap-3" style="background-color: var(--color-bg-card); box-shadow: var(--shadow-sm);">
+      <span style="color: var(--color-accent-primary-light); font-size: 1.25rem; flex-shrink: 0; line-height: 1;">ℹ️</span>
       <p class="text-sm leading-relaxed" style="color: var(--color-text-secondary);">
         Nově přidané metafory procházejí schválením před zveřejněním. Obvykle to trvá 1–2 dny.
       </p>
@@ -40,7 +40,7 @@ import BaseLayout from '../layouts/BaseLayout.astro'
       <form id="metaphor-form" class="space-y-7">
         <!-- Název metafory -->
         <div>
-          <label for="nazev" class="block text-sm font-semibold mb-3" style="color: var(--color-text-primary);">
+          <label for="nazev" class="block text-base font-semibold mb-3" style="color: var(--color-text-primary);">
             Název metafory <span style="color: var(--color-negative);">*</span>
           </label>
           <input
@@ -59,7 +59,7 @@ import BaseLayout from '../layouts/BaseLayout.astro'
 
         <!-- Definice -->
         <div>
-          <label for="definice" class="block text-sm font-semibold mb-3" style="color: var(--color-text-primary);">
+          <label for="definice" class="block text-base font-semibold mb-3" style="color: var(--color-text-primary);">
             Definice <span style="color: var(--color-negative);">*</span>
           </label>
           <textarea
@@ -79,7 +79,7 @@ import BaseLayout from '../layouts/BaseLayout.astro'
 
         <!-- Příklad použití -->
         <div>
-          <label for="priklad" class="block text-sm font-semibold mb-3" style="color: var(--color-text-primary);">
+          <label for="priklad" class="block text-base font-semibold mb-3" style="color: var(--color-text-primary);">
             Příklad použití <span style="color: var(--color-negative);">*</span>
           </label>
           <textarea
@@ -99,7 +99,7 @@ import BaseLayout from '../layouts/BaseLayout.astro'
 
         <!-- Zdroj (nepovinné) -->
         <div>
-          <label for="zdroj" class="block text-sm font-semibold mb-3" style="color: var(--color-text-primary);">
+          <label for="zdroj" class="block text-base font-semibold mb-3" style="color: var(--color-text-primary);">
             Zdroj (nepovinné)
           </label>
           <input
@@ -120,7 +120,7 @@ import BaseLayout from '../layouts/BaseLayout.astro'
 
         <!-- Jméno autora (nepovinné) -->
         <div>
-          <label for="autor_jmeno" class="block text-sm font-semibold mb-3" style="color: var(--color-text-primary);">
+          <label for="autor_jmeno" class="block text-base font-semibold mb-3" style="color: var(--color-text-primary);">
             Vaše jméno (nepovinné)
           </label>
           <input
@@ -138,7 +138,7 @@ import BaseLayout from '../layouts/BaseLayout.astro'
 
         <!-- Email autora (nepovinné) -->
         <div>
-          <label for="autor_email" class="block text-sm font-semibold mb-3" style="color: var(--color-text-primary);">
+          <label for="autor_email" class="block text-base font-semibold mb-3" style="color: var(--color-text-primary);">
             Váš email (nepovinný)
           </label>
           <input

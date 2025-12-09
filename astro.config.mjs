@@ -13,6 +13,12 @@ export default {
   integrations: [react()],
 
   vite: {
-    plugins: [tailwindcss()]
+    plugins: [tailwindcss()],
+    server: {
+      watch: {
+        usePolling: true, // Fix for WSL2 file watching
+        interval: 100
+      }
+    }
   }
 };
