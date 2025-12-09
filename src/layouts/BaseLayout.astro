@@ -69,19 +69,28 @@ const siteUrl = 'https://metafory.cz'
             class="h-24 sm:h-30 w-auto"
           />
         </a>
-        <a
-          href="/pridat"
-          class="inline-flex items-center gap-2 px-4 sm:px-6 py-2.5 sm:py-3 rounded-lg font-semibold text-sm sm:text-base hover:transform hover:scale-105 transition-all shadow-md"
-          style="background-color: var(--color-accent-red); color: white;"
-          onmouseover="this.style.backgroundColor='var(--color-accent-red-hover)'"
-          onmouseout="this.style.backgroundColor='var(--color-accent-red)'"
-        >
-          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" class="w-5 h-5">
-            <path stroke-linecap="round" stroke-linejoin="round" d="M12 4.5v15m7.5-7.5h-15" />
-          </svg>
-          <span class="hidden sm:inline">Přidat metaforu</span>
-          <span class="sm:hidden">Přidat</span>
-        </a>
+        <div class="flex items-center gap-4 sm:gap-6">
+          <a
+            href="/kontakt"
+            class="text-sm sm:text-base font-medium hover:opacity-70 transition-opacity"
+            style="color: var(--color-text-primary);"
+          >
+            Kontakt
+          </a>
+          <a
+            href="/pridat"
+            class="inline-flex items-center gap-2 px-4 sm:px-6 py-2.5 sm:py-3 rounded-lg font-semibold text-sm sm:text-base hover:transform hover:scale-105 transition-all shadow-md"
+            style="background-color: var(--color-accent-red); color: white;"
+            onmouseover="this.style.backgroundColor='var(--color-accent-red-hover)'"
+            onmouseout="this.style.backgroundColor='var(--color-accent-red)'"
+          >
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" class="w-5 h-5">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M12 4.5v15m7.5-7.5h-15" />
+            </svg>
+            <span class="hidden sm:inline">Přidat metaforu</span>
+            <span class="sm:hidden">Přidat</span>
+          </a>
+        </div>
       </nav>
     </div>
   </header>

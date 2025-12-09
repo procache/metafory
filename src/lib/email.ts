@@ -98,3 +98,63 @@ Přejděte do Supabase Dashboard pro schválení.
     return { success: false, error: err }
   }
 }
+
+interface ContactEmailParams {
+  jmeno: string
+  email: string
+  zprava: string
+}
+
+export async function sendContactMessage(params: ContactEmailParams) {
+  // If no Resend API key or admin email, skip email sending
+  if (!resend || !adminEmail) {
+    console.warn('Contact email skipped: Missing RESEND_API_KEY or ADMIN_EMAIL')
+    return { success: false, skipped: true }
+  }
+
+  try {
+    const { jmeno, email, zprava } = params
+
+    const htmlContent = `
+      <h2>Nová zpráva z kontaktního formuláře</h2>
+
+      <p><strong>Od:</strong> ${jmeno}</p>
+      <p><strong>Email:</strong> <a href="mailto:${email}">${email}</a></p>
+
+      <hr>
+
+      <p><strong>Zpráva:</strong></p>
+      <p style="white-space: pre-wrap;">${zprava}</p>
+    `
+
+    const textContent = `
+Nová zpráva z kontaktního formuláře
+
+Od: ${jmeno}
+Email: ${email}
+
+Zpráva:
+${zprava}
+    `.trim()
+
+    const { data, error } = await resend.emails.send({
+      from: 'Metafory.cz <onboarding@resend.dev>', // Default Resend sender for testing
+      to: [adminEmail],
+      replyTo: email, // Allow easy reply to the sender
+      subject: `Kontakt: ${jmeno}`,
+      html: htmlContent,
+      text: textContent
+    })
+
+    if (error) {
+      console.error('Contact email send error:', error)
+      return { success: false, error }
+    }
+
+    console.log('Contact email sent successfully:', data)
+    return { success: true, data }
+  } catch (err) {
+    console.error('Contact email error:', err)
+    return { success: false, error: err }
+  }
+}
