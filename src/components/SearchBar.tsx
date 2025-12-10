@@ -70,13 +70,6 @@ export default function SearchBar({ metaphors }: SearchBarProps) {
       return result
         .sort((a, b) => b.like_count - a.like_count)
         .slice(0, 5)
-    } else if (viewType === 'recent') {
-      // Sort by approval date, then creation date
-      return result.sort((a, b) => {
-        const dateA = a.approved_at ? new Date(a.approved_at).getTime() : new Date(a.created_at).getTime()
-        const dateB = b.approved_at ? new Date(b.approved_at).getTime() : new Date(b.created_at).getTime()
-        return dateB - dateA
-      })
     } else {
       // 'all' view: use shuffled order if no search, otherwise sort by likes
       if (!searchQuery.trim()) {
@@ -215,21 +208,6 @@ export default function SearchBar({ metaphors }: SearchBarProps) {
             >
               Top 5
             </button>
-            <button
-              onClick={() => handleViewChange('recent')}
-              className={`px-3 sm:px-4 py-2 rounded-lg font-medium text-sm sm:text-base transition-all ${
-                viewType === 'recent' ? 'font-semibold' : ''
-              }`}
-              style={{
-                backgroundColor: viewType === 'recent' ? 'var(--color-accent-primary)' : 'white',
-                color: viewType === 'recent' ? 'white' : 'var(--color-text-secondary)',
-                border: '2px solid',
-                borderColor: viewType === 'recent' ? 'var(--color-accent-primary)' : 'rgba(0, 0, 0, 0.1)',
-                boxShadow: viewType === 'recent' ? 'none' : '0 1px 3px rgba(0, 0, 0, 0.05)'
-              }}
-            >
-              Nejnovější
-            </button>
           </div>
         </div>
       </div>
@@ -260,54 +238,101 @@ export default function SearchBar({ metaphors }: SearchBarProps) {
             Žádné metafory nenalezeny. Zkuste jiné hledání.
           </div>
         ) : viewType === 'favorites' ? (
-          // Favorites View with Ranking
-          paginatedMetaphors.map((metaphor, index) => (
-            <div
-              key={metaphor.id}
-              className="flex gap-4 sm:gap-5 p-6 sm:p-8 rounded-xl transition-all duration-300"
-              style={{
-                backgroundColor: 'var(--color-bg-card)',
-                boxShadow: 'var(--shadow-sm)'
-              }}
-              onMouseOver={(e) => {
-                e.currentTarget.style.boxShadow = 'var(--shadow-md)'
-              }}
-              onMouseOut={(e) => {
-                e.currentTarget.style.boxShadow = 'var(--shadow-sm)'
-              }}
-            >
+          // Favorites View with Premium Ranking
+          paginatedMetaphors.map((metaphor, index) => {
+            // Premium styling based on rank
+            const getRankStyles = (rank: number) => {
+              switch (rank) {
+                case 0: // 1st place - Gold
+                  return {
+                    cardBg: 'linear-gradient(135deg, #FFF9E6 0%, #FFFBF0 100%)',
+                    titleColor: '#D4AF37', // Gold
+                    badgeBg: 'linear-gradient(135deg, #FFD700 0%, #FFA500 100%)',
+                    badgeText: 'white',
+                    emoji: '🏆'
+                  }
+                case 1: // 2nd place - Silver
+                  return {
+                    cardBg: 'linear-gradient(135deg, #F5F5F5 0%, #FAFAFA 100%)',
+                    titleColor: '#A8A8A8', // Silver
+                    badgeBg: 'linear-gradient(135deg, #C0C0C0 0%, #A8A8A8 100%)',
+                    badgeText: 'white',
+                    emoji: '🥈'
+                  }
+                case 2: // 3rd place - Bronze
+                  return {
+                    cardBg: 'linear-gradient(135deg, #FFF5F0 0%, #FFF9F5 100%)',
+                    titleColor: '#CD7F32', // Bronze
+                    badgeBg: 'linear-gradient(135deg, #CD7F32 0%, #A0522D 100%)',
+                    badgeText: 'white',
+                    emoji: '🥉'
+                  }
+                default: // 4th-5th place
+                  return {
+                    cardBg: 'white',
+                    titleColor: 'var(--color-heading-blue)',
+                    badgeBg: '#E0E0E0',
+                    badgeText: '#666',
+                    emoji: null
+                  }
+              }
+            }
+
+            const styles = getRankStyles(index)
+
+            return (
               <div
-                className="flex-shrink-0 w-10 h-10 flex items-center justify-center rounded-full font-bold text-base"
-                style={{ backgroundColor: 'var(--color-accent-primary)', color: 'white' }}
+                key={metaphor.id}
+                className="flex gap-4 sm:gap-5 p-6 sm:p-8 rounded-xl transition-all duration-300"
+                style={{
+                  background: styles.cardBg,
+                  boxShadow: 'var(--shadow-sm)'
+                }}
+                onMouseOver={(e) => {
+                  e.currentTarget.style.boxShadow = 'var(--shadow-md)'
+                }}
+                onMouseOut={(e) => {
+                  e.currentTarget.style.boxShadow = 'var(--shadow-sm)'
+                }}
               >
-                {index + 1}
+                <div
+                  className="flex-shrink-0 w-10 h-10 flex items-center justify-center rounded-full font-bold text-base"
+                  style={{
+                    background: styles.badgeBg,
+                    color: styles.badgeText,
+                    boxShadow: '0 2px 4px rgba(0, 0, 0, 0.1)'
+                  }}
+                >
+                  {index + 1}
+                </div>
+                <div className="flex-grow">
+                  <a href={`/metafora/${metaphor.slug}`} className="block hover:opacity-70 transition-opacity">
+                    <h3
+                      className="text-xl sm:text-2xl font-bold mb-3 leading-tight flex items-center gap-2"
+                      style={{ color: styles.titleColor }}
+                    >
+                      {metaphor.nazev}
+                      {styles.emoji && <span className="text-2xl">{styles.emoji}</span>}
+                    </h3>
+                    <p
+                      className="text-sm sm:text-base mb-3 leading-relaxed font-medium"
+                      style={{ color: 'var(--color-text-primary)' }}
+                    >
+                      {metaphor.definice}
+                    </p>
+                    {metaphor.like_count > 0 && (
+                      <div className="flex items-center gap-1.5 text-sm font-medium" style={{ color: 'var(--color-positive)' }}>
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" className="w-4 h-4">
+                          <path d="m11.645 20.91-.007-.003-.022-.012a15.247 15.247 0 0 1-.383-.218 25.18 25.18 0 0 1-4.244-3.17C4.688 15.36 2.25 12.174 2.25 8.25 2.25 5.322 4.714 3 7.688 3A5.5 5.5 0 0 1 12 5.052 5.5 5.5 0 0 1 16.313 3c2.973 0 5.437 2.322 5.437 5.25 0 3.925-2.438 7.111-4.739 9.256a25.175 25.175 0 0 1-4.244 3.17 15.247 15.247 0 0 1-.383.219l-.022.012-.007.004-.003.001a.752.752 0 0 1-.704 0l-.003-.001Z" />
+                        </svg>
+                        <span>{metaphor.like_count}</span>
+                      </div>
+                    )}
+                  </a>
+                </div>
               </div>
-              <div className="flex-grow">
-                <a href={`/metafora/${metaphor.slug}`} className="block hover:opacity-70 transition-opacity">
-                  <h3
-                    className="text-xl sm:text-2xl font-bold mb-3 leading-tight"
-                    style={{ color: 'var(--color-heading-blue)' }}
-                  >
-                    {metaphor.nazev}
-                  </h3>
-                  <p
-                    className="text-sm sm:text-base mb-3 leading-relaxed font-medium"
-                    style={{ color: 'var(--color-text-primary)' }}
-                  >
-                    {metaphor.definice}
-                  </p>
-                  {metaphor.like_count > 0 && (
-                    <div className="flex items-center gap-1.5 text-sm font-medium" style={{ color: 'var(--color-positive)' }}>
-                      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" className="w-4 h-4">
-                        <path d="m11.645 20.91-.007-.003-.022-.012a15.247 15.247 0 0 1-.383-.218 25.18 25.18 0 0 1-4.244-3.17C4.688 15.36 2.25 12.174 2.25 8.25 2.25 5.322 4.714 3 7.688 3A5.5 5.5 0 0 1 12 5.052 5.5 5.5 0 0 1 16.313 3c2.973 0 5.437 2.322 5.437 5.25 0 3.925-2.438 7.111-4.739 9.256a25.175 25.175 0 0 1-4.244 3.17 15.247 15.247 0 0 1-.383.219l-.022.012-.007.004-.003.001a.752.752 0 0 1-.704 0l-.003-.001Z" />
-                      </svg>
-                      <span>{metaphor.like_count}</span>
-                    </div>
-                  )}
-                </a>
-              </div>
-            </div>
-          ))
+            )
+          })
         ) : (
           // Standard View (all/recent)
           paginatedMetaphors.map((metaphor) => (
