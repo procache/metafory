@@ -1,0 +1,23 @@
+{
+  "name": "Metafory.cz - České metafory a rčení",
+  "short_name": "Metafory.cz",
+  "description": "Online databáze českých metafor s možností vyhledávání, přidávání a hodnocení.",
+  "icons": [
+    {
+      "src": "/android-chrome-192x192.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    },
+    {
+      "src": "/android-chrome-512x512.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    }
+  ],
+  "theme_color": "#D8E3DD",
+  "background_color": "#f8fffe",
+  "display": "standalone",
+  "start_url": "/",
+  "lang": "cs",
+  "orientation": "portrait-primary"
+}
