@@ -218,9 +218,9 @@ import BaseLayout from '../layouts/BaseLayout.astro'
       if (response.ok) {
         // Success
         statusDiv.className = 'p-5 rounded-lg font-medium'
-        statusDiv.style.backgroundColor = 'var(--color-positive)'
+        statusDiv.style.backgroundColor = 'var(--color-success)'
         statusDiv.style.color = 'white'
-        statusDiv.style.border = '1.5px solid var(--color-positive)'
+        statusDiv.style.border = '1.5px solid var(--color-success)'
         statusDiv.innerHTML = `
           <div class="font-bold mb-2">✅ Metafora úspěšně odeslána!</div>
           <div class="text-sm opacity-95">Zkontrolujeme ji a zveřejníme do 1–2 dnů.</div>
@@ -232,16 +232,16 @@ import BaseLayout from '../layouts/BaseLayout.astro'
         // Error
         statusDiv.className = 'p-5 rounded-lg font-medium'
         statusDiv.style.backgroundColor = 'var(--color-bg-card)'
-        statusDiv.style.color = 'var(--color-negative)'
-        statusDiv.style.border = '1.5px solid var(--color-negative)'
+        statusDiv.style.color = 'var(--color-error)'
+        statusDiv.style.border = '1.5px solid var(--color-error)'
         statusDiv.textContent = result.error || 'Chyba při odesílání. Zkuste to prosím znovu.'
         statusDiv.classList.remove('hidden')
       }
     } catch (err) {
       statusDiv.className = 'p-5 rounded-lg font-medium'
       statusDiv.style.backgroundColor = 'var(--color-bg-card)'
-      statusDiv.style.color = 'var(--color-negative)'
-      statusDiv.style.border = '1.5px solid var(--color-negative)'
+      statusDiv.style.color = 'var(--color-error)'
+      statusDiv.style.border = '1.5px solid var(--color-error)'
       statusDiv.textContent = 'Chyba připojení. Zkontrolujte prosím internetové připojení.'
       statusDiv.classList.remove('hidden')
     } finally {

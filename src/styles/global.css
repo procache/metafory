@@ -36,6 +36,10 @@
   --color-positive: #E53935;         /* Red for heart icon (active) */
   --color-positive-hover: #C62828;   /* Darker red for hover */
   --color-negative: rgba(27, 94, 32, 0.3);  /* Muted forest green for inactive states */
+
+  /* Success/Error states */
+  --color-success: #4CAF50;          /* Green for success messages */
+  --color-error: #E53935;            /* Red for error messages */
 }
 
 /* Custom fonts and typography - minimalist inspired by cestina20.cz */
