@@ -1,44 +1,29 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
-  <defs>
-    <linearGradient id="pageGradient1" x1="0%" y1="0%" x2="100%" y2="100%">
-      <stop offset="0%" style="stop-color:#6fd89d;stop-opacity:1" />
-      <stop offset="100%" style="stop-color:#52b788;stop-opacity:1" />
-    </linearGradient>
-    <linearGradient id="pageGradient2" x1="0%" y1="0%" x2="100%" y2="100%">
-      <stop offset="0%" style="stop-color:#64B5F6;stop-opacity:1" />
-      <stop offset="100%" style="stop-color:#42A5F5;stop-opacity:1" />
-    </linearGradient>
-  </defs>
+  <!-- Background -->
+  <rect width="512" height="512" fill="#f8fffe"/>
 
-  <!-- Background circle for better visibility -->
-  <circle cx="256" cy="256" r="256" fill="#f8fffe"/>
+  <!-- Open book design based on logo_kniha.png -->
 
-  <!-- Open book illustration -->
-  <!-- Left page -->
-  <path d="M 120 180 Q 120 220 120 260 Q 120 300 140 320 Q 160 340 200 350 Q 240 360 256 360 L 256 180 Q 240 190 200 190 Q 160 190 140 180 Q 120 170 120 180 Z"
-        fill="url(#pageGradient1)"
-        stroke="#40916c"
-        stroke-width="8"/>
+  <!-- Left page - outer green line -->
+  <path d="M 80 200 Q 80 180 100 165 L 100 310 Q 90 320 220 340 Q 240 342 256 345"
+        fill="none" stroke="#6fd89d" stroke-width="12" stroke-linecap="round"/>
 
-  <!-- Right page -->
-  <path d="M 392 180 Q 392 220 392 260 Q 392 300 372 320 Q 352 340 312 350 Q 272 360 256 360 L 256 180 Q 272 190 312 190 Q 352 190 372 180 Q 392 170 392 180 Z"
-        fill="url(#pageGradient2)"
-        stroke="#1976D2"
-        stroke-width="8"/>
+  <!-- Left page - inner blue line -->
+  <path d="M 100 180 Q 100 165 115 155 L 115 295 Q 110 305 220 325 Q 240 328 256 332"
+        fill="none" stroke="#64B5F6" stroke-width="10" stroke-linecap="round"/>
 
-  <!-- Book binding (center) -->
-  <path d="M 256 180 L 256 360 Q 256 370 266 365 Q 276 360 276 360"
-        fill="none"
-        stroke="#2d6a4f"
-        stroke-width="6"/>
+  <!-- Right page - outer blue line -->
+  <path d="M 432 200 Q 432 180 412 165 L 412 310 Q 422 320 292 340 Q 272 342 256 345"
+        fill="none" stroke="#64B5F6" stroke-width="12" stroke-linecap="round"/>
 
-  <!-- Decorative lines on left page -->
-  <line x1="160" y1="220" x2="230" y2="220" stroke="#40916c" stroke-width="4" opacity="0.5"/>
-  <line x1="160" y1="250" x2="230" y2="250" stroke="#40916c" stroke-width="4" opacity="0.5"/>
-  <line x1="160" y1="280" x2="210" y2="280" stroke="#40916c" stroke-width="4" opacity="0.5"/>
+  <!-- Right page - inner green line -->
+  <path d="M 412 180 Q 412 165 397 155 L 397 295 Q 402 305 292 325 Q 272 328 256 332"
+        fill="none" stroke="#6fd89d" stroke-width="10" stroke-linecap="round"/>
 
-  <!-- Decorative lines on right page -->
-  <line x1="282" y1="220" x2="352" y2="220" stroke="#1976D2" stroke-width="4" opacity="0.5"/>
-  <line x1="282" y1="250" x2="352" y2="250" stroke="#1976D2" stroke-width="4" opacity="0.5"/>
-  <line x1="302" y1="280" x2="352" y2="280" stroke="#1976D2" stroke-width="4" opacity="0.5"/>
+  <!-- Bottom horizontal lines -->
+  <line x1="30" y1="318" x2="220" y2="340" stroke="#6fd89d" stroke-width="12" stroke-linecap="round"/>
+  <line x1="482" y1="318" x2="292" y2="340" stroke="#6fd89d" stroke-width="12" stroke-linecap="round"/>
+
+  <!-- Center binding circle -->
+  <circle cx="256" cy="350" r="28" fill="#6fd89d"/>
 </svg>
