@@ -13,10 +13,39 @@
 [[headers]]
   for = "/*"
   [headers.values]
+    # Prevent clickjacking
     X-Frame-Options = "DENY"
+
+    # Prevent MIME type sniffing
     X-Content-Type-Options = "nosniff"
+
+    # Control referrer information
     Referrer-Policy = "strict-origin-when-cross-origin"
-    Permissions-Policy = "geolocation=(), microphone=(), camera=()"
+
+    # Disable unnecessary browser features
+    Permissions-Policy = "geolocation=(), microphone=(), camera=(), payment=(), usb=(), magnetometer=(), gyroscope=(), accelerometer=()"
+
+    # Enable XSS protection (for older browsers)
+    X-XSS-Protection = "1; mode=block"
+
+    # Enforce HTTPS (2 years = 63072000 seconds)
+    Strict-Transport-Security = "max-age=63072000; includeSubDomains; preload"
+
+    # Content Security Policy
+    # Note: 'unsafe-inline' is needed for Astro's inline scripts and styles
+    # Consider using nonces in production for stricter CSP
+    Content-Security-Policy = """
+      default-src 'self';
+      script-src 'self' 'unsafe-inline' https://cdn.jsdelivr.net;
+      style-src 'self' 'unsafe-inline';
+      img-src 'self' data: https:;
+      font-src 'self' data:;
+      connect-src 'self' https://*.supabase.co https://resend.com;
+      frame-ancestors 'none';
+      base-uri 'self';
+      form-action 'self';
+      upgrade-insecure-requests;
+    """
 
 [[headers]]
   for = "/_astro/*"
