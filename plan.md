@@ -11,6 +11,23 @@
 ## Done
 <!-- Claude moves completed items here with commit hash + date -->
 
+### Phase 9: Security Hardening (2025-12-16)
+[x] PLAN-039: Fix XSS in email notifications (`51cbe41`, 2025-12-16)
+[x] PLAN-040: Implement rate limiting on API endpoints (`e6474f0`, 2025-12-16)
+[x] PLAN-041: Improve email validation with validator.js (`d4355b1`, 2025-12-16)
+[x] PLAN-042: Add CSP and security headers (`965ada4`, 2025-12-16)
+[x] PLAN-043: Implement honeypot anti-spam in forms (`d5afff8`, 2025-12-16)
+[x] PLAN-044: Fix npm audit vulnerabilities (`35bf841`, 2025-12-16)
+
+**Results achieved:**
+- All critical security issues addressed
+- XSS prevention through HTML escaping
+- Rate limiting: 3/hour submissions, 5/hour contacts, 50/15min votes
+- RFC 5322 compliant email validation + control char detection
+- Comprehensive security headers including CSP, HSTS, XSS protection
+- Honeypot anti-spam with client and server-side validation
+- Zero npm audit vulnerabilities
+
 ### Phase 1: Project Setup
 [x] PLAN-001: Initialize Astro project with React and Tailwind (`48bee22`, 2025-11-03)
 [x] PLAN-002: Set up Supabase project and configure environment variables (`48bee22`, 2025-11-03)
