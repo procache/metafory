@@ -9,6 +9,18 @@ if (resendApiKey) {
   resend = new Resend(resendApiKey)
 }
 
+/**
+ * Escape HTML to prevent XSS attacks in email content
+ */
+function escapeHtml(unsafe: string): string {
+  return unsafe
+    .replace(/&/g, '&amp;')
+    .replace(/</g, '&lt;')
+    .replace(/>/g, '&gt;')
+    .replace(/"/g, '&quot;')
+    .replace(/'/g, '&#039;')
+}
+
 interface NewMetaphorEmailParams {
   nazev: string
   definice: string
@@ -29,22 +41,31 @@ export async function sendNewMetaphorNotification(params: NewMetaphorEmailParams
   try {
     const { nazev, definice, priklad, zdroj, autor_jmeno, autor_email, slug } = params
 
-    const sourceInfo = zdroj
-      ? `<p><strong>Zdroj:</strong> ${zdroj}</p>`
+    // Escape all user-provided data to prevent XSS
+    const escapedNazev = escapeHtml(nazev)
+    const escapedDefinice = escapeHtml(definice)
+    const escapedPriklad = escapeHtml(priklad)
+    const escapedZdroj = zdroj ? escapeHtml(zdroj) : null
+    const escapedAutorJmeno = autor_jmeno ? escapeHtml(autor_jmeno) : null
+    const escapedAutorEmail = autor_email ? escapeHtml(autor_email) : null
+    const escapedSlug = escapeHtml(slug)
+
+    const sourceInfo = escapedZdroj
+      ? `<p><strong>Zdroj:</strong> ${escapedZdroj}</p>`
       : ''
 
-    const authorInfo = autor_jmeno || autor_email
-      ? `<p><strong>Autor:</strong> ${autor_jmeno || 'Neposkytnut'} ${autor_email ? `(${autor_email})` : ''}</p>`
+    const authorInfo = escapedAutorJmeno || escapedAutorEmail
+      ? `<p><strong>Autor:</strong> ${escapedAutorJmeno || 'Neposkytnut'} ${escapedAutorEmail ? `(${escapedAutorEmail})` : ''}</p>`
       : ''
 
     const htmlContent = `
       <h2>Nová metafora čeká na schválení</h2>
 
-      <h3>${nazev}</h3>
+      <h3>${escapedNazev}</h3>
 
-      <p><strong>Definice:</strong><br>${definice}</p>
+      <p><strong>Definice:</strong><br>${escapedDefinice}</p>
 
-      <p><strong>Příklad:</strong><br>${priklad}</p>
+      <p><strong>Příklad:</strong><br>${escapedPriklad}</p>
 
       ${sourceInfo}
 
@@ -55,7 +76,7 @@ export async function sendNewMetaphorNotification(params: NewMetaphorEmailParams
       <p><strong>Akce:</strong></p>
       <ul>
         <li>Přejděte do <a href="https://supabase.com/dashboard/project/pyvqfqxiefxptavzmqpm/editor">Supabase Dashboard</a></li>
-        <li>Najděte metaforu se slug: <code>${slug}</code></li>
+        <li>Najděte metaforu se slug: <code>${escapedSlug}</code></li>
         <li>Změňte status na 'published' nebo 'rejected'</li>
       </ul>
     `
@@ -115,16 +136,21 @@ export async function sendContactMessage(params: ContactEmailParams) {
   try {
     const { jmeno, email, zprava } = params
 
+    // Escape all user-provided data to prevent XSS
+    const escapedJmeno = escapeHtml(jmeno)
+    const escapedEmail = escapeHtml(email)
+    const escapedZprava = escapeHtml(zprava)
+
     const htmlContent = `
       <h2>Nová zpráva z kontaktního formuláře</h2>
 
-      <p><strong>Od:</strong> ${jmeno}</p>
-      <p><strong>Email:</strong> <a href="mailto:${email}">${email}</a></p>
+      <p><strong>Od:</strong> ${escapedJmeno}</p>
+      <p><strong>Email:</strong> <a href="mailto:${escapedEmail}">${escapedEmail}</a></p>
 
       <hr>
 
       <p><strong>Zpráva:</strong></p>
-      <p style="white-space: pre-wrap;">${zprava}</p>
+      <p style="white-space: pre-wrap;">${escapedZprava}</p>
     `
 
     const textContent = `
