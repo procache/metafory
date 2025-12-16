@@ -1,6 +1,7 @@
 import type { APIRoute } from 'astro'
 import { sendContactMessage } from '../../lib/email'
 import { checkRateLimit, getClientIp, RATE_LIMITS } from '../../lib/rate-limit'
+import { validateCsrf, createCsrfErrorResponse } from '../../lib/csrf'
 import validator from 'validator'
 
 // Ensure this route is never prerendered (needed for Netlify)
@@ -8,6 +9,11 @@ export const prerender = false
 
 export const POST: APIRoute = async ({ request }) => {
   try {
+    // CSRF Protection: Validate Origin/Referer headers
+    if (!validateCsrf(request)) {
+      return createCsrfErrorResponse()
+    }
+
     // Check rate limit
     const clientIp = getClientIp(request)
     const rateLimit = checkRateLimit(clientIp, RATE_LIMITS.CONTACT)
