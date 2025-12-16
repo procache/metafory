@@ -1,6 +1,7 @@
 import type { APIRoute } from 'astro'
 import { sendContactMessage } from '../../lib/email'
 import { checkRateLimit, getClientIp, RATE_LIMITS } from '../../lib/rate-limit'
+import validator from 'validator'
 
 // Ensure this route is never prerendered (needed for Netlify)
 export const prerender = false
@@ -42,9 +43,17 @@ export const POST: APIRoute = async ({ request }) => {
       )
     }
 
-    // Validate email format (basic)
-    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
-    if (!emailRegex.test(email)) {
+    // Check for control characters in all fields (prevent injection attacks)
+    const hasControlChars = (str: string) => /[\x00-\x1F\x7F]/.test(str)
+    if (hasControlChars(jmeno) || hasControlChars(email) || hasControlChars(zprava)) {
+      return new Response(
+        JSON.stringify({ error: 'Pole obsahují neplatné znaky' }),
+        { status: 400, headers: { 'Content-Type': 'application/json' } }
+      )
+    }
+
+    // Validate email format using validator.js (RFC 5322 compliant)
+    if (!validator.isEmail(email)) {
       return new Response(
         JSON.stringify({ error: 'Neplatný formát emailu' }),
         { status: 400, headers: { 'Content-Type': 'application/json' } }

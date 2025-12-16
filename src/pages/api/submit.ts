@@ -3,6 +3,7 @@ import { getServerSupabase } from '../../lib/supabase'
 import { generateSlug, ensureUniqueSlug } from '../../lib/utils'
 import { sendNewMetaphorNotification } from '../../lib/email'
 import { checkRateLimit, getClientIp, RATE_LIMITS } from '../../lib/rate-limit'
+import validator from 'validator'
 
 // Ensure this route is never prerendered (needed for Netlify)
 export const prerender = false
@@ -43,6 +44,30 @@ export const POST: APIRoute = async ({ request }) => {
     if (!nazev || !definice || !priklad) {
       return new Response(
         JSON.stringify({ error: 'Všechna povinná pole musí být vyplněna' }),
+        { status: 400, headers: { 'Content-Type': 'application/json' } }
+      )
+    }
+
+    // Check for control characters in all fields (prevent injection attacks)
+    const hasControlChars = (str: string) => /[\x00-\x1F\x7F]/.test(str)
+    if (
+      hasControlChars(nazev) ||
+      hasControlChars(definice) ||
+      hasControlChars(priklad) ||
+      (zdroj && hasControlChars(zdroj)) ||
+      (autor_jmeno && hasControlChars(autor_jmeno)) ||
+      (autor_email && hasControlChars(autor_email))
+    ) {
+      return new Response(
+        JSON.stringify({ error: 'Pole obsahují neplatné znaky' }),
+        { status: 400, headers: { 'Content-Type': 'application/json' } }
+      )
+    }
+
+    // Validate email format if provided
+    if (autor_email && !validator.isEmail(autor_email)) {
+      return new Response(
+        JSON.stringify({ error: 'Neplatný formát emailu autora' }),
         { status: 400, headers: { 'Content-Type': 'application/json' } }
       )
     }
