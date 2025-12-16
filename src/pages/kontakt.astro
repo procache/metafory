@@ -30,6 +30,18 @@ import BaseLayout from '../layouts/BaseLayout.astro'
     <div class="rounded-xl p-8 sm:p-10" style="background-color: var(--color-bg-card); box-shadow: var(--shadow-sm);">
 
       <form id="contact-form" class="space-y-7">
+        <!-- Honeypot field (hidden from real users, but bots will fill it) -->
+        <div style="position: absolute; left: -5000px;" aria-hidden="true">
+          <input
+            type="text"
+            name="website"
+            id="website"
+            tabindex="-1"
+            autocomplete="off"
+            placeholder="Leave this field empty"
+          />
+        </div>
+
         <!-- Jméno -->
         <div>
           <label for="jmeno" class="block text-base font-semibold mb-3" style="color: var(--color-text-primary);">
@@ -161,7 +173,8 @@ import BaseLayout from '../layouts/BaseLayout.astro'
       const data = {
         jmeno: formData.get('jmeno') as string,
         email: formData.get('email') as string,
-        zprava: formData.get('zprava') as string
+        zprava: formData.get('zprava') as string,
+        website: formData.get('website') as string || ''
       }
 
       try {

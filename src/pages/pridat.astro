@@ -38,6 +38,18 @@ import BaseLayout from '../layouts/BaseLayout.astro'
     <div class="rounded-xl p-8 sm:p-10" style="background-color: var(--color-bg-card); box-shadow: var(--shadow-sm);">
 
       <form id="metaphor-form" class="space-y-7">
+        <!-- Honeypot field (hidden from real users, but bots will fill it) -->
+        <div style="position: absolute; left: -5000px;" aria-hidden="true">
+          <input
+            type="text"
+            name="website"
+            id="website"
+            tabindex="-1"
+            autocomplete="off"
+            placeholder="Leave this field empty"
+          />
+        </div>
+
         <!-- Název metafory -->
         <div>
           <label for="nazev" class="block text-base font-semibold mb-3" style="color: var(--color-text-primary);">
@@ -197,13 +209,35 @@ import BaseLayout from '../layouts/BaseLayout.astro'
 
     // Get form data
     const formData = new FormData(form)
+
+    // Check honeypot field (anti-spam)
+    const honeypot = formData.get('website') as string
+    if (honeypot) {
+      // Bot detected - silently reject
+      statusDiv.className = 'p-5 rounded-lg font-medium text-center'
+      statusDiv.style.backgroundColor = 'var(--color-success)'
+      statusDiv.style.color = 'white'
+      statusDiv.innerHTML = '✅ Metafora úspěšně odeslána!'
+      statusDiv.classList.remove('hidden')
+
+      submitButton.disabled = false
+      submitButton.textContent = 'Odeslat metaforu'
+      form.reset()
+
+      setTimeout(() => {
+        window.location.href = '/'
+      }, 2000)
+      return
+    }
+
     const data = {
       nazev: formData.get('nazev') as string,
       definice: formData.get('definice') as string,
       priklad: formData.get('priklad') as string,
       zdroj: formData.get('zdroj') as string || null,
       autor_jmeno: formData.get('autor_jmeno') as string || null,
-      autor_email: formData.get('autor_email') as string || null
+      autor_email: formData.get('autor_email') as string || null,
+      website: formData.get('website') as string || ''
     }
 
     try {

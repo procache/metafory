@@ -33,7 +33,15 @@ export const POST: APIRoute = async ({ request }) => {
     }
 
     const body = await request.json()
-    const { jmeno, email, zprava } = body
+    const { jmeno, email, zprava, website } = body
+
+    // Check honeypot field (anti-spam) - silently reject bots
+    if (website) {
+      return new Response(
+        JSON.stringify({ success: true, message: 'Zpráva byla úspěšně odeslána' }),
+        { status: 200, headers: { 'Content-Type': 'application/json' } }
+      )
+    }
 
     // Validate required fields
     if (!jmeno || !email || !zprava) {

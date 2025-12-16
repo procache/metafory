@@ -38,7 +38,15 @@ export const POST: APIRoute = async ({ request }) => {
     const supabase = getServerSupabase()
 
     const body = await request.json()
-    const { nazev, definice, priklad, zdroj, autor_jmeno, autor_email } = body
+    const { nazev, definice, priklad, zdroj, autor_jmeno, autor_email, website } = body
+
+    // Check honeypot field (anti-spam) - silently reject bots
+    if (website) {
+      return new Response(
+        JSON.stringify({ success: true, message: 'Metafora byla úspěšně odeslána' }),
+        { status: 200, headers: { 'Content-Type': 'application/json' } }
+      )
+    }
 
     // Validate required fields
     if (!nazev || !definice || !priklad) {
