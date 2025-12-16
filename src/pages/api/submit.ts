@@ -2,12 +2,37 @@ import type { APIRoute } from 'astro'
 import { getServerSupabase } from '../../lib/supabase'
 import { generateSlug, ensureUniqueSlug } from '../../lib/utils'
 import { sendNewMetaphorNotification } from '../../lib/email'
+import { checkRateLimit, getClientIp, RATE_LIMITS } from '../../lib/rate-limit'
 
 // Ensure this route is never prerendered (needed for Netlify)
 export const prerender = false
 
 export const POST: APIRoute = async ({ request }) => {
   try {
+    // Check rate limit
+    const clientIp = getClientIp(request)
+    const rateLimit = checkRateLimit(clientIp, RATE_LIMITS.SUBMIT)
+
+    if (!rateLimit.allowed) {
+      const retryAfter = Math.ceil((rateLimit.resetTime - Date.now()) / 1000)
+      return new Response(
+        JSON.stringify({
+          error: 'Příliš mnoho požadavků. Zkuste to prosím později.',
+          retryAfter
+        }),
+        {
+          status: 429,
+          headers: {
+            'Content-Type': 'application/json',
+            'Retry-After': retryAfter.toString(),
+            'X-RateLimit-Limit': RATE_LIMITS.SUBMIT.maxRequests.toString(),
+            'X-RateLimit-Remaining': '0',
+            'X-RateLimit-Reset': new Date(rateLimit.resetTime).toISOString()
+          }
+        }
+      )
+    }
+
     // Use service role for admin operations (bypasses RLS)
     const supabase = getServerSupabase()
 
@@ -86,7 +111,15 @@ export const POST: APIRoute = async ({ request }) => {
         message: 'Metafora byla úspěšně odeslána',
         metaphor: data
       }),
-      { status: 200, headers: { 'Content-Type': 'application/json' } }
+      {
+        status: 200,
+        headers: {
+          'Content-Type': 'application/json',
+          'X-RateLimit-Limit': RATE_LIMITS.SUBMIT.maxRequests.toString(),
+          'X-RateLimit-Remaining': rateLimit.remaining.toString(),
+          'X-RateLimit-Reset': new Date(rateLimit.resetTime).toISOString()
+        }
+      }
     )
   } catch (err) {
     console.error('Submit API error:', err)

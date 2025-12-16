@@ -1,11 +1,36 @@
 import type { APIRoute } from 'astro'
 import { supabase } from '../../lib/supabase'
+import { checkRateLimit, getClientIp, RATE_LIMITS } from '../../lib/rate-limit'
 
 // Ensure this route is never prerendered (needed for Netlify)
 export const prerender = false
 
 export const POST: APIRoute = async ({ request }) => {
   try {
+    // Check rate limit
+    const clientIp = getClientIp(request)
+    const rateLimit = checkRateLimit(clientIp, RATE_LIMITS.VOTE)
+
+    if (!rateLimit.allowed) {
+      const retryAfter = Math.ceil((rateLimit.resetTime - Date.now()) / 1000)
+      return new Response(
+        JSON.stringify({
+          error: 'Příliš mnoho požadavků. Zkuste to prosím později.',
+          retryAfter
+        }),
+        {
+          status: 429,
+          headers: {
+            'Content-Type': 'application/json',
+            'Retry-After': retryAfter.toString(),
+            'X-RateLimit-Limit': RATE_LIMITS.VOTE.maxRequests.toString(),
+            'X-RateLimit-Remaining': '0',
+            'X-RateLimit-Reset': new Date(rateLimit.resetTime).toISOString()
+          }
+        }
+      )
+    }
+
     const body = await request.json()
     const { metaphor_id, vote_type, cookie_id } = body
 
@@ -68,7 +93,15 @@ export const POST: APIRoute = async ({ request }) => {
         success: true,
         votes: metaphor || { like_count: 0, dislike_count: 0, score: 0 }
       }),
-      { status: 200, headers: { 'Content-Type': 'application/json' } }
+      {
+        status: 200,
+        headers: {
+          'Content-Type': 'application/json',
+          'X-RateLimit-Limit': RATE_LIMITS.VOTE.maxRequests.toString(),
+          'X-RateLimit-Remaining': rateLimit.remaining.toString(),
+          'X-RateLimit-Reset': new Date(rateLimit.resetTime).toISOString()
+        }
+      }
     )
   } catch (err) {
     console.error('Vote API error:', err)

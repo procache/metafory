@@ -1,11 +1,36 @@
 import type { APIRoute } from 'astro'
 import { sendContactMessage } from '../../lib/email'
+import { checkRateLimit, getClientIp, RATE_LIMITS } from '../../lib/rate-limit'
 
 // Ensure this route is never prerendered (needed for Netlify)
 export const prerender = false
 
 export const POST: APIRoute = async ({ request }) => {
   try {
+    // Check rate limit
+    const clientIp = getClientIp(request)
+    const rateLimit = checkRateLimit(clientIp, RATE_LIMITS.CONTACT)
+
+    if (!rateLimit.allowed) {
+      const retryAfter = Math.ceil((rateLimit.resetTime - Date.now()) / 1000)
+      return new Response(
+        JSON.stringify({
+          error: 'Příliš mnoho požadavků. Zkuste to prosím později.',
+          retryAfter
+        }),
+        {
+          status: 429,
+          headers: {
+            'Content-Type': 'application/json',
+            'Retry-After': retryAfter.toString(),
+            'X-RateLimit-Limit': RATE_LIMITS.CONTACT.maxRequests.toString(),
+            'X-RateLimit-Remaining': '0',
+            'X-RateLimit-Reset': new Date(rateLimit.resetTime).toISOString()
+          }
+        }
+      )
+    }
+
     const body = await request.json()
     const { jmeno, email, zprava } = body
 
@@ -54,7 +79,15 @@ export const POST: APIRoute = async ({ request }) => {
         success: true,
         message: 'Zpráva byla úspěšně odeslána'
       }),
-      { status: 200, headers: { 'Content-Type': 'application/json' } }
+      {
+        status: 200,
+        headers: {
+          'Content-Type': 'application/json',
+          'X-RateLimit-Limit': RATE_LIMITS.CONTACT.maxRequests.toString(),
+          'X-RateLimit-Remaining': rateLimit.remaining.toString(),
+          'X-RateLimit-Reset': new Date(rateLimit.resetTime).toISOString()
+        }
+      }
     )
   } catch (err) {
     console.error('Contact API error:', err)
