@@ -42,3 +42,28 @@
 - Direct database access bypass application-level security (rate limiting, validation)
 - Security audit checklist valuable before production deployment
 
+---
+
+### 2025-12-18: CSRF Validation Too Restrictive for Netlify Deployments
+
+**Context:** Form submission on /pridat page returned "Neplatný požadavek" error after security hardening
+
+**Failure Type:** misconfig
+
+**Root Cause:**
+- CSRF validation in `src/lib/csrf.ts` had hardcoded allowlist of origins
+- Only allowed: metafory.cz, www.metafory.cz, localhost:4321, localhost:3000
+- Netlify preview deployments use dynamic subdomains (e.g., `abc123--metafory.netlify.app`)
+- Requests from Netlify preview URLs failed CSRF validation
+
+**Fix Applied:**
+1. Added regex patterns for Netlify subdomains: `/^https:\/\/[a-z0-9-]+\.netlify\.app$/`
+2. Added dynamic same-origin check: compare Origin header host with request Host header
+3. Kept explicit allowlist as primary check, dynamic check as fallback
+
+**Commit:** `04500c7` - fix: CSRF validation now supports dynamic origins and Netlify previews
+
+### 📏 Rule Added
+- .claude/docs/rules-learned.md: CSRF allowlists must include all deployment environments
+- enforcement: Manual testing on Netlify preview before production deploy
+

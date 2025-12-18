@@ -36,3 +36,10 @@
 - Run npm audit for vulnerable dependencies
 - Test all API endpoints manually after deployment
 
+**CSRF Origin Allowlists (2025-12-18):**
+- Hardcoded origin allowlists break on dynamic deployment environments (Netlify previews, staging)
+- Always include: production domain, www subdomain, localhost variants, AND hosting platform patterns
+- Use dynamic same-origin fallback: compare Origin host with request Host header
+- Test form submissions on Netlify preview deployments before merging to production
+- Enforcement: `src/lib/csrf.ts` includes regex patterns for `*.netlify.app` + dynamic host check
+
