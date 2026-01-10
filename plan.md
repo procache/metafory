@@ -5,20 +5,28 @@
 
 ## Now
 
-### Phase 10: Real-time Vote Updates with TanStack Query
-- [ ] PLAN-045: Install @tanstack/react-query dependency
-- [ ] PLAN-046: Create QueryClientProvider wrapper component
-- [ ] PLAN-047: Create GET /api/metaphors endpoint for fresh data
-- [ ] PLAN-048: Create useMetaphors and useVote custom hooks
-- [ ] PLAN-049: Refactor SearchBar to use TanStack Query with SSG initialData
-- [ ] PLAN-050: Refactor VoteButtons to use mutation with cache invalidation
-- [ ] PLAN-051: Test and verify Top 5 reflects current votes
-
 ## Next
 - [ ] Optimalizace velikosti obrázků v public/ (2.6MB koreni_cestiny PNG soubory)
 
 ## Done
 <!-- Claude moves completed items here with commit hash + date -->
+
+### Phase 10: Real-time Vote Updates with TanStack Query (2026-01-10)
+[x] PLAN-045: Install @tanstack/react-query dependency (`6e69207`, 2026-01-10)
+[x] PLAN-046: Create QueryClientProvider wrapper component (`6e69207`, 2026-01-10)
+[x] PLAN-047: Create GET /api/metaphors endpoint for fresh data (`6e69207`, 2026-01-10)
+[x] PLAN-048: Create useMetaphors and useVote custom hooks (`6e69207`, 2026-01-10)
+[x] PLAN-049: Refactor SearchBar to use TanStack Query with SSG initialData (`6e69207`, 2026-01-10)
+[x] PLAN-050: Refactor VoteButtons to use mutation with cache invalidation (`6e69207`, 2026-01-10)
+[x] PLAN-051: Test and verify Top 5 reflects current votes (`6e69207`, 2026-01-10)
+
+**Results achieved:**
+- TanStack Query integrated for vendor-agnostic real-time data fetching
+- SSG data used as initialData for instant page load + SEO
+- Background refetch provides fresh data after page load
+- Cache invalidation after voting ensures Top 5 reflects current votes
+- Optimistic updates for instant UI feedback
+- VoteButtonsStandalone variant for detail pages with separate QueryProvider
 
 ### Phase 9: Security Hardening (2025-12-16)
 [x] PLAN-039: Fix XSS in email notifications (`51cbe41`, 2025-12-16)
