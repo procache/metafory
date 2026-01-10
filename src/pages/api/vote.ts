@@ -1,5 +1,5 @@
 import type { APIRoute } from 'astro'
-import { supabase } from '../../lib/supabase'
+import { getServerSupabase } from '../../lib/supabase'
 import { checkRateLimit, getClientIp, RATE_LIMITS } from '../../lib/rate-limit'
 import { validateCsrf, createCsrfErrorResponse } from '../../lib/csrf'
 
@@ -36,6 +36,9 @@ export const POST: APIRoute = async ({ request }) => {
         }
       )
     }
+
+    // Use service role for database operations (bypasses RLS)
+    const supabase = getServerSupabase()
 
     const body = await request.json()
     const { metaphor_id, vote_type, cookie_id } = body
