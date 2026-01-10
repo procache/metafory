@@ -5,6 +5,15 @@
 
 ## Now
 
+### Phase 10: Real-time Vote Updates with TanStack Query
+- [ ] PLAN-045: Install @tanstack/react-query dependency
+- [ ] PLAN-046: Create QueryClientProvider wrapper component
+- [ ] PLAN-047: Create GET /api/metaphors endpoint for fresh data
+- [ ] PLAN-048: Create useMetaphors and useVote custom hooks
+- [ ] PLAN-049: Refactor SearchBar to use TanStack Query with SSG initialData
+- [ ] PLAN-050: Refactor VoteButtons to use mutation with cache invalidation
+- [ ] PLAN-051: Test and verify Top 5 reflects current votes
+
 ## Next
 - [ ] Optimalizace velikosti obrázků v public/ (2.6MB koreni_cestiny PNG soubory)
 

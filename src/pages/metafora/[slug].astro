@@ -1,6 +1,6 @@
 ---
 import BaseLayout from '../../layouts/BaseLayout.astro'
-import VoteButtons from '../../components/VoteButtons'
+import { VoteButtonsStandalone } from '../../components/VoteButtons'
 import { supabase } from '../../lib/supabase'
 import type { MetaphorWithVotes } from '../../lib/types'
 
@@ -90,7 +90,7 @@ const jsonLd = {
 
       <!-- Voting buttons -->
       <div class="py-4">
-        <VoteButtons
+        <VoteButtonsStandalone
           client:load
           metaphorId={metaphor.id}
           initialLikes={metaphor.like_count}

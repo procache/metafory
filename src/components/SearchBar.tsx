@@ -1,9 +1,11 @@
 import { useState, useEffect, useMemo } from 'react'
 import type { MetaphorWithVotes } from '../lib/types'
 import VoteButtons from './VoteButtons'
+import QueryProvider from './QueryProvider'
+import { useMetaphors } from '../lib/hooks/useMetaphors'
 
 interface SearchBarProps {
-  metaphors: MetaphorWithVotes[]
+  initialMetaphors: MetaphorWithVotes[]
 }
 
 const METAPHORS_PER_PAGE = 30
@@ -18,7 +20,12 @@ function shuffleArray<T>(array: T[]): T[] {
   return shuffled
 }
 
-export default function SearchBar({ metaphors }: SearchBarProps) {
+// Inner component that uses React Query hooks
+function SearchBarContent({ initialMetaphors }: SearchBarProps) {
+  // Use TanStack Query with SSG data as initial data
+  const { data: metaphors = initialMetaphors } = useMetaphors({
+    initialData: initialMetaphors,
+  })
   // Read initial state from URL
   const getInitialState = () => {
     if (typeof window === 'undefined') return { q: '', view: 'all', page: 1 }
@@ -448,5 +455,14 @@ export default function SearchBar({ metaphors }: SearchBarProps) {
         </div>
       </div>
     </div>
+  )
+}
+
+// Main component with QueryProvider wrapper
+export default function SearchBar({ initialMetaphors }: SearchBarProps) {
+  return (
+    <QueryProvider>
+      <SearchBarContent initialMetaphors={initialMetaphors} />
+    </QueryProvider>
   )
 }

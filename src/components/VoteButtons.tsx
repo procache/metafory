@@ -1,27 +1,32 @@
 import { useState, useEffect } from 'react'
+import { useVote } from '../lib/hooks/useVote'
+import QueryProvider from './QueryProvider'
 
 interface VoteButtonsProps {
   metaphorId: string
   initialLikes: number
 }
 
-export default function VoteButtons({
+// Inner component that uses React Query hooks
+function VoteButtonsContent({
   metaphorId,
   initialLikes
 }: VoteButtonsProps) {
-  const [likes, setLikes] = useState(initialLikes)
   const [hasVoted, setHasVoted] = useState(false)
-  const [isVoting, setIsVoting] = useState(false)
   const [error, setError] = useState<string | null>(null)
   const [copied, setCopied] = useState(false)
+  const [cookieId, setCookieId] = useState<string | null>(null)
+
+  const voteMutation = useVote()
 
   // Generate or retrieve cookie ID for anti-spam
   useEffect(() => {
-    const existingCookie = localStorage.getItem('voter_id')
+    let existingCookie = localStorage.getItem('voter_id')
     if (!existingCookie) {
-      const newCookie = crypto.randomUUID()
-      localStorage.setItem('voter_id', newCookie)
+      existingCookie = crypto.randomUUID()
+      localStorage.setItem('voter_id', existingCookie)
     }
+    setCookieId(existingCookie)
 
     // Check if user already voted on this metaphor
     const votedMetaphors = JSON.parse(localStorage.getItem('voted_metaphors') || '[]')
@@ -31,50 +36,34 @@ export default function VoteButtons({
   }, [metaphorId])
 
   const handleVote = async (voteType: 'like' | 'dislike') => {
-    if (hasVoted || isVoting) return
+    if (hasVoted || voteMutation.isPending || !cookieId) return
 
-    setIsVoting(true)
     setError(null)
 
-    try {
-      const cookieId = localStorage.getItem('voter_id')
-
-      const response = await fetch('/api/vote', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({
-          metaphor_id: metaphorId,
-          vote_type: voteType,
-          cookie_id: cookieId
-        })
-      })
-
-      const data = await response.json()
-
-      if (!response.ok) {
-        if (response.status === 409) {
-          setError('Už jste hlasovali')
+    voteMutation.mutate(
+      {
+        metaphorId,
+        voteType,
+        cookieId,
+      },
+      {
+        onSuccess: () => {
           setHasVoted(true)
-        } else {
-          setError(data.error || 'Chyba při hlasování')
-        }
-        return
+          // Remember this vote in localStorage
+          const votedMetaphors = JSON.parse(localStorage.getItem('voted_metaphors') || '[]')
+          votedMetaphors.push(metaphorId)
+          localStorage.setItem('voted_metaphors', JSON.stringify(votedMetaphors))
+        },
+        onError: (err) => {
+          if (err.message === 'Already voted') {
+            setError('Už jste hlasovali')
+            setHasVoted(true)
+          } else {
+            setError(err.message || 'Chyba při hlasování')
+          }
+        },
       }
-
-      // Update vote count
-      setLikes(data.votes.like_count)
-      setHasVoted(true)
-
-      // Remember this vote in localStorage
-      const votedMetaphors = JSON.parse(localStorage.getItem('voted_metaphors') || '[]')
-      votedMetaphors.push(metaphorId)
-      localStorage.setItem('voted_metaphors', JSON.stringify(votedMetaphors))
-    } catch (err) {
-      console.error('Vote error:', err)
-      setError('Nepodařilo se odeslat hlas')
-    } finally {
-      setIsVoting(false)
-    }
+    )
   }
 
   const handleCopyLink = async () => {
@@ -87,6 +76,10 @@ export default function VoteButtons({
       console.error('Failed to copy:', err)
     }
   }
+
+  const isVoting = voteMutation.isPending
+  // Use initialLikes as display value (cache updates happen via React Query)
+  const displayLikes = initialLikes
 
   return (
     <div className="space-y-3">
@@ -122,7 +115,7 @@ export default function VoteButtons({
           <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" className="w-5 h-5">
             <path d="m11.645 20.91-.007-.003-.022-.012a15.247 15.247 0 0 1-.383-.218 25.18 25.18 0 0 1-4.244-3.17C4.688 15.36 2.25 12.174 2.25 8.25 2.25 5.322 4.714 3 7.688 3A5.5 5.5 0 0 1 12 5.052 5.5 5.5 0 0 1 16.313 3c2.973 0 5.437 2.322 5.437 5.25 0 3.925-2.438 7.111-4.739 9.256a25.175 25.175 0 0 1-4.244 3.17 15.247 15.247 0 0 1-.383.219l-.022.012-.007.004-.003.001a.752.752 0 0 1-.704 0l-.003-.001Z" />
           </svg>
-          {likes > 0 && <span>{likes}</span>}
+          {displayLikes > 0 && <span>{displayLikes}</span>}
         </button>
 
         <button
@@ -176,5 +169,17 @@ export default function VoteButtons({
         <p className="text-sm" style={{ color: 'var(--color-text-tertiary)' }}>Odesílám...</p>
       )}
     </div>
+  )
+}
+
+// Default export: for use inside existing QueryProvider (e.g., SearchBar)
+export default VoteButtonsContent
+
+// Named export: standalone version with its own QueryProvider (for detail pages)
+export function VoteButtonsStandalone(props: VoteButtonsProps) {
+  return (
+    <QueryProvider>
+      <VoteButtonsContent {...props} />
+    </QueryProvider>
   )
 }
