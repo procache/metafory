@@ -1,5 +1,6 @@
 ---
 import '../styles/global.css'
+import { supabase } from '../lib/supabase'
 
 interface Props {
   title?: string
@@ -16,6 +17,12 @@ const {
 } = Astro.props
 
 const siteUrl = 'https://metafory.cz'
+
+// Fetch total count of published metaphors for footer
+const { count: metaphorCount } = await supabase
+  .from('metaphors')
+  .select('*', { count: 'exact', head: true })
+  .eq('status', 'published')
 ---
 
 <!DOCTYPE html>
@@ -120,6 +127,11 @@ const siteUrl = 'https://metafory.cz'
           </a>
         </div>
       </div>
+      {metaphorCount !== null && (
+        <p class="text-sm text-center mb-2" style="color: var(--color-text-secondary);">
+          Celkem metafor: <span class="font-semibold">{metaphorCount}</span>
+        </p>
+      )}
       <p class="text-sm text-center" style="color: var(--color-text-tertiary);">&copy; {new Date().getFullYear()} Metafory.cz — Databáze českých metafor</p>
     </footer>
   </div>
