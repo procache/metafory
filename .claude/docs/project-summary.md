@@ -6,8 +6,8 @@
 
 ## Current Status
 
-**Phase:** Phase 5 Complete ✅ → MVP Ready for Production
-**Last Updated:** 2025-12-02
+**Phase:** Phase 10 Complete ✅ → Real-time Vote Updates
+**Last Updated:** 2026-01-10
 
 ---
 
@@ -18,12 +18,14 @@
 - **Database:** Supabase (PostgreSQL)
 - **Hosting:** Netlify
 - **Email:** Supabase + Resend.com
+- **Data Fetching:** TanStack Query (React Query) — vendor-agnostic client-side caching
 
 **Rationale:**
 - Astro hybrid mode chosen for optimal performance (static pages + dynamic API)
 - Supabase provides easy backend without server management
 - Netlify offers free hosting with auto-deploy from Git
 - Static generation provides < 100ms load times
+- TanStack Query enables real-time vote updates without vendor lock-in
 
 ---
 
@@ -34,6 +36,7 @@
 3. **Anti-spam via cookie + IP** - Prevents duplicate voting without user accounts
 4. **Hybrid static/dynamic** - Homepage + detail pages prerendered, API routes dynamic
 5. **Client-side search & filters** - Instant filtering with URL state management
+6. **TanStack Query for votes** - SSG data as initialData + background refetch for fresh votes
 
 ---
 
@@ -104,6 +107,29 @@
 - Detail pages: < 50ms load time
 - 72 metaphor pages + homepage prerendered as static HTML
 
+**Phase 6-9 (✅ Complete):**
+- UX improvements (sticky header, heart voting, Top 5, featured metaphor)
+- Design refresh (sage green palette, blue headings, horizontal logo)
+- Detail page redesign with white card layout
+- Security hardening (XSS, rate limiting, CSRF, honeypot, security headers)
+
+**Phase 10 (✅ Complete - 2026-01-10):**
+- PLAN-045: Installed @tanstack/react-query
+- PLAN-046: Created QueryProvider wrapper component
+- PLAN-047: Created GET /api/metaphors endpoint
+- PLAN-048: Created useMetaphors and useVote custom hooks
+- PLAN-049: Refactored SearchBar to use TanStack Query with SSG initialData
+- PLAN-050: Refactored VoteButtons to use mutation with cache invalidation
+- PLAN-051: Verified Top 5 reflects current votes after voting
+
+**Key commit:** `6e69207` - TanStack Query for real-time vote updates
+
+**Architecture:**
+- SSG data provides instant first render + SEO
+- Background refetch gets fresh vote counts
+- Cache invalidation after voting updates Top 5 immediately
+- Vendor-agnostic (not locked to Supabase Realtime)
+
 ## Next Milestones
 
 See [plan.md](../../plan.md) for detailed task breakdown.
@@ -112,3 +138,4 @@ See [plan.md](../../plan.md) for detailed task breakdown.
 - Automated rebuild via Netlify build hooks
 - Open Graph image generation
 - RSS feed for new metaphors
+- Image optimization for public/ assets

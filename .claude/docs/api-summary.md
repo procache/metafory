@@ -4,6 +4,18 @@
 
 ## API Endpoints
 
+### GET /api/metaphors
+- **Purpose:** Fetch all published metaphors with vote counts (for client-side data refresh)
+- **Security:** Public read-only endpoint
+- **Input:** None
+- **Logic:**
+  - Queries metaphors_with_votes view for published metaphors
+  - Orders by score descending
+  - Returns cached response (30s s-maxage, 60s stale-while-revalidate)
+- **Output:** Array of MetaphorWithVotes objects
+- **Source:** [src/pages/api/metaphors.ts](../../src/pages/api/metaphors.ts)
+- **Used by:** TanStack Query for real-time vote updates (PLAN-047)
+
 ### POST /api/submit
 - **Purpose:** Submit new metaphor for admin approval
 - **Security:**
