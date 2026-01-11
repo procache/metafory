@@ -6,11 +6,11 @@
 ## Now
 
 ### Phase 11: Related Metaphors Feature
-- [ ] PLAN-052: Add `related_slugs` column (text[]) to metaphors table in Supabase
-- [ ] PLAN-053: Update TypeScript types to include `related_slugs` field
-- [ ] PLAN-054: Create RelatedMetaphors component for displaying links
-- [ ] PLAN-055: Integrate RelatedMetaphors into detail page ([slug].astro)
-- [ ] PLAN-056: Update /api/metaphors endpoint to include related_slugs
+[x] PLAN-052: Add `related_slugs` column (text[]) to metaphors table in Supabase (`06094ff`, 2026-01-11)
+[x] PLAN-053: Update TypeScript types to include `related_slugs` field (`06094ff`, 2026-01-11)
+[x] PLAN-054: Create RelatedMetaphors component for displaying links (`06094ff`, 2026-01-11)
+[x] PLAN-055: Integrate RelatedMetaphors into detail page ([slug].astro) (`06094ff`, 2026-01-11)
+[x] PLAN-056: Update /api/metaphors endpoint to include related_slugs (`06094ff`, 2026-01-11)
 - [ ] PLAN-057: Test with sample data (add related_slugs to a few metaphors)
 
 ## Next
