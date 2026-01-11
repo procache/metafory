@@ -2,13 +2,20 @@
 import { supabase } from '../lib/supabase'
 
 interface Props {
-  slugs: string[] | null
+  slugs: string | string[] | null
 }
 
-const { slugs } = Astro.props
+const { slugs: rawSlugs } = Astro.props
+
+// Normalize to array (handles both string and array input)
+const slugs = !rawSlugs
+  ? []
+  : Array.isArray(rawSlugs)
+    ? rawSlugs
+    : [rawSlugs]
 
 // Don't render if no related slugs
-if (!slugs || slugs.length === 0) {
+if (slugs.length === 0) {
   return
 }
 
