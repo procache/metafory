@@ -5,6 +5,14 @@
 
 ## Now
 
+### Phase 11: Related Metaphors Feature
+- [ ] PLAN-052: Add `related_slugs` column (text[]) to metaphors table in Supabase
+- [ ] PLAN-053: Update TypeScript types to include `related_slugs` field
+- [ ] PLAN-054: Create RelatedMetaphors component for displaying links
+- [ ] PLAN-055: Integrate RelatedMetaphors into detail page ([slug].astro)
+- [ ] PLAN-056: Update /api/metaphors endpoint to include related_slugs
+- [ ] PLAN-057: Test with sample data (add related_slugs to a few metaphors)
+
 ## Next
 - [ ] Optimalizace velikosti obrázků v public/ (2.6MB koreni_cestiny PNG soubory)
 

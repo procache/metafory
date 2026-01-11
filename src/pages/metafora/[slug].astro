@@ -1,6 +1,7 @@
 ---
 import BaseLayout from '../../layouts/BaseLayout.astro'
 import { VoteButtonsStandalone } from '../../components/VoteButtons'
+import RelatedMetaphors from '../../components/RelatedMetaphors.astro'
 import { supabase } from '../../lib/supabase'
 import type { MetaphorWithVotes } from '../../lib/types'
 
@@ -96,6 +97,9 @@ const jsonLd = {
           initialLikes={metaphor.like_count}
         />
       </div>
+
+      <!-- Related metaphors -->
+      <RelatedMetaphors slugs={metaphor.related_slugs} />
 
       <!-- Author info -->
       {metaphor.autor_jmeno && (

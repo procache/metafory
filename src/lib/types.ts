@@ -12,6 +12,7 @@ export interface Metaphor {
   status: 'pending' | 'published' | 'rejected'
   created_at: string
   approved_at: string | null
+  related_slugs: string[] | null
 }
 
 export interface Vote {
