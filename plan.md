@@ -5,19 +5,26 @@
 
 ## Now
 
-### Phase 11: Related Metaphors Feature
-[x] PLAN-052: Add `related_slugs` column (text[]) to metaphors table in Supabase (`06094ff`, 2026-01-11)
-[x] PLAN-053: Update TypeScript types to include `related_slugs` field (`06094ff`, 2026-01-11)
-[x] PLAN-054: Create RelatedMetaphors component for displaying links (`06094ff`, 2026-01-11)
-[x] PLAN-055: Integrate RelatedMetaphors into detail page ([slug].astro) (`06094ff`, 2026-01-11)
-[x] PLAN-056: Update /api/metaphors endpoint to include related_slugs (`06094ff`, 2026-01-11)
-- [ ] PLAN-057: Test with sample data (add related_slugs to a few metaphors)
-
 ## Next
 - [ ] Optimalizace velikosti obrázků v public/ (2.6MB koreni_cestiny PNG soubory)
 
 ## Done
 <!-- Claude moves completed items here with commit hash + date -->
+
+### Phase 11: Related Metaphors Feature (2026-01-12)
+[x] PLAN-052: Add `related_slugs` column (text[]) to metaphors table in Supabase (`06094ff`, 2026-01-11)
+[x] PLAN-053: Update TypeScript types to include `related_slugs` field (`06094ff`, 2026-01-11)
+[x] PLAN-054: Create RelatedMetaphors component for displaying links (`06094ff`, 2026-01-11)
+[x] PLAN-055: Integrate RelatedMetaphors into detail page ([slug].astro) (`06094ff`, 2026-01-11)
+[x] PLAN-056: Update /api/metaphors endpoint to include related_slugs (`06094ff`, 2026-01-11)
+[x] PLAN-057: Test with sample data and style adjustments (`d4da6e1`, 2026-01-12)
+
+**Results achieved:**
+- New `related_slugs` field (text[]) links metaphors to related ones
+- RelatedMetaphors component displays clickable tag-like links on detail pages
+- Accepts both single string and array input for flexible Supabase editing
+- Updated `metaphors_with_votes` view to include the new field
+- Clean UI with "Související:" label and sage green background tags
 
 ### Phase 10: Real-time Vote Updates with TanStack Query (2026-01-10)
 [x] PLAN-045: Install @tanstack/react-query dependency (`6e69207`, 2026-01-10)
