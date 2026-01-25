@@ -1,0 +1,17 @@
+# Metafory.cz
+
+> Databáze českých metafor s definicemi a příklady použití.
+
+## Obsah
+- Databáze českých metafor
+- Každá metafora má: název, definici, příklad použití
+- Možnost hlasování a přidávání nových metafor
+
+## Struktura
+- / - Seznam všech metafor s vyhledáváním
+- /metafora/[slug] - Detail konkrétní metafory
+- /pridat - Formulář pro přidání nové metafory
+- /co-je-metafora - Vysvětlení pojmu metafora
+
+## Kontakt
+- Web: https://metafory.cz
