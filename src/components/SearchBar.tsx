@@ -138,6 +138,10 @@ function SearchBarContent({ initialMetaphors }: SearchBarProps) {
         }}
       >
         <div className="max-w-4xl mx-auto">
+          <p className="text-center text-base sm:text-lg font-semibold mb-3" style={{ color: 'var(--color-accent-red)' }}>
+            Vsadím se, že znáte metaforu, která tu ještě není.{' '}
+            <a href="/pridat" className="underline hover:opacity-70 transition-opacity">Přidejte ji!</a>
+          </p>
           <div className="relative">
             <input
               type="text"
